@@ -1,4 +1,5 @@
 import { Button } from "../ui/button";
+import { motion } from "framer-motion";
 
 export function CTA() {
   return (
@@ -11,23 +12,47 @@ export function CTA() {
       </div>
       
       <div className="container relative z-20 px-4 md:px-6 flex flex-col items-center text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight max-w-4xl">
+        <motion.h2 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight max-w-4xl"
+        >
           Ready to scale your brand?
-        </h2>
-        <p className="text-lg md:text-xl opacity-80 mb-10 max-w-2xl px-2">
+        </motion.h2>
+        <motion.p 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-lg md:text-xl opacity-80 mb-10 max-w-2xl px-2"
+        >
           Join 50+ modern brands who trust us to handle their social presence and drive measurable top-line revenue.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0">
-          <Button size="lg" className="h-14 w-full sm:w-auto px-8 text-base rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-medium">
+        </motion.p>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0"
+        >
+          <Button size="lg" className="h-14 w-full sm:w-auto px-8 text-base rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-medium group">
             Book your free discovery call
           </Button>
-          <Button size="lg" variant="outline" className="h-14 w-full sm:w-auto px-8 text-base rounded-full border-primary-foreground/20 hover:bg-primary-foreground/10 bg-transparent text-primary-foreground">
+          <Button size="lg" variant="outline" className="h-14 w-full sm:w-auto px-8 text-base rounded-full border-primary-foreground/20 hover:bg-primary-foreground/10 bg-transparent text-primary-foreground transition-all">
             Shoot us an email
           </Button>
-        </div>
-        <p className="mt-8 text-sm opacity-60">
+        </motion.div>
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="mt-8 text-sm opacity-60"
+        >
           No commitment. Just a 30-minute chat to see if we're a fit.
-        </p>
+        </motion.p>
       </div>
     </section>
   );

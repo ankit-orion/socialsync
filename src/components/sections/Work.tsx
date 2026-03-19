@@ -9,6 +9,9 @@ const projects = [
     category: "Brand Identity & Social",
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop",
     stats: "+240% Engagement",
+    challenge: "TechFlow struggled with a fragmented brand identity across social platforms, leading to low trust and inconsistent engagement from their developer audience.",
+    strategy: "We implemented a cohesive design system, launched a 'Dev-to-Dev' content series, and optimized their posting schedule using data-driven insights.",
+    results: "Within 6 months, engagement tripled, and brand recall among their target demographic increased by 45%.",
     gridImages: [
         "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=500&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=500&auto=format&fit=crop",
@@ -23,6 +26,9 @@ const projects = [
     category: "TikTok Viral Campaign",
     image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1000&auto=format&fit=crop",
     stats: "15M+ Views",
+    challenge: "Aura Cosmetics was a newcomer in a saturated beauty market. They needed a breakthrough moment to establish presence and drive sales without a massive traditional ad budget.",
+    strategy: "We leveraged micro-influencers for authentic 'unboxing' experiences and created a viral #AuraGlow challenge that encouraged user-generated content.",
+    results: "The campaign reached 15 million views in 3 weeks, leading to a complete sell-out of their initial inventory within a month.",
     gridImages: [
         "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=500&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=500&auto=format&fit=crop",
@@ -37,6 +43,9 @@ const projects = [
     category: "Paid Social Scaling",
     image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop",
     stats: "4.2x ROAS",
+    challenge: "Elevate Fitness had high member churn and was struggling to convert high-intent prospects into long-term subscribers through paid channels.",
+    strategy: "We redesigned their full-funnel ad strategy, focusing on personalized video testimonials and retargeting ads that highlighted community success stories.",
+    results: "ROAS increased from 1.5x up to 4.2x, while CPA (Cost Per Acquisition) dropped by 30% over the first quarter.",
     gridImages: [
         "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=500&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=500&auto=format&fit=crop",
@@ -51,6 +60,9 @@ const projects = [
     category: "Product Launch",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
     stats: "100k+ App Installs",
+    challenge: "Lumina needed to launch their productivity app in an extremely crowded market with heavy hitters like Notion and Linear.",
+    strategy: "We focused on a 'Minimalist Productivity' narrative, using highly aesthetic motion design and a targeted waitlist strategy to build pre-launch hype.",
+    results: "Achieved over 100,000 installs in the first month and was featured as 'App of the Day' on the iOS App Store.",
     gridImages: [
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=500&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500&auto=format&fit=crop",
