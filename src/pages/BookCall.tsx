@@ -44,7 +44,7 @@ export function BookCall() {
       const finalDate = new Date(selectedDate);
       finalDate.setHours(hours, minutes, 0, 0);
 
-      const response = await fetch("https://social-media-agency-backend.vercel.app/", {
+      const response = await fetch("https://social-media-agency-backend.vercel.app/api/calendar/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
