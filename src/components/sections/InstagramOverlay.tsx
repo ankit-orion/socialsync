@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Heart, MoreHorizontal, Grid, User, Video, Tag, ChevronLeft, Bell, ArrowUpRight, Layout, BarChart } from "lucide-react";
+import { Heart, MoreHorizontal, Grid, User, Video, Tag, ChevronLeft, Bell, ArrowUpRight, Layout, BarChart } from "lucide-react";
 
 interface InstagramOverlayProps {
   isOpen: boolean;
