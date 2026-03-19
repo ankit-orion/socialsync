@@ -106,65 +106,73 @@ export function Work() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group cursor-pointer block"
-              onClick={() => openOverlay(project)}
-            >
-              <div className="relative overflow-hidden rounded-3xl aspect-[4/3] mb-8 shadow-xl border border-border/20 bg-muted/30">
-                {/* Instagram Style Grid Preview */}
-                <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-[2px] p-2 bg-background/50 backdrop-blur-sm group-hover:bg-background/20 transition-colors duration-500">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[350px] md:auto-rows-[400px]">
+          {projects.map((project, index) => {
+            // True Interlocking Bento Grid Layout
+            let spanClass = "md:col-span-1";
+            if (index === 0) spanClass = "md:col-span-2";
+            if (index === 1) spanClass = "md:col-span-1";
+            if (index === 2) spanClass = "md:col-span-1";
+            if (index === 3) spanClass = "md:col-span-2";
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+                className={`group cursor-pointer block relative overflow-hidden rounded-[2rem] shadow-xl border border-border/20 bg-muted/20 ${spanClass}`}
+                onClick={() => openOverlay(project)}
+              >
+                {/* Default Background Image */}
+                <div className="absolute inset-0 z-0 opacity-100 group-hover:opacity-0 transition-opacity duration-700">
+                  <img src={project.image} className="w-full h-full object-cover" alt="" />
+                </div>
+
+                {/* Instagram Style Grid Preview (Hover Reveal) */}
+                <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-1 p-2 bg-background z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     {project.gridImages.map((img, i) => (
-                        <div key={i} className="relative overflow-hidden rounded-sm group-hover:rounded-md transition-all duration-500">
+                        <div key={i} className="relative overflow-hidden rounded-md">
                              <img 
                                 src={img} 
                                 alt="" 
-                                className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700"
+                                className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-[2s] ease-out"
                             />
                         </div>
                     ))}
-                    {/* Overlay Tag on the first grid item or elsewhere */}
-                    <div className="absolute top-6 right-6 z-20">
-                      <div className="bg-background/90 backdrop-blur-md px-4 py-2 rounded-full text-xs font-black border border-border/50 shadow-lg text-foreground uppercase tracking-widest flex items-center gap-2">
-                        <Grid className="w-3 h-3" />
-                        {project.stats}
+                </div>
+
+                {/* Always-on Top Gradient for Tag */}
+                <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none" />
+                
+                {/* Top Right Tag */}
+                <div className="absolute top-5 right-5 z-20 transition-transform duration-500 group-hover:scale-105 origin-right">
+                  <div className="bg-background/95 backdrop-blur-md px-3 md:px-4 py-2 rounded-full text-[10px] md:text-[11px] font-black border border-border/20 shadow-2xl text-foreground uppercase tracking-[0.2em] flex items-center gap-2">
+                    <Grid className="w-3.5 h-3.5 text-primary" />
+                    {project.stats}
+                  </div>
+                </div>
+
+                {/* Bottom Gradient Overlay */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 pointer-events-none transition-opacity duration-500" />
+                
+                {/* Embedded Typography & Content */}
+                <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 z-20 flex flex-col justify-end">
+                    <div className="flex justify-between items-end">
+                      <div className="space-y-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                        <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-primary shadow-sm">{project.category}</p>
+                        <h3 className="text-2xl md:text-3xl font-black tracking-tight text-white">{project.title}</h3>
+                      </div>
+                      
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 shadow-xl flex-shrink-0 origin-bottom-right">
+                        <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
                       </div>
                     </div>
                 </div>
-
-                {/* Hover Effect Mask */}
-                <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                
-                {/* Action Reveal */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
-                    <div className="bg-background px-6 py-3 rounded-full font-bold shadow-2xl scale-90 group-hover:scale-100 transition-transform flex items-center gap-2">
-                        View Profile <ArrowUpRight className="w-4 h-4" />
-                    </div>
-                </div>
-              </div>
-
-              <div className="flex justify-between items-start px-2">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-6 h-6 rounded-full overflow-hidden border border-border">
-                        <img src={project.image} alt="" className="w-full h-full object-cover" />
-                    </div>
-                    <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
-                  </div>
-                  <p className="text-muted-foreground font-medium">{project.category}</p>
-                </div>
-                <div className="w-12 h-12 rounded-full border border-border flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all shadow-sm">
-                  <ArrowUpRight className="w-5 h-5" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
