@@ -1,5 +1,6 @@
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export function CTA() {
   return (
@@ -37,12 +38,16 @@ export function CTA() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0"
         >
-          <Button size="lg" className="h-14 w-full sm:w-auto px-8 text-base rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-medium group">
-            Book your free discovery call
-          </Button>
-          <Button size="lg" variant="outline" className="h-14 w-full sm:w-auto px-8 text-base rounded-full border-primary-foreground/20 hover:bg-primary-foreground/10 bg-transparent text-primary-foreground transition-all">
-            Shoot us an email
-          </Button>
+          <Link to="/book" className="w-full sm:w-auto">
+            <Button size="lg" className="h-14 w-full px-8 text-base rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-medium group">
+              Book your free discovery call
+            </Button>
+          </Link>
+          <Link to="/contact" className="w-full sm:w-auto">
+            <Button size="lg" variant="outline" className="h-14 w-full px-8 text-base rounded-full border-primary-foreground/20 hover:bg-primary-foreground/10 bg-transparent text-primary-foreground transition-all">
+              Shoot us an email
+            </Button>
+          </Link>
         </motion.div>
         <motion.p 
           initial={{ opacity: 0 }}
