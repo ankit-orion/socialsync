@@ -9,7 +9,6 @@ export function BookCall() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [meetLink, setMeetLink] = useState("");
 
   const upcomingDays = useMemo(() => {
     const days = [];
@@ -59,7 +58,6 @@ export function BookCall() {
       
       if (data.success) {
         setSuccess(true);
-        setMeetLink(data.meetLink);
       } else {
         alert(data.error || "Failed to book call.");
       }
@@ -130,7 +128,7 @@ export function BookCall() {
                 <div className="hidden sm:block w-px h-4 bg-border"></div>
                 <div className="flex items-center gap-2 px-3 py-1">
                   <Video className="w-4 h-4" />
-                  <span className="text-sm font-medium">Google Meet / Zoom</span>
+                  <span className="text-sm font-medium">Phone or Video Call</span>
                 </div>
               </div>
             </div>
@@ -148,13 +146,11 @@ export function BookCall() {
                 <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
                   <CheckCircle2 className="w-10 h-10 text-primary" />
                 </div>
-                <h3 className="text-3xl font-bold tracking-tight mb-4">You're Booked!</h3>
-                <p className="text-muted-foreground mb-8">We've added the event to our calendar and sent an invite to your email.</p>
-                {meetLink && (
-                  <a href={meetLink} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity">
-                    Join Google Meet <Video className="w-4 h-4 ml-2" />
-                  </a>
-                )}
+                <h3 className="text-3xl font-bold tracking-tight mb-2">You're Booked!</h3>
+                <p className="text-lg font-semibold text-primary mb-4">
+                  {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at {selectedTime}
+                </p>
+                <p className="text-muted-foreground">We've locked this time exclusively for you. You will receive a confirmation email shortly.</p>
               </div>
             ) : (
               <>
