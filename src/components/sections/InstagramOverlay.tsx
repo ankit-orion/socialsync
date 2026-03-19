@@ -132,7 +132,7 @@ export function InstagramOverlay({ isOpen, onClose, project }: InstagramOverlayP
                     {/* Highlights Section Removed by user request */}
 
                     {/* Tabs */}
-                    <div className="flex border-t border-border/10 sticky top-0 bg-background/90 backdrop-blur-md z-20 transition-colors">
+                    <div className="flex border-t border-border/10 bg-background/90 backdrop-blur-md transition-colors">
                         <div className="flex-1 flex justify-center py-4 border-b-2 border-primary group cursor-pointer">
                             <Grid className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
                         </div>
