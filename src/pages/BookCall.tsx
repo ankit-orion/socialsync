@@ -114,7 +114,7 @@ export function BookCall() {
   };
 
   return (
-    <main className="flex-1 w-full flex justify-center pt-28 pb-20 overflow-hidden relative">
+    <main className="flex-1 w-full flex justify-center pt-28 pb-20 relative overflow-x-hidden">
       {/* Background gradients */}
       <div className="absolute top-0 left-0 right-0 h-96 bg-primary/5 blur-3xl -z-10 rounded-b-full"></div>
       
@@ -218,12 +218,8 @@ export function BookCall() {
 
                   <div 
                     ref={scrollContainerRef}
-                    className="flex w-full overflow-x-auto pb-4 gap-2 md:gap-3 snap-x scroll-smooth" 
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                    className="flex w-full overflow-x-auto pb-4 gap-2 md:gap-3 snap-x scroll-smooth scrollbar-none" 
                   >
-                    <style>{`
-                      .flex::-webkit-scrollbar { display: none; }
-                    `}</style>
                     {upcomingDays.map((date, i) => {
                       const isSelected = selectedDate.getDate() === date.getDate();
                       const dayString = date.toLocaleDateString('en-US', { weekday: 'short' });

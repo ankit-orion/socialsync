@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export function Contact() {
   return (
-    <main className="flex-1 w-full flex justify-center pt-28 pb-20 overflow-hidden relative">
+    <main className="flex-1 w-full flex justify-center pt-28 pb-20 relative overflow-x-hidden">
       {/* Background gradients */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 blur-[100px] -z-10 rounded-full mix-blend-screen"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 blur-[100px] -z-10 rounded-full mix-blend-screen"></div>
