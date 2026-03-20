@@ -13,7 +13,7 @@ export function BookCall() {
   const upcomingDays = useMemo(() => {
     const days = [];
     let d = new Date();
-    while (days.length < 3) {
+    while (days.length < 15) {
       d.setDate(d.getDate() + 1);
       if (d.getDay() !== 0 && d.getDay() !== 6) { 
         days.push(new Date(d));
@@ -159,7 +159,10 @@ export function BookCall() {
                   <p className="text-sm text-muted-foreground mt-2">Times are shown in your local timezone.</p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 md:gap-3 mb-6">
+                <div className="flex w-full overflow-x-auto pb-4 gap-2 md:gap-3 snap-x" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  <style>{`
+                    .flex::-webkit-scrollbar { display: none; }
+                  `}</style>
                   {upcomingDays.map((date, i) => {
                     const isSelected = selectedDate.getDate() === date.getDate();
                     const dayString = date.toLocaleDateString('en-US', { weekday: 'short' });
@@ -168,10 +171,10 @@ export function BookCall() {
                       <div 
                         key={i} 
                         onClick={() => setSelectedDate(date)}
-                        className={`p-3 md:p-4 rounded-xl border flex flex-col items-center justify-center cursor-pointer transition-all ${isSelected ? 'bg-primary/10 border-primary shadow-sm scale-[1.02]' : 'bg-background hover:bg-muted border-border/50'}`}
+                        className={`min-w-[80px] md:min-w-[90px] shrink-0 snap-start p-3 md:p-4 rounded-xl border flex flex-col items-center justify-center cursor-pointer transition-all ${isSelected ? 'bg-primary/10 border-primary shadow-sm scale-[1.02]' : 'bg-background hover:bg-muted border-border/50'}`}
                       >
-                        <span className={`text-[10px] md:text-xs font-medium uppercase tracking-wider ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}>{dayString}</span>
-                        <span className={`text-xl md:text-2xl font-bold mt-1 ${isSelected ? 'text-primary' : ''}`}>{dateNum}</span>
+                        <span className={`text-[10px] md:text-sm font-medium uppercase tracking-wider ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}>{dayString}</span>
+                        <span className={`text-2xl md:text-3xl font-bold mt-1 ${isSelected ? 'text-primary' : ''}`}>{dateNum}</span>
                       </div>
                     );
                   })}
