@@ -3,19 +3,34 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { ModeToggle } from "../mode-toggle";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Smooth scroll handler
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    e.preventDefault();
     const href = e.currentTarget.getAttribute('href');
-    if (!href) return;
+    if (!href || !href.startsWith('#')) return;
     
     const targetId = href.replace('#', '');
+    
+    // If we're not on the homepage, first navigate home
+    if (location.pathname !== '/') {
+      e.preventDefault();
+      navigate('/' + href);
+      setIsOpen(false);
+      return;
+    }
+
+    // If we're on the homepage, scroll smoothly
+    e.preventDefault();
     const elem = document.getElementById(targetId);
-    elem?.scrollIntoView({ behavior: 'smooth' });
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
     setIsOpen(false);
   };
 
@@ -41,9 +56,9 @@ export function Navbar() {
           <a href="#about" onClick={handleScroll} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">About</a>
           <div className="flex items-center gap-4">
             <ModeToggle />
-            <a href="#cta" onClick={handleScroll}>
+            <Link to="/book">
               <Button className="rounded-full px-6 transition-transform hover:scale-105 active:scale-95">Book a Call</Button>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -70,9 +85,9 @@ export function Navbar() {
             <a href="#services" className="text-lg font-medium text-muted-foreground hover:text-foreground" onClick={handleScroll}>Services</a>
             <a href="#work" className="text-lg font-medium text-muted-foreground hover:text-foreground" onClick={handleScroll}>Work</a>
             <a href="#about" className="text-lg font-medium text-muted-foreground hover:text-foreground" onClick={handleScroll}>About</a>
-            <a href="#cta" onClick={handleScroll}>
+            <Link to="/book" onClick={() => setIsOpen(false)}>
               <Button size="lg" className="w-full rounded-full mt-2">Book a Call</Button>
-            </a>
+            </Link>
           </div>
         </motion.div>
       )}
