@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 import { Stats } from "@/components/sections/Stats";
 import { Work } from "@/components/sections/Work";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { CTA } from "@/components/sections/CTA";
 
 export function Home() {
@@ -12,6 +13,7 @@ export function Home() {
         <Services />
         <Work />
         <Stats />
+        <Testimonials />
         <CTA />
       </div>
     </main>

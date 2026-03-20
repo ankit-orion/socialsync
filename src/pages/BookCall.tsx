@@ -1,14 +1,58 @@
-import { motion } from "framer-motion";
-import { Clock, Video, CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Clock, Video, CheckCircle2, ArrowRight, Loader2, ChevronLeft, ChevronRight, MessageSquare, Zap, BarChart, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
+import { useSound } from "@/hooks/useSound";
+
+function FaqItem({ question, answer }: { question: string, answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const { playHover } = useSound();
+
+  return (
+    <div 
+      className="border-b border-border/40 py-6 pr-4 cursor-pointer group"
+      onClick={() => setIsOpen(!isOpen)}
+      onMouseEnter={playHover}
+    >
+      <div className="flex justify-between items-center gap-4">
+        <h3 className="font-semibold text-left text-lg group-hover:text-primary transition-colors">{question}</h3>
+        <ChevronDown className={`w-5 h-5 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-primary' : 'text-muted-foreground group-hover:text-primary'}`} />
+      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <p className="pt-4 text-muted-foreground text-left leading-relaxed">{answer}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export function BookCall() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const { current } = scrollContainerRef;
+      const scrollAmount = direction === 'left' ? -200 : 200;
+      current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const { playHover, playClick } = useSound();
 
   const upcomingDays = useMemo(() => {
     const days = [];
@@ -159,25 +203,44 @@ export function BookCall() {
                   <p className="text-sm text-muted-foreground mt-2">Times are shown in your local timezone.</p>
                 </div>
 
-                <div className="flex w-full overflow-x-auto pb-4 gap-2 md:gap-3 snap-x" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                  <style>{`
-                    .flex::-webkit-scrollbar { display: none; }
-                  `}</style>
-                  {upcomingDays.map((date, i) => {
-                    const isSelected = selectedDate.getDate() === date.getDate();
-                    const dayString = date.toLocaleDateString('en-US', { weekday: 'short' });
-                    const dateNum = date.getDate();
-                    return (
-                      <div 
-                        key={i} 
-                        onClick={() => setSelectedDate(date)}
-                        className={`min-w-[80px] md:min-w-[90px] shrink-0 snap-start p-3 md:p-4 rounded-xl border flex flex-col items-center justify-center cursor-pointer transition-all ${isSelected ? 'bg-primary/10 border-primary shadow-sm scale-[1.02]' : 'bg-background hover:bg-muted border-border/50'}`}
-                      >
-                        <span className={`text-[10px] md:text-sm font-medium uppercase tracking-wider ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}>{dayString}</span>
-                        <span className={`text-2xl md:text-3xl font-bold mt-1 ${isSelected ? 'text-primary' : ''}`}>{dateNum}</span>
-                      </div>
-                    );
-                  })}
+                <div className="relative mb-6 group">
+                  <div className="absolute left-0 top-0 bottom-4 w-16 bg-gradient-to-r from-background to-transparent z-10 flex items-center justify-start opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <button onClick={() => scroll('left')} onMouseEnter={playHover} className="p-1.5 rounded-full bg-background/80 backdrop-blur-md border border-border/50 shadow-md text-foreground hover:bg-muted ml-1 transition-all pointer-events-auto">
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                  </div>
+                  
+                  <div className="absolute right-0 top-0 bottom-4 w-16 bg-gradient-to-l from-background to-transparent z-10 flex items-center justify-end opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <button onClick={() => scroll('right')} onMouseEnter={playHover} className="p-1.5 rounded-full bg-background/80 backdrop-blur-md border border-border/50 shadow-md text-foreground hover:bg-muted mr-1 transition-all pointer-events-auto">
+                      <ChevronRight className="w-5 h-5 text-primary" />
+                    </button>
+                  </div>
+
+                  <div 
+                    ref={scrollContainerRef}
+                    className="flex w-full overflow-x-auto pb-4 gap-2 md:gap-3 snap-x scroll-smooth" 
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  >
+                    <style>{`
+                      .flex::-webkit-scrollbar { display: none; }
+                    `}</style>
+                    {upcomingDays.map((date, i) => {
+                      const isSelected = selectedDate.getDate() === date.getDate();
+                      const dayString = date.toLocaleDateString('en-US', { weekday: 'short' });
+                      const dateNum = date.getDate();
+                      return (
+                        <div 
+                          key={i} 
+                          onMouseEnter={playHover}
+                          onClick={() => { playHover(); setSelectedDate(date); }}
+                          className={`min-w-[80px] md:min-w-[90px] shrink-0 snap-start p-3 md:p-4 rounded-xl border flex flex-col items-center justify-center cursor-pointer transition-all ${isSelected ? 'bg-primary/10 border-primary shadow-sm scale-[1.02]' : 'bg-background hover:bg-muted border-border/50'}`}
+                        >
+                          <span className={`text-[10px] md:text-sm font-medium uppercase tracking-wider ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}>{dayString}</span>
+                          <span className={`text-2xl md:text-3xl font-bold mt-1 ${isSelected ? 'text-primary' : ''}`}>{dateNum}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 <div className="space-y-2 mb-6">
@@ -186,7 +249,8 @@ export function BookCall() {
                     return (
                       <button 
                         key={time} 
-                        onClick={() => setSelectedTime(time)}
+                        onMouseEnter={playHover}
+                        onClick={() => { playHover(); setSelectedTime(time); }}
                         className={`w-full py-3 px-6 rounded-xl border flex justify-between items-center transition-all ${isSelected ? 'border-primary ring-1 ring-primary bg-primary/5 text-foreground' : 'border-border/50 hover:border-primary/50 text-muted-foreground bg-background/50 hover:bg-background'}`}
                       >
                         <span className="font-semibold">{time}</span>
@@ -215,7 +279,8 @@ export function BookCall() {
 
                 <Button 
                   size="lg" 
-                  onClick={handleBookCall}
+                  onMouseEnter={playHover}
+                  onClick={() => { playClick(); handleBookCall(); }}
                   disabled={loading}
                   className="w-full h-14 rounded-xl text-base font-semibold group bg-gradient-to-r from-blue-600 to-primary text-white hover:opacity-90 border-0 shadow-xl shadow-primary/20 transition-all disabled:opacity-50"
                 >
@@ -226,6 +291,101 @@ export function BookCall() {
             )}
           </motion.div>
         </div>
+
+        {/* What Happens Next Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-32 pt-20 border-t border-border/40"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">What happens next?</h2>
+            <p className="text-muted-foreground">Our simple, completely transparent onboarding process.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            <div className="hidden md:block absolute top-[28px] left-[15%] right-[15%] h-[2px] bg-border/40 -z-10" />
+            
+            <div className="flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 shadow-xl shadow-primary/5">
+                <MessageSquare className="text-primary w-6 h-6" />
+              </div>
+              <h4 className="text-xl font-bold mb-3">1. The Discovery</h4>
+              <p className="text-muted-foreground text-sm leading-relaxed px-4 max-w-xs">We dive deep into your current social metrics and outline immediate low-hanging fruit for your brand.</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 shadow-xl shadow-primary/5">
+                <Zap className="text-primary w-6 h-6" />
+              </div>
+              <h4 className="text-xl font-bold mb-3">2. Action Plan</h4>
+              <p className="text-muted-foreground text-sm leading-relaxed px-4 max-w-xs">If we're a fit, we design a transparent, viral-engineered roadmap tailored exactly to your niche.</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 shadow-xl shadow-primary/5">
+                <BarChart className="text-primary w-6 h-6" />
+              </div>
+              <h4 className="text-xl font-bold mb-3">3. Scale & Conquer</h4>
+              <p className="text-muted-foreground text-sm leading-relaxed px-4 max-w-xs">We start deploying content, analyzing massive data, and scaling your brand vertically week over week.</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Minimal Social Proof Banner */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-32 mb-32 p-8 md:p-12 rounded-3xl bg-card border border-border/50 text-center shadow-lg"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight">You're in elite company.</h2>
+          <p className="text-muted-foreground mb-10 max-w-2xl mx-auto text-balance">We've generated tens of millions of views for brands just like yours. A single 30-minute discovery call could rewrite the trajectory of your entire digital presence.</p>
+          
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-40 hover:opacity-100 transition-opacity duration-500">
+             <div className="text-2xl font-black tracking-tighter">AURA</div>
+             <div className="text-2xl font-serif italic font-bold">Lumina</div>
+             <div className="text-2xl font-mono font-bold tracking-widest">NEXUS</div>
+             <div className="text-2xl font-sans font-bold flex items-center"><Zap className="w-5 h-5 mr-1"/> VOLT</div>
+          </div>
+        </motion.div>
+
+        {/* Dynamic FAQ Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-32 max-w-3xl mx-auto"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Frequently Asked Questions</h2>
+            <p className="text-muted-foreground">Everything you need to know before we jump on the call.</p>
+          </div>
+          
+          <div className="flex flex-col border-t border-border/40">
+            <FaqItem 
+              question="Is there an upfront cost for the discovery call?" 
+              answer="Absolutely not. This is a complimentary, zero-pressure 30-minute session strictly designed to see if we have the mathematical capacity to scale your exact brand." 
+            />
+            <FaqItem 
+              question="What do I need to prepare before we speak?" 
+              answer="Nothing except yourself and a rough idea of your current revenue and traffic goals. We will handle the heavy lifting, deep-diving into your active accounts prior to the call." 
+            />
+            <FaqItem 
+              question="Who will I actually be speaking with?" 
+              answer="You will be speaking directly with our lead growth engineer. No sales reps, no fluff—just raw, actionable data and viral strategies right out of the gate." 
+            />
+            <FaqItem 
+              question="What happens if we aren't a good fit?" 
+              answer="If we analyze your metrics during the call and realize we can't legitimately double or triple your presence, we will explicitly tell you. We'll even hand you over some free strategies before parting ways." 
+            />
+          </div>
+        </motion.div>
+
       </div>
     </main>
   );
