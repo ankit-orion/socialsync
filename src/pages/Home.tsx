@@ -3,6 +3,7 @@ import { Services } from "@/components/sections/Services";
 import { Stats } from "@/components/sections/Stats";
 import { Work } from "@/components/sections/Work";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { Clients } from "@/components/sections/Clients";
 import { CTA } from "@/components/sections/CTA";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -31,6 +32,7 @@ export function Home() {
         <Work />
         <Stats />
         <Testimonials />
+        <Clients />
         <CTA />
       </div>
     </main>
