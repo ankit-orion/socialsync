@@ -1,102 +1,73 @@
 import { motion } from "framer-motion";
-import { Megaphone, PenTool, BarChart3, Users, Zap, Target } from "lucide-react";
+import { ArrowUpRight, Users, PenTool, Target, BarChart3 } from "lucide-react";
 
-const services = [
-  {
-    title: "Social Management",
-    description: "End-to-end management of your social channels. We handle the posting, engaging, and growing so you can focus on building your business.",
-    icon: Users,
-    colSpan: "md:col-span-2 lg:col-span-2",
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    iconColor: "text-cyan-500"
-  },
-  {
-    title: "Content Creation",
-    description: "Scroll-stopping visuals and copy. From short-form video to graphics.",
-    icon: PenTool,
-    colSpan: "col-span-1",
-    gradient: "from-purple-500/20 to-pink-500/20",
-    iconColor: "text-purple-500"
-  },
-  {
-    title: "Paid Advertising",
-    description: "Data-backed ad campaigns to scale your revenue.",
-    icon: Target,
-    colSpan: "col-span-1",
-    gradient: "from-orange-500/20 to-red-500/20",
-    iconColor: "text-orange-500"
-  },
-  {
-    title: "Influencer Collabs",
-    description: "Connect with creators who align with your brand to reach authentic audiences.",
-    icon: Megaphone,
-    colSpan: "md:col-span-2 lg:col-span-1",
-    gradient: "from-green-500/20 to-emerald-500/20",
-    iconColor: "text-emerald-500"
-  },
-  {
-    title: "Analytics & Strategy",
-    description: "Deep-dive reports and actionable insights. We measure what matters.",
-    icon: BarChart3,
-    colSpan: "col-span-1",
-    gradient: "from-yellow-500/20 to-amber-500/20",
-    iconColor: "text-amber-500"
-  },
-  {
-    title: "Viral Campaigns",
-    description: "Explosive growth campaigns designed to maximize reach and brand awareness quickly across networks.",
-    icon: Zap,
-    colSpan: "md:col-span-2 lg:col-span-2",
-    gradient: "from-pink-500/20 to-rose-500/20",
-    iconColor: "text-pink-500"
-  },
+const features = [
+  { icon: Users, title: "Social Management", desc: "End-to-end channel management across every platform." },
+  { icon: PenTool, title: "Content Creation", desc: "Scroll-stopping visuals, copy, and short-form video." },
+  { icon: Target, title: "Paid Advertising", desc: "Data-backed ad campaigns built to scale revenue." },
+  { icon: BarChart3, title: "Analytics & Strategy", desc: "Deep-dive reports and actionable growth insights." },
 ];
 
 export function Services() {
   return (
-    <section id="services" className="py-24 relative">
-      <div className="container px-4 md:px-6 mx-auto">
-        <div className="flex flex-col items-center text-center space-y-4 mb-16">
-          <div className="inline-block rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-sm font-medium backdrop-blur-md">
-            Our Expertise
+    <section id="services" className="bg-[#e8e8e8] py-8 px-5 md:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="max-w-7xl mx-auto bg-white rounded-[32px] p-8 md:p-12"
+      >
+        {/* Top row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-black text-[#0d0d0d] leading-tight tracking-tight">
+              We Tried To Provide You
+              <br />
+              With All Social Media
+              <br />
+              Growth Services
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Everything you need to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">dominate</span> social.
-          </h2>
-          <p className="max-w-[700px] text-muted-foreground md:text-xl">
-            We combine creative excellence with data-driven strategy.
-          </p>
+          <div className="flex flex-col justify-between gap-6">
+            <p className="text-[#0d0d0d]/55 text-base leading-relaxed font-medium">
+              We made every effort to ensure you have access to a comprehensive range of social media services. Our aim was to provide you with a seamless growth experience that caters to your brand's needs regardless of your industry.
+            </p>
+            <div>
+              <button className="flex items-center gap-2 h-11 px-6 rounded-full bg-[#c8f03c] text-[#0d0d0d] font-bold text-sm hover:bg-[#b8e02c] transition-colors">
+                Explore More <ArrowUpRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-          {services.map((service, index) => (
+        {/* Divider */}
+        <div className="border-t border-[#0d0d0d]/[0.07] mb-10" />
+
+        {/* Feature grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((f, i) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`group relative overflow-hidden rounded-3xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-border transition-colors ${service.colSpan}`}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="space-y-4"
             >
-              {/* Card Hover Gradient Background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-              
-              <div className="p-8 h-full flex flex-col justify-between relative z-10">
-                <div className="mb-6">
-                  <div className={`w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-sm border border-border/50`}>
-                    <service.icon className={`w-6 h-6 ${service.iconColor}`} />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
+              {/* Icon illustration area */}
+              <div className="h-28 bg-[#f5f5f5] rounded-2xl flex items-center justify-center relative overflow-hidden group hover:bg-[#c8f03c]/10 transition-colors duration-300">
+                <f.icon className="w-10 h-10 text-[#0d0d0d]/20 group-hover:text-[#0d0d0d]/50 transition-colors duration-300" strokeWidth={1.5} />
+                <div className="absolute bottom-2 right-2 w-2 h-2 rounded-full bg-[#c8f03c]" />
+              </div>
+              <div>
+                <h4 className="font-black text-[#0d0d0d] text-sm tracking-tight mb-1">{f.title}</h4>
+                <p className="text-[#0d0d0d]/50 text-xs leading-relaxed font-medium">{f.desc}</p>
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

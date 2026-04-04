@@ -1,125 +1,121 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-function Counter({ from, to, suffix = "", duration = 2 }: { from: number; to: number; suffix?: string; duration?: number }) {
-  const nodeRef = useRef<HTMLSpanElement>(null);
-  const inView = useInView(nodeRef, { once: true, margin: "-100px" });
-  const [count, setCount] = useState(from);
-
-  useEffect(() => {
-    if (inView) {
-      let startTime: number;
-      let animationFrame: number;
-
-      const step = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-        
-        // easeOutQuart
-        const easeProgress = 1 - Math.pow(1 - progress, 4);
-        const currentCount = Math.floor(easeProgress * (to - from) + from);
-        
-        setCount(currentCount);
-
-        if (progress < 1) {
-          animationFrame = requestAnimationFrame(step);
-        } else {
-          setCount(to);
-        }
-      };
-
-      animationFrame = requestAnimationFrame(step);
-
-      return () => cancelAnimationFrame(animationFrame);
-    }
-  }, [inView, from, to, duration]);
-
-  return <span ref={nodeRef}>{count}{suffix}</span>;
-}
+const features = [
+  "Brand Audit & Competitive Analysis",
+  "Data-Driven Content Strategy",
+  "High-Converting Content Engine",
+  "Multi-Platform Distribution",
+  "Real-Time Analytics & Reporting",
+];
 
 export function Stats() {
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-muted/30 border-y border-border/20">
-      
-      {/* Background Decor */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-         <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent" />
-         <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-emerald-500 via-transparent to-transparent" />
-      </div>
+    <section id="about" className="bg-[#e8e8e8] py-16 md:py-24 px-5 md:px-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-      <div className="container px-4 md:px-6 mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-              Numbers that speak louder than words.
+        {/* Left */}
+        <motion.div
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-8"
+        >
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#0d0d0d]/40">From 2020</span>
+              <div className="w-10 h-5 bg-[#0d0d0d] rounded-full flex items-center px-1">
+                <div className="w-3 h-3 rounded-full bg-[#c8f03c] ml-auto" />
+              </div>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-[#0d0d0d] leading-tight tracking-tight">
+              What Makes Our
+              <br />
+              Social Strategy{" "}
+              <span className="text-[#c8f03c] [-webkit-text-stroke:2px_#0d0d0d]">Distinctive</span>
+              <br />
+              And{" "}
+              <span className="text-[#c8f03c] [-webkit-text-stroke:2px_#0d0d0d]">Effective</span>?
             </h2>
-            <p className="text-lg text-muted-foreground max-w-md">
-              We've helped modern brands scale their presence and revenue by focusing on what actually moves the needle in today's attention economy.
+            <p className="text-[#0d0d0d]/55 text-base leading-relaxed font-medium max-w-md">
+              According to the needs of modern brands, we have provided a social media strategy that can be the answer to all your growth needs.
             </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 gap-4 md:gap-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col gap-2 p-4 md:p-0"
-            >
-              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                <Counter from={0} to={250} suffix="M+" />
-              </span>
-              <span className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wider">Impressions Generated</span>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col gap-2 p-4 md:p-0"
-            >
-              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500 w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                <Counter from={0} to={50} suffix="+" />
-              </span>
-              <span className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wider">Brands Scaled</span>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col gap-2 p-4 md:p-0"
-            >
-              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-l from-emerald-500 to-green-400 w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                <Counter from={0} to={12} suffix="x" />
-              </span>
-              <span className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wider">Avg. ROI on Ads</span>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col gap-2 p-4 md:p-0"
-            >
-              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                <Counter from={0} to={98} suffix="%" />
-              </span>
-              <span className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wider">Client Retention</span>
-            </motion.div>
           </div>
 
-        </div>
+          <div className="space-y-3">
+            {features.map((f, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                className="flex items-center gap-4"
+              >
+                <div className="w-7 h-7 rounded-full bg-[#0d0d0d] flex items-center justify-center flex-shrink-0">
+                  <span className="text-[11px] font-black text-white">{i + 1}</span>
+                </div>
+                <span className="text-[#0d0d0d] font-semibold text-sm">{f}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Right: stats visual */}
+        <motion.div
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative"
+        >
+          {/* Decorative dot grid */}
+          <div className="absolute inset-0 grid grid-cols-10 grid-rows-8 gap-3 p-4 pointer-events-none">
+            {Array.from({ length: 80 }).map((_, i) => (
+              <div
+                key={i}
+                className="w-1.5 h-1.5 rounded-full"
+                style={{ background: i % 7 === 0 ? "#c8f03c" : "#0d0d0d", opacity: 0.12 + (i % 5) * 0.05 }}
+              />
+            ))}
+          </div>
+
+          {/* Central stats card */}
+          <div className="relative bg-white rounded-[28px] p-8 shadow-lg">
+            <div className="grid grid-cols-2 gap-6 mb-8">
+              {[
+                { value: "250M+", label: "Impressions", color: "#c8f03c" },
+                { value: "50+", label: "Brands Scaled", color: "#0d0d0d" },
+                { value: "12x", label: "Avg. ROI on Ads", color: "#0d0d0d" },
+                { value: "98%", label: "Client Retention", color: "#c8f03c" },
+              ].map((s, i) => (
+                <div key={i} className="space-y-1">
+                  <p className="text-4xl font-black text-[#0d0d0d] tracking-tighter">{s.value}</p>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 rounded-full" style={{ background: s.color }} />
+                    <p className="text-xs font-bold text-[#0d0d0d]/40 uppercase tracking-wider">{s.label}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="border-t border-[#0d0d0d]/[0.06] pt-6">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-black uppercase tracking-wider text-[#0d0d0d]/40">Overall Growth</span>
+                <span className="text-xs font-black text-[#0d0d0d]">+312%</span>
+              </div>
+              <div className="h-2 bg-[#f0f0f0] rounded-full overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "82%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+                  className="h-full bg-[#c8f03c] rounded-full"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
