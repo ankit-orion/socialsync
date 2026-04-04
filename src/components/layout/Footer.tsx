@@ -1,91 +1,151 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Send, MessageCircle, Twitter, Instagram, Linkedin } from "lucide-react";
+
+const leftLinks = ["About Us", "Services", "Careers", "Learn"];
+const rightLinks = ["Branches", "Faq", "Blog"];
+
+const socialIcons = [
+  { icon: Send,          bg: "#7c3aed", color: "#fff" },
+  { icon: MessageCircle, bg: "transparent", color: "#fff" },
+  { icon: Twitter,       bg: "transparent", color: "#fff" },
+  { icon: Instagram,     bg: "transparent", color: "#fff" },
+  { icon: Linkedin,      bg: "transparent", color: "#fff" },
+];
+
+// Pixel checkerboard pattern data — pairs of [width, height, color]
+const pixels = [
+  [56,56,"#e8e8e8"],[28,28,"#0d0d0d"],[28,28,"#0d0d0d"],[56,56,"#e8e8e8"],[28,28,"#0d0d0d"],
+  [56,28,"#e8e8e8"],[28,56,"#0d0d0d"],[56,56,"#e8e8e8"],[28,28,"#0d0d0d"],[28,28,"#0d0d0d"],
+  [56,56,"#e8e8e8"],[28,56,"#0d0d0d"],[56,28,"#e8e8e8"],[28,28,"#0d0d0d"],[56,56,"#e8e8e8"],
+  [28,28,"#0d0d0d"],[56,28,"#e8e8e8"],[28,56,"#0d0d0d"],[28,28,"#0d0d0d"],[56,56,"#e8e8e8"],
+  [28,28,"#0d0d0d"],[56,28,"#e8e8e8"],[28,56,"#0d0d0d"],[56,56,"#e8e8e8"],[28,28,"#0d0d0d"],
+];
 
 export function Footer() {
   return (
-    <footer className="bg-[#e8e8e8] pt-4 px-5 md:px-8">
+    <footer className="bg-[#e8e8e8]">
+
+      {/* Dark section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="bg-[#0d0d0d] rounded-t-[40px] px-8 md:px-16 pt-14 pb-8"
+        className="relative bg-[#0d0d0d] overflow-hidden"
       >
-        {/* Top grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        {/* ── Double arch cutout at top ── */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 flex pointer-events-none z-10">
+          <div className="w-40 h-20 bg-[#e8e8e8] rounded-b-[100%]" />
+          <div className="w-40 h-20 bg-[#e8e8e8] rounded-b-[100%]" />
+        </div>
 
-          {/* Brand */}
-          <div className="space-y-4 md:col-span-1">
-            <div className="flex items-center gap-2.5">
-              <div className="flex gap-0.5">
-                <div className="w-4 h-4 bg-white rounded-sm" />
-                <div className="w-4 h-4 border-2 border-white rounded-sm" />
+        {/* Content */}
+        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-28 pb-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-16">
+
+            {/* Brand */}
+            <div className="space-y-5">
+              <div className="flex gap-1">
+                <div className="w-8 h-8 bg-white rounded-md" />
+                <div className="w-8 h-8 border-2 border-white rounded-md" />
               </div>
-              <span className="font-black text-[17px] text-white tracking-tight">SocialSync</span>
+              <p className="text-white/40 text-sm leading-relaxed font-medium max-w-[200px]">
+                A Modern Social Agency For A Modern Brand And Advanced And Up-To-Date Services For Your Convenience
+              </p>
             </div>
-            <p className="text-white/40 text-sm leading-relaxed font-medium max-w-xs">
-              A modern social media agency for modern brands. Measurable growth, guaranteed results.
-            </p>
-          </div>
 
-          {/* Quick links */}
-          <div className="grid grid-cols-2 gap-8 md:col-span-1">
-            <div className="space-y-3">
-              <p className="text-white/30 text-xs font-black uppercase tracking-[0.2em] mb-4">Quick Access</p>
-              {["About Us", "Services", "Careers", "Learn"].map((l) => (
-                <a key={l} href="#" className="block text-white/60 text-sm font-medium hover:text-white transition-colors">
-                  {l}
-                </a>
-              ))}
+            {/* Quick Access */}
+            <div>
+              <p className="text-white font-bold text-base mb-6">Quick Access</p>
+              <div className="grid grid-cols-2 gap-x-12 gap-y-3">
+                <div className="space-y-3">
+                  {leftLinks.map((l) => (
+                    <a
+                      key={l}
+                      href="#"
+                      className={`flex items-center gap-2 text-sm font-medium transition-colors ${
+                        l === "Services" ? "text-white" : "text-white/50 hover:text-white"
+                      }`}
+                    >
+                      {l === "Services" && (
+                        <span className="w-2 h-2 rounded-full bg-[#7c3aed] flex-shrink-0" />
+                      )}
+                      {l}
+                    </a>
+                  ))}
+                </div>
+                <div className="space-y-3">
+                  {rightLinks.map((l) => (
+                    <a key={l} href="#" className="block text-white/50 text-sm font-medium hover:text-white transition-colors">
+                      {l}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="space-y-3">
-              <p className="text-white/30 text-xs font-black uppercase tracking-[0.2em] mb-4">&nbsp;</p>
-              {["Branches", "FAQ", "Blog", "Contact"].map((l) => (
-                <a key={l} href="#" className="block text-white/60 text-sm font-medium hover:text-white transition-colors">
-                  {l}
-                </a>
-              ))}
-            </div>
-          </div>
 
-          {/* Newsletter */}
-          <div className="space-y-4 md:col-span-1">
-            <p className="text-white/70 text-sm font-medium leading-relaxed">
-              To know the latest news and updates, enter your email so that we can contact you.
-            </p>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Enter Email Address"
-                className="flex-1 h-11 px-4 rounded-full bg-white/[0.08] border border-white/10 text-white text-sm placeholder:text-white/30 outline-none focus:border-[#c8f03c]/60"
-              />
-              <button className="h-11 px-5 rounded-full bg-[#c8f03c] text-[#0d0d0d] font-bold text-sm flex items-center gap-1.5 hover:bg-[#b8e02c] transition-colors flex-shrink-0">
-                Subscribe <ArrowUpRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-            <div className="flex items-center gap-2 pt-2">
-              <span className="text-white/30 text-xs font-medium">Contact Us:</span>
-              {["telegram", "whatsapp", "twitter", "instagram", "linkedin"].map((s) => (
-                <a key={s} href="#" className="w-7 h-7 rounded-full bg-white/[0.06] hover:bg-white/20 flex items-center justify-center transition-colors">
-                  <span className="text-[9px] font-black text-white/40 uppercase">{s[0]}</span>
-                </a>
-              ))}
+            {/* Newsletter */}
+            <div className="space-y-5">
+              <p className="text-white/70 text-sm font-medium leading-relaxed">
+                To Know The Latest News And Updates, Enter Your Email So That We Can Contact You
+              </p>
+
+              {/* Email input */}
+              <div className="flex bg-white rounded-full overflow-hidden pr-1 py-1 pl-5 items-center gap-2">
+                <input
+                  type="email"
+                  placeholder="Enter Email Address"
+                  className="flex-1 bg-transparent text-[#0d0d0d] text-sm placeholder:text-[#0d0d0d]/30 outline-none min-w-0"
+                />
+                <button className="h-9 px-5 rounded-full bg-[#c8f03c] text-[#0d0d0d] font-bold text-sm flex items-center gap-1.5 hover:bg-[#b8e02c] transition-colors flex-shrink-0">
+                  Subscribe <ArrowUpRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {/* Social icons */}
+              <div className="flex items-center gap-3">
+                <span className="text-white/40 text-sm font-medium">Contact Us :</span>
+                {socialIcons.map(({ icon: Icon, bg, color }, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    className="w-8 h-8 rounded-full flex items-center justify-center transition-opacity hover:opacity-70"
+                    style={{ background: bg !== "transparent" ? bg : "rgba(255,255,255,0.08)" }}
+                  >
+                    <Icon className="w-3.5 h-3.5" style={{ color }} />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/25 text-xs font-medium">
-            Copyright © {new Date().getFullYear()} SocialSync Agency. All Rights Reserved.
-          </p>
-          <div className="flex gap-5">
-            {["Privacy", "Terms"].map((l) => (
-              <a key={l} href="#" className="text-white/30 text-xs font-medium hover:text-white/60 transition-colors">{l}</a>
-            ))}
-          </div>
+        {/* ── Pixel checkerboard border ── */}
+        <div className="flex items-end overflow-hidden h-16">
+          {pixels.map(([w, h, c], i) => (
+            <div
+              key={i}
+              className="flex-shrink-0"
+              style={{ width: w, height: h, background: c }}
+            />
+          ))}
+          {/* repeat to fill width */}
+          {pixels.map(([w, h, c], i) => (
+            <div
+              key={`r-${i}`}
+              className="flex-shrink-0"
+              style={{ width: w, height: h, background: c }}
+            />
+          ))}
         </div>
       </motion.div>
+
+      {/* Copyright bar */}
+      <div className="bg-[#e8e8e8] py-5 text-center">
+        <p className="text-[#0d0d0d]/40 text-sm font-medium">
+          Copyright © {new Date().getFullYear()} SocialSync Agency. All Rights Reserved.
+        </p>
+      </div>
     </footer>
   );
 }

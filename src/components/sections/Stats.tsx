@@ -14,106 +14,89 @@ export function Stats() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
         {/* Left */}
-        <motion.div
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="space-y-8"
-        >
-          <div className="space-y-4">
+        <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="space-y-8">
+          <div className="space-y-5">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#0d0d0d]/40">From 2020</span>
-              <div className="w-10 h-5 bg-[#0d0d0d] rounded-full flex items-center px-1">
-                <div className="w-3 h-3 rounded-full bg-[#c8f03c] ml-auto" />
+              <div className="flex items-center gap-2 border border-[#0d0d0d]/15 rounded-full px-3 py-1">
+                <span className="text-xs font-bold text-[#0d0d0d]/50">From 2020</span>
+                <div className="w-8 h-4 bg-[#0d0d0d] rounded-full flex items-center px-0.5">
+                  <div className="w-3 h-3 rounded-full bg-[#c8f03c] ml-auto" />
+                </div>
               </div>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-[#0d0d0d] leading-tight tracking-tight">
-              What Makes Our
-              <br />
-              Social Strategy{" "}
-              <span className="text-[#c8f03c] [-webkit-text-stroke:2px_#0d0d0d]">Distinctive</span>
-              <br />
-              And{" "}
-              <span className="text-[#c8f03c] [-webkit-text-stroke:2px_#0d0d0d]">Effective</span>?
+            <h2 className="text-4xl md:text-5xl font-black text-[#0d0d0d] leading-[1.1] tracking-tight">
+              What Features Make Our
+              <br />Social Strategy{" "}
+              <span style={{ color: '#7c3aed' }}>Distinctive</span>
+              <br />And{" "}
+              <span style={{ color: '#7c3aed' }}>Popular</span>?
             </h2>
-            <p className="text-[#0d0d0d]/55 text-base leading-relaxed font-medium max-w-md">
-              According to the needs of modern brands, we have provided a social media strategy that can be the answer to all your growth needs.
+            <p className="text-[#0d0d0d]/50 text-[15px] leading-relaxed font-medium max-w-md">
+              According To The Needs Of Users And Different Brands, We Have Provided A New Social Media Strategy That Can Be The Answer To All Your Needs.
             </p>
           </div>
 
-          <div className="space-y-3">
-            {features.map((f, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.07 }}
-                className="flex items-center gap-4"
-              >
-                <div className="w-7 h-7 rounded-full bg-[#0d0d0d] flex items-center justify-center flex-shrink-0">
-                  <span className="text-[11px] font-black text-white">{i + 1}</span>
-                </div>
-                <span className="text-[#0d0d0d] font-semibold text-sm">{f}</span>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-2 gap-x-12 gap-y-3">
+            <div className="space-y-3">
+              {features.slice(0, 3).map((f, i) => (
+                <motion.div key={i} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0">
+                    <span className="text-[10px] font-black text-[#0d0d0d]">{i + 1}</span>
+                  </div>
+                  <span className="text-[#0d0d0d] font-semibold text-sm leading-snug">{f}</span>
+                </motion.div>
+              ))}
+            </div>
+            <div className="space-y-3">
+              {features.slice(3).map((f, i) => (
+                <motion.div key={i} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: (i + 3) * 0.07 }} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0">
+                    <span className="text-[10px] font-black text-[#0d0d0d]">{i + 4}</span>
+                  </div>
+                  <span className="text-[#0d0d0d] font-semibold text-sm leading-snug">{f}</span>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
-        {/* Right: stats visual */}
-        <motion.div
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative"
-        >
-          {/* Decorative dot grid */}
-          <div className="absolute inset-0 grid grid-cols-10 grid-rows-8 gap-3 p-4 pointer-events-none">
-            {Array.from({ length: 80 }).map((_, i) => (
-              <div
-                key={i}
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ background: i % 7 === 0 ? "#c8f03c" : "#0d0d0d", opacity: 0.12 + (i % 5) * 0.05 }}
-              />
+        {/* Right: orbit/dot illustration */}
+        <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="flex items-center justify-center">
+          <svg viewBox="0 0 440 440" className="w-full max-w-md" fill="none">
+            {/* Scattered background dots */}
+            {[
+              [30,80],[80,30],[400,60],[420,160],[370,30],[50,380],[20,200],[100,400],[420,380],[380,400],
+              [160,20],[280,15],[340,420],[60,300],[400,300],[200,420],[140,380],[300,50],
+            ].map(([x,y], i) => (
+              <circle key={i} cx={x} cy={y} r="3" fill="#0d0d0d" opacity="0.15"/>
             ))}
-          </div>
 
-          {/* Central stats card */}
-          <div className="relative bg-white rounded-[28px] p-8 shadow-lg">
-            <div className="grid grid-cols-2 gap-6 mb-8">
-              {[
-                { value: "250M+", label: "Impressions", color: "#c8f03c" },
-                { value: "50+", label: "Brands Scaled", color: "#0d0d0d" },
-                { value: "12x", label: "Avg. ROI on Ads", color: "#0d0d0d" },
-                { value: "98%", label: "Client Retention", color: "#c8f03c" },
-              ].map((s, i) => (
-                <div key={i} className="space-y-1">
-                  <p className="text-4xl font-black text-[#0d0d0d] tracking-tighter">{s.value}</p>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full" style={{ background: s.color }} />
-                    <p className="text-xs font-bold text-[#0d0d0d]/40 uppercase tracking-wider">{s.label}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="border-t border-[#0d0d0d]/[0.06] pt-6">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-black uppercase tracking-wider text-[#0d0d0d]/40">Overall Growth</span>
-                <span className="text-xs font-black text-[#0d0d0d]">+312%</span>
-              </div>
-              <div className="h-2 bg-[#f0f0f0] rounded-full overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "82%" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-                  className="h-full bg-[#c8f03c] rounded-full"
-                />
-              </div>
-            </div>
-          </div>
+            {/* Dotted arc paths */}
+            <path d="M 120 80 Q 280 20 380 160" stroke="#0d0d0d" strokeWidth="1" strokeDasharray="4 6" strokeOpacity="0.2" fill="none"/>
+            <path d="M 60 300 Q 100 400 240 420" stroke="#0d0d0d" strokeWidth="1" strokeDasharray="4 6" strokeOpacity="0.15" fill="none"/>
+            <path d="M 380 160 Q 420 280 360 380" stroke="#0d0d0d" strokeWidth="1" strokeDasharray="4 6" strokeOpacity="0.15" fill="none"/>
+
+            {/* Main large black circle */}
+            <circle cx="260" cy="230" r="95" fill="#0d0d0d"/>
+
+            {/* Orbiting circles */}
+            <circle cx="110" cy="130" r="22" fill="#7c3aed"/>
+            <circle cx="380" cy="120" r="14" fill="#c8f03c"/>
+            <circle cx="130" cy="340" r="10" fill="white" fillOpacity="0.7"/>
+            <circle cx="390" cy="320" r="18" fill="#7c3aed" fillOpacity="0.5"/>
+            <circle cx="300" cy="390" r="8" fill="#c8f03c" fillOpacity="0.7"/>
+
+            {/* Connector lines */}
+            <line x1="132" y1="148" x2="180" y2="185" stroke="#0d0d0d" strokeOpacity="0.2" strokeDasharray="3 4"/>
+            <line x1="366" y1="128" x2="330" y2="175" stroke="#0d0d0d" strokeOpacity="0.2" strokeDasharray="3 4"/>
+            <line x1="140" y1="330" x2="175" y2="295" stroke="#0d0d0d" strokeOpacity="0.15" strokeDasharray="3 4"/>
+
+            {/* Small accent dots near main circle */}
+            <circle cx="175" cy="195" r="5" fill="#c8f03c" opacity="0.6"/>
+            <circle cx="340" cy="175" r="4" fill="#7c3aed" opacity="0.5"/>
+            <circle cx="175" cy="290" r="4" fill="white" opacity="0.5"/>
+            <circle cx="350" cy="320" r="5" fill="#c8f03c" opacity="0.4"/>
+          </svg>
         </motion.div>
 
       </div>

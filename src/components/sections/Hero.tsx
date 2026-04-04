@@ -1,188 +1,169 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, TrendingUp, Users, Zap } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const brands = ["Tata Power", "Malabar Gold", "Stryder", "IFFCO", "Jubilant"];
+const brands = [
+  { name: "Precision", icon: "⚙" },
+  { name: "MIT", icon: "|||" },
+  { name: "ArsenalBio", icon: "-A-" },
+  { name: "Stretch", icon: "S" },
+  { name: "Stryder", icon: "S" },
+];
+
+// Static pixel grid for card illustration — 'p'=purple, 'y'=lime, 'b'=dark, ''=transparent
+const pixelRows = [
+  ['','p','','y','','b','p','','y',''],
+  ['p','','b','p','','','','y','','p'],
+  ['','b','','','y','p','b','','','y'],
+  ['y','p','','b','','y','','p','',''],
+  ['','','p','y','b','','p','','y','b'],
+  ['b','y','','','p','','','b','y',''],
+];
+const colorMap: Record<string, string> = {
+  p: '#7c3aed', y: '#c8f03c', b: '#ffffff18', '': 'transparent',
+};
 
 export function Hero() {
   return (
-    <section className="min-h-screen bg-[#e8e8e8] pt-16 flex items-center relative overflow-hidden">
-      {/* Decorative floating squares */}
-      <div className="absolute top-24 right-[12%] w-5 h-5 bg-[#c8f03c] rounded-sm rotate-12 opacity-80" />
-      <div className="absolute top-40 right-[8%] w-3 h-3 bg-[#0d0d0d] rounded-sm -rotate-6 opacity-40" />
-      <div className="absolute bottom-32 right-[18%] w-4 h-4 border-2 border-[#0d0d0d] rounded-sm rotate-45 opacity-30" />
-      <div className="absolute top-1/3 right-[6%] w-2.5 h-2.5 bg-[#c8f03c] rounded-sm rotate-3 opacity-60" />
-      <div className="absolute bottom-1/4 left-[5%] w-3 h-3 bg-[#c8f03c] rounded-sm -rotate-12 opacity-50" />
+    <section className="min-h-screen bg-[#e8e8e8] pt-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 md:px-8 pt-16 md:pt-24 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-start">
 
-      <div className="max-w-7xl mx-auto px-5 md:px-8 w-full py-16 md:py-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-
-          {/* Left: text */}
-          <div className="space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+          {/* ── Left: text ── */}
+          <div className="space-y-8 lg:pt-8">
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.55 }}
+              className="text-5xl md:text-6xl xl:text-7xl font-black text-[#0d0d0d] leading-[1.02] tracking-tight"
             >
-              <h1 className="text-5xl md:text-6xl xl:text-7xl font-black text-[#0d0d0d] leading-[1.02] tracking-tight">
-                A Modern Social
-                <br />
-                Agency For A
-                <br />
-                <span className="relative inline-block">
-                  Modern Brand.
-                  <span className="absolute -bottom-1 left-0 right-0 h-[6px] bg-[#c8f03c] -z-10 translate-y-1" />
-                </span>
-              </h1>
-            </motion.div>
+              A Modern Social
+              <br />Agency For A
+              <br />Modern Brand.
+            </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-[#0d0d0d]/60 text-lg leading-relaxed max-w-md font-medium"
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="text-[#0d0d0d]/55 text-base leading-relaxed font-medium max-w-sm"
             >
-              We engineer data-driven social content that turns followers into
-              loyal customers. No guesswork — just measurable growth.
+              This Modern Social Agency Embraces The Era Of Data-Driven Content, Enabling Swift And Effortless Growth. No More Guessing Or Struggling With Outdated Marketing Methods.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex items-center gap-4"
+              transition={{ duration: 0.55, delay: 0.2 }}
             >
               <Link to="/book">
-                <button className="flex items-center gap-2 h-12 px-7 rounded-full bg-[#c8f03c] text-[#0d0d0d] font-bold text-sm hover:bg-[#b8e02c] transition-colors shadow-sm">
-                  Explore More
-                  <ArrowUpRight className="w-4 h-4" />
+                <button className="flex items-center gap-2 h-12 px-7 rounded-full bg-[#c8f03c] text-[#0d0d0d] font-bold text-sm hover:bg-[#b8e02c] transition-colors">
+                  Explore More <ArrowUpRight className="w-4 h-4" />
                 </button>
               </Link>
-              <a href="#work" onClick={(e) => { e.preventDefault(); document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }); }}>
-                <button className="h-12 px-7 rounded-full border-2 border-[#0d0d0d]/20 text-[#0d0d0d] font-bold text-sm hover:border-[#0d0d0d]/60 transition-colors">
-                  View Work
-                </button>
-              </a>
             </motion.div>
 
-            {/* Brand strip */}
+            {/* Brand logos */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="pt-4 border-t border-[#0d0d0d]/10"
+              className="flex items-center gap-8 pt-2 flex-wrap"
             >
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0d0d0d]/40 mb-4">Trusted By</p>
-              <div className="flex items-center gap-6 flex-wrap">
-                {brands.map((b) => (
-                  <span key={b} className="text-sm font-black text-[#0d0d0d]/30 tracking-tight uppercase">{b}</span>
-                ))}
-              </div>
+              {brands.map((b) => (
+                <div key={b.name} className="flex items-center gap-1.5 text-[#0d0d0d]/35">
+                  <span className="text-sm font-mono font-bold">{b.icon}</span>
+                  <span className="text-sm font-bold tracking-tight">{b.name}</span>
+                </div>
+              ))}
             </motion.div>
           </div>
 
-          {/* Right: floating analytics card */}
+          {/* ── Right: card illustration ── */}
           <motion.div
-            initial={{ opacity: 0, x: 40, y: 20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            className="relative flex items-center justify-center"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
+            className="relative flex items-center justify-center min-h-[380px] lg:min-h-[500px]"
           >
-            {/* Pixel art background grid (decorative) */}
-            <div className="absolute inset-0 grid grid-cols-12 grid-rows-8 gap-1.5 opacity-[0.07] pointer-events-none p-4">
-              {Array.from({ length: 96 }).map((_, i) => (
-                <div key={i} className="rounded-sm bg-[#0d0d0d]" style={{ opacity: Math.random() > 0.5 ? 1 : 0 }} />
-              ))}
-            </div>
+            {/* Floating lime square top-right */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-6 right-10 w-14 h-14 bg-[#c8f03c] rounded-xl z-20 shadow-lg"
+            />
 
-            {/* Main analytics card */}
-            <div className="relative bg-white rounded-[28px] shadow-xl p-6 w-full max-w-sm">
-              {/* Card header */}
-              <div className="flex items-center justify-between mb-5">
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#0d0d0d]/40">Dashboard</p>
-                  <h3 className="text-lg font-black text-[#0d0d0d]">Campaign Overview</h3>
-                </div>
-                <div className="w-9 h-9 rounded-full bg-[#c8f03c] flex items-center justify-center">
-                  <TrendingUp className="w-4 h-4 text-[#0d0d0d]" />
-                </div>
-              </div>
+            {/* Small dark square */}
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              className="absolute top-12 right-4 w-5 h-5 bg-[#0d0d0d] rounded-sm z-20 opacity-60"
+            />
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute bottom-20 right-8 w-4 h-4 border-2 border-[#0d0d0d] rounded-sm opacity-40"
+            />
+            <motion.div
+              animate={{ x: [0, 6, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+              className="absolute bottom-28 left-6 w-3 h-3 bg-[#c8f03c] rounded-sm opacity-70"
+            />
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+              className="absolute top-24 left-16 w-2.5 h-2.5 bg-[#7c3aed] rounded-sm opacity-60"
+            />
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              className="absolute top-1/3 right-2 w-2 h-2 bg-[#c8f03c] rounded-sm opacity-80"
+            />
 
-              {/* Metrics row */}
-              <div className="grid grid-cols-2 gap-3 mb-5">
-                {[
-                  { label: "Followers", value: "+48.2K", icon: Users, color: "#c8f03c" },
-                  { label: "Engagement", value: "18.4%", icon: Zap, color: "#0d0d0d" },
-                ].map((m) => (
-                  <div key={m.label} className="bg-[#f5f5f5] rounded-2xl p-4">
-                    <div className="w-7 h-7 rounded-full flex items-center justify-center mb-2" style={{ background: m.color }}>
-                      <m.icon className="w-3.5 h-3.5" style={{ color: m.color === "#0d0d0d" ? "#fff" : "#0d0d0d" }} />
-                    </div>
-                    <p className="text-xl font-black text-[#0d0d0d]">{m.value}</p>
-                    <p className="text-xs text-[#0d0d0d]/50 font-medium">{m.label}</p>
-                  </div>
+            {/* Main dark card — rotated */}
+            <motion.div
+              animate={{ rotate: [8, 10, 8] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-[280px] md:w-[340px] h-[180px] md:h-[210px] bg-[#12102a] rounded-3xl shadow-2xl overflow-hidden"
+            >
+              {/* Pixel grid on card */}
+              <div className="absolute inset-0 grid p-5 gap-1" style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: 'repeat(6, 1fr)' }}>
+                {pixelRows.flat().map((code, i) => (
+                  <div
+                    key={i}
+                    className="rounded-[2px]"
+                    style={{ background: colorMap[code] }}
+                  />
                 ))}
               </div>
 
-              {/* Mini bar chart */}
-              <div className="space-y-2 mb-5">
-                <div className="flex justify-between text-[11px] font-bold text-[#0d0d0d]/40">
-                  <span>Monthly Reach</span>
-                  <span>5.1M</span>
-                </div>
-                <div className="flex items-end gap-1 h-14">
-                  {[40, 60, 45, 75, 55, 90, 70, 100, 85, 95, 80, 100].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ scaleY: 0 }}
-                      animate={{ scaleY: 1 }}
-                      transition={{ duration: 0.4, delay: 0.5 + i * 0.04 }}
-                      className="flex-1"
-                      style={{ height: `${h}%`, originY: 1 }}
-                    >
-                      <div
-                        className="w-full rounded-t-sm"
-                        style={{
-                          height: `${h}%`,
-                          background: i === 11 ? "#c8f03c" : "#0d0d0d",
-                          opacity: i === 11 ? 1 : 0.08 + i * 0.07,
-                        }}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+              {/* Card chip */}
+              <div className="absolute top-5 left-5 w-8 h-6 bg-[#c8f03c]/80 rounded-md" />
 
-              {/* Bottom CTA */}
-              <div className="flex items-center justify-between pt-4 border-t border-[#0d0d0d]/[0.06]">
-                <div className="flex -space-x-2">
-                  {["12", "33", "41"].map((id) => (
-                    <img key={id} src={`https://i.pravatar.cc/40?img=${id}`} className="w-7 h-7 rounded-full border-2 border-white object-cover" alt="" />
-                  ))}
+              {/* Card details at bottom */}
+              <div className="absolute bottom-4 left-5 right-5">
+                <div className="flex justify-between items-end">
+                  <div>
+                    <p className="text-white/40 text-[9px] font-bold tracking-widest uppercase mb-0.5">Card Holder</p>
+                    <p className="text-white text-xs font-bold">Megan Lee</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-white/40 text-[9px] mb-0.5">07/26</p>
+                    <div className="flex gap-0.5">
+                      <div className="w-4 h-4 rounded-full bg-[#7c3aed] opacity-80" />
+                      <div className="w-4 h-4 rounded-full bg-[#c8f03c] opacity-80 -ml-2" />
+                    </div>
+                  </div>
                 </div>
-                <span className="text-xs font-bold text-[#0d0d0d]/40">50+ brands scaled</span>
               </div>
+            </motion.div>
+
+            {/* Scattered small pixel squares below/around card */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 opacity-50">
+              {['#7c3aed','#c8f03c','#0d0d0d','#7c3aed','#c8f03c'].map((c, i) => (
+                <div key={i} className="w-3 h-3 rounded-sm" style={{ background: c, transform: `rotate(${i * 15}deg)` }} />
+              ))}
             </div>
-
-            {/* Floating accent card */}
-            <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-4 -right-4 bg-[#c8f03c] rounded-2xl p-4 shadow-lg"
-            >
-              <p className="text-[11px] font-black text-[#0d0d0d]/60 uppercase tracking-wider">Growth</p>
-              <p className="text-2xl font-black text-[#0d0d0d]">+312%</p>
-            </motion.div>
-
-            {/* Floating dark card */}
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute -bottom-4 -left-4 bg-[#0d0d0d] rounded-2xl p-4 shadow-lg"
-            >
-              <p className="text-[11px] font-black text-white/40 uppercase tracking-wider">ROAS</p>
-              <p className="text-2xl font-black text-white">4.2x</p>
-            </motion.div>
           </motion.div>
         </div>
       </div>
