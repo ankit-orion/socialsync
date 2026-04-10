@@ -24,7 +24,7 @@ export function Stats() {
                 </div>
               </div>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-[#0d0d0d] leading-[1.1] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0d0d0d] leading-[1.1] tracking-tight">
               What Features Make Our
               <br />Social Strategy{" "}
               <span style={{ color: '#7c3aed' }}>Distinctive</span>
@@ -36,7 +36,7 @@ export function Stats() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-12 gap-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-3">
             <div className="space-y-3">
               {features.slice(0, 3).map((f, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }} className="flex items-center gap-3">

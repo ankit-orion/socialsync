@@ -1,34 +1,6 @@
 import { motion } from "framer-motion";
 
-/* Simplified continent paths — viewBox 0 0 900 420 */
-const WorldMap = () => (
-  <svg viewBox="0 0 900 420" fill="none" className="absolute inset-0 w-full h-full">
-    {/* North America */}
-    <path d="M128,28 L195,18 L245,34 L275,62 L288,118 L274,172 L242,204 L200,224 L160,208 L132,168 L112,120 L116,68 Z" fill="#d1d5db" opacity="0.5"/>
-    {/* Greenland */}
-    <path d="M220,8 L255,5 L270,18 L265,38 L240,42 L220,30 Z" fill="#d1d5db" opacity="0.4"/>
-    {/* South America */}
-    <path d="M202,250 L242,238 L268,258 L280,325 L268,388 L238,405 L205,396 L184,362 L180,302 L190,268 Z" fill="#d1d5db" opacity="0.5"/>
-    {/* Europe */}
-    <path d="M398,22 L458,15 L494,30 L502,66 L480,90 L448,98 L412,88 L396,62 Z" fill="#d1d5db" opacity="0.5"/>
-    {/* UK */}
-    <path d="M386,30 L400,22 L406,36 L396,48 L384,42 Z" fill="#d1d5db" opacity="0.45"/>
-    {/* Africa */}
-    <path d="M396,120 L450,108 L492,124 L508,192 L500,275 L468,335 L430,345 L392,318 L375,252 L380,178 Z" fill="#d1d5db" opacity="0.5"/>
-    {/* Asia */}
-    <path d="M508,12 L698,8 L775,44 L788,108 L752,162 L690,182 L618,165 L558,142 L520,92 L504,46 Z" fill="#d1d5db" opacity="0.5"/>
-    {/* India */}
-    <path d="M578,178 L618,172 L634,218 L618,272 L596,282 L572,254 L562,214 Z" fill="#d1d5db" opacity="0.45"/>
-    {/* SE Asia */}
-    <path d="M692,178 L735,170 L762,192 L756,230 L728,244 L694,232 L678,208 Z" fill="#d1d5db" opacity="0.45"/>
-    {/* Japan */}
-    <path d="M764,62 L780,55 L790,70 L784,90 L770,92 L760,78 Z" fill="#d1d5db" opacity="0.4"/>
-    {/* Australia */}
-    <path d="M700,272 L765,258 L798,282 L792,350 L760,372 L712,362 L692,328 L694,292 Z" fill="#d1d5db" opacity="0.5"/>
-    {/* New Zealand */}
-    <path d="M808,332 L820,325 L826,342 L818,358 L808,352 Z" fill="#d1d5db" opacity="0.4"/>
-  </svg>
-);
+
 
 /* Hub center coords (for the SVG viewBox 0 0 900 420) */
 const HX = 450;
@@ -74,12 +46,12 @@ export function GlobalReach() {
         <div className="bg-white rounded-[32px] overflow-hidden">
 
           {/* Header */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 md:p-12 pb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8 md:p-12 pb-6">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-xs font-black uppercase tracking-widest text-[#0d0d0d]/40">// Global Reach</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-black text-[#0d0d0d] leading-tight tracking-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0d0d0d] leading-tight tracking-tight">
                 We Connect Your Brand<br />Across The World.
               </h2>
             </div>
@@ -91,11 +63,15 @@ export function GlobalReach() {
           </div>
 
           {/* Illustration */}
-          <div className="relative mx-6 mb-6 rounded-2xl overflow-hidden bg-[#f8f8f8]" style={{ height: 420 }}>
+          <div className="relative mx-3 sm:mx-6 mb-6 rounded-2xl overflow-hidden bg-white h-[200px] sm:h-[300px] md:h-[420px]">
+            {/* World map background image */}
+            <img
+              src="/worldmap.png"
+              alt="World map"
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+              style={{ opacity: 0.45, zIndex: 0 }}
+            />
             <svg viewBox="0 0 900 420" className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
-
-              {/* World map */}
-              <WorldMap />
 
               {/* ── Connection lines ── */}
               {leftAvatars.map((a, i) => (
@@ -335,15 +311,15 @@ export function GlobalReach() {
           </div>
 
           {/* Bottom stats */}
-          <div className="grid grid-cols-3 divide-x divide-[#0d0d0d]/08 border-t border-[#0d0d0d]/08 mx-6 mb-6">
+          <div className="grid grid-cols-3 divide-x divide-[#0d0d0d]/[0.08] border-t border-[#0d0d0d]/[0.08] mx-3 sm:mx-6 mb-6">
             {[
               { value: '50+', label: 'Countries Reached' },
               { value: '180+', label: 'Active Campaigns' },
               { value: '99M+', label: 'Impressions Delivered' },
             ].map((s, i) => (
-              <div key={i} className="py-6 text-center">
-                <p className="text-3xl font-black text-[#0d0d0d] tracking-tight">{s.value}</p>
-                <p className="text-xs font-semibold text-[#0d0d0d]/40 mt-1 uppercase tracking-widest">{s.label}</p>
+              <div key={i} className="py-4 sm:py-6 text-center px-1">
+                <p className="text-xl sm:text-2xl md:text-3xl font-black text-[#0d0d0d] tracking-tight">{s.value}</p>
+                <p className="text-[9px] sm:text-xs font-semibold text-[#0d0d0d]/40 mt-1 uppercase tracking-widest leading-tight">{s.label}</p>
               </div>
             ))}
           </div>

@@ -162,8 +162,8 @@ export function Work() {
       <div className="max-w-7xl mx-auto px-5 md:px-8">
 
         {/* Header + arrows */}
-        <div className="flex items-start justify-between mb-10 gap-6">
-          <h2 className="text-3xl md:text-4xl font-black text-[#0d0d0d] leading-tight tracking-tight max-w-lg">
+        <div className="flex items-start justify-between mb-10 gap-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#0d0d0d] leading-tight tracking-tight max-w-lg">
             Up-To-Date And Fast Social
             <br />Media Services In One Place
           </h2>
@@ -186,7 +186,7 @@ export function Work() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 overflow-hidden">
           <AnimatePresence mode="popLayout">
             {carousels.slice(start, start + visible).map((c) => (
               <motion.div

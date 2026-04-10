@@ -10,10 +10,10 @@ export function CTA() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="max-w-7xl mx-auto bg-[#0d0d0d] rounded-[32px] px-10 md:px-16 py-16 flex flex-col md:flex-row items-center justify-between gap-8"
+        className="max-w-7xl mx-auto bg-[#0d0d0d] rounded-[24px] sm:rounded-[32px] px-6 sm:px-10 md:px-16 py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8"
       >
         <div className="space-y-3 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight tracking-tight">
             Ready to scale your brand?
           </h2>
           <p className="text-white/45 text-base font-medium max-w-md">

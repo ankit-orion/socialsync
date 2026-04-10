@@ -42,7 +42,7 @@ export function Clients() {
   const current = testimonials[index];
 
   return (
-    <section className="bg-[#e8e8e8] py-24 px-5 md:px-8 relative overflow-hidden">
+    <section className="bg-[#e8e8e8] py-16 md:py-24 px-5 md:px-8 relative overflow-hidden">
       {/* Subtle Grid Background */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
         style={{ 
@@ -66,7 +66,7 @@ export function Clients() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-black text-[#0d0d0d] tracking-tighter leading-none mb-6 uppercase"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#0d0d0d] tracking-tighter leading-none mb-6 uppercase"
           >
             TRUSTED BY FOUNDERS<br />
             <span className="text-[#0d0d0d]/40">BACKED BY RESULTS</span>
@@ -82,7 +82,7 @@ export function Clients() {
           </motion.p>
         </div>
 
-        <div className="relative h-[420px] md:h-[380px] flex items-center justify-center">
+        <div className="relative h-[520px] sm:h-[460px] md:h-[420px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
@@ -90,7 +90,7 @@ export function Clients() {
               animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -20, rotate: 2 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="absolute w-full max-w-2xl bg-white rounded-[32px] p-8 md:p-12 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border border-white"
+              className="absolute w-full max-w-2xl bg-white rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 md:p-12 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border border-white"
             >
               {/* Virtual Badge Header Detail */}
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-24 h-12 bg-gradient-to-b from-[#f0f0f0] to-white rounded-t-xl border-x border-t border-[#000]/5 flex items-center justify-center">
@@ -110,7 +110,7 @@ export function Clients() {
 
               <div className="relative mb-10">
                 <Quote className="absolute -top-4 -left-4 w-8 h-8 text-[#c8f03c] opacity-40 rotate-180" strokeWidth={3} />
-                <p className="text-[#0d0d0d]/70 text-lg md:text-xl font-medium leading-relaxed tracking-tight relative z-10">
+                <p className="text-[#0d0d0d]/70 text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-relaxed tracking-tight relative z-10">
                   {current.quote}
                 </p>
               </div>

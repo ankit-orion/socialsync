@@ -35,12 +35,12 @@ export function Footer() {
       >
         {/* ── Double arch cutout at top ── */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 flex pointer-events-none z-10">
-          <div className="w-40 h-20 bg-[#e8e8e8] rounded-b-[100%]" />
-          <div className="w-40 h-20 bg-[#e8e8e8] rounded-b-[100%]" />
+          <div className="w-24 h-14 sm:w-40 sm:h-20 bg-[#e8e8e8] rounded-b-[100%]" />
+          <div className="w-24 h-14 sm:w-40 sm:h-20 bg-[#e8e8e8] rounded-b-[100%]" />
         </div>
 
         {/* Content */}
-        <div className="max-w-7xl mx-auto px-8 md:px-16 pt-28 pb-0">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 pt-20 sm:pt-28 pb-0">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-16">
 
             {/* Brand */}
@@ -91,19 +91,19 @@ export function Footer() {
               </p>
 
               {/* Email input */}
-              <div className="flex bg-white rounded-full overflow-hidden pr-1 py-1 pl-5 items-center gap-2">
+              <div className="flex bg-white rounded-full overflow-hidden pr-1 py-1 pl-4 items-center gap-2">
                 <input
                   type="email"
-                  placeholder="Enter Email Address"
-                  className="flex-1 bg-transparent text-[#0d0d0d] text-sm placeholder:text-[#0d0d0d]/30 outline-none min-w-0"
+                  placeholder="Enter Email"
+                  className="flex-1 bg-transparent text-[#0d0d0d] text-sm placeholder:text-[#0d0d0d]/30 outline-none min-w-0 w-0"
                 />
-                <button className="h-9 px-5 rounded-full bg-[#c8f03c] text-[#0d0d0d] font-bold text-sm flex items-center gap-1.5 hover:bg-[#b8e02c] transition-colors flex-shrink-0">
-                  Subscribe <ArrowUpRight className="w-3.5 h-3.5" />
+                <button className="h-9 px-3 sm:px-5 rounded-full bg-[#c8f03c] text-[#0d0d0d] font-bold text-xs sm:text-sm flex items-center gap-1 hover:bg-[#b8e02c] transition-colors flex-shrink-0 whitespace-nowrap">
+                  Subscribe <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </button>
               </div>
 
               {/* Social icons */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-white/40 text-sm font-medium">Contact Us :</span>
                 {socialIcons.map(({ icon: Icon, bg, color }, i) => (
                   <a
