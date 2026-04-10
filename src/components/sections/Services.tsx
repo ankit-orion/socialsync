@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Rocket, ShoppingBag, Star, Building2, Users } from "lucide-react";
+import { Rocket, ShoppingBag, Star, Building2, Users, ArrowLeft, ArrowRight } from "lucide-react";
 
 /* ── Category tabs ── */
 const CATEGORIES = [
@@ -792,7 +792,26 @@ const RenderMock = ({ type }: { type: string }) => {
    ════════════════════════════════════════════ */
 export function Services() {
   const [activeCategory, setActiveCategory] = useState<Category>("For Startups");
+  const [isMobile, setIsMobile] = useState(false);
+  const [cardIndex, setCardIndex] = useState(0);
+
   const cards = SERVICES[activeCategory];
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const handleDragEnd = (e: any, info: any) => {
+    if (!isMobile) return;
+    if (info.offset.x < -80) {
+      setCardIndex((prev) => (prev + 1) % cards.length);
+    } else if (info.offset.x > 80) {
+      setCardIndex((prev) => (prev === 0 ? cards.length - 1 : prev - 1));
+    }
+  };
 
   return (
     <section id="services" className="bg-[#e8e8e8] py-16 md:py-24 px-5 md:px-8">
@@ -840,9 +859,9 @@ export function Services() {
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  onClick={() => { setActiveCategory(cat); setCardIndex(0); }}
                   title={cat}
-                  className={`flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300 ${
+                  className={`flex flex-shrink-0 items-center gap-1.5 px-3 md:px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
                     activeCategory === cat
                       ? "bg-[#0d0d0d] text-white shadow-md"
                       : "text-[#0d0d0d]/70 hover:text-[#0d0d0d]/80 hover:bg-[#0d0d0d]/[0.03]"
@@ -864,15 +883,41 @@ export function Services() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-5"
+            className="relative h-[560px] md:h-auto md:grid md:grid-cols-3 gap-5"
           >
-            {cards.map((card, i) => (
+            {cards.map((card, i) => {
+              const isTop = i === cardIndex;
+              const isSecond = i === (cardIndex + 1) % 3;
+              const isThird = i === (cardIndex + 2) % 3;
+
+              let mobileZIndex = 10;
+              let mobileScale = 1;
+              let mobileY = 0;
+              let mobileOpacity = 1;
+
+              if (isTop) { mobileZIndex = 30; mobileScale = 1; mobileY = 40; }
+              else if (isSecond) { mobileZIndex = 20; mobileScale = 0.94; mobileY = 20; }
+              else if (isThird) { mobileZIndex = 10; mobileScale = 0.88; mobileY = 0; }
+
+              return (
               <motion.div
                 key={`${activeCategory}-${card.num}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
-                className="group bg-white rounded-[28px] border border-[#0d0d0d]/[0.05] overflow-hidden shadow-[0_8px_30px_-10px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col"
+                drag={isMobile && isTop ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                onDragEnd={handleDragEnd}
+                animate={isMobile ? {
+                  scale: mobileScale,
+                  y: mobileY,
+                  zIndex: mobileZIndex,
+                  opacity: mobileOpacity
+                } : {
+                  scale: 1,
+                  y: 0,
+                  opacity: 1
+                }}
+                transition={isMobile ? { duration: 0.4, type: "spring", stiffness: 300, damping: 25 } : { delay: i * 0.1, duration: 0.4 }}
+                className={`${isMobile ? "absolute inset-x-0 mx-auto top-0 w-full origin-top shadow-2xl cursor-grab active:cursor-grabbing pb-8" : "shadow-[0_8px_30px_-10px_rgba(0,0,0,0.04)] h-full"} group bg-white rounded-[32px] border border-[#0d0d0d]/[0.05] overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-500 flex flex-col`}
+                style={isMobile ? { zIndex: mobileZIndex } : {}}
               >
                 {/* Text area */}
                 <div className="p-7 pb-5">
@@ -892,7 +937,22 @@ export function Services() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+             );
+            })}
+
+            {/* Mobile swipe helper */}
+            {isMobile && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="absolute -bottom-8 left-0 right-0 flex justify-center items-center gap-3 text-[#0d0d0d]/40"
+              >
+                <ArrowLeft className="w-3 h-3 animate-pulse" />
+                <span className="text-[10px] font-black uppercase tracking-[0.2em]">Swipe to explore</span>
+                <ArrowRight className="w-3 h-3 animate-pulse" />
+              </motion.div>
+            )}
           </motion.div>
         </AnimatePresence>
 
