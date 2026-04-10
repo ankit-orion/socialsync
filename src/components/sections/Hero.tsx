@@ -2607,14 +2607,6 @@ export function Hero() {
     <section className="min-h-screen bg-[#e8e8e8] pt-16 overflow-hidden relative">
       {/* ── Background decoration ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Dot grid */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "radial-gradient(circle, rgba(13,13,13,0.13) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
         {/* Drifting orbs */}
         <motion.div
           className="absolute rounded-full"
