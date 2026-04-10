@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Send, MessageCircle, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const leftLinks = ["About Us", "Services", "Careers", "Learn"];
 const rightLinks = ["Branches", "Faq", "Blog"];
@@ -46,20 +47,23 @@ export function Footer() {
               <p className="text-white font-bold text-base mb-6">Quick Access</p>
               <div className="grid grid-cols-2 gap-x-12 gap-y-3">
                 <div className="space-y-3">
-                  {leftLinks.map((l) => (
-                    <a
-                      key={l}
-                      href="#"
-                      className={`flex items-center gap-2 text-sm font-medium transition-colors ${
-                        l === "Services" ? "text-white" : "text-white/50 hover:text-white"
-                      }`}
-                    >
-                      {l === "Services" && (
-                        <span className="w-2 h-2 rounded-full bg-[#60516f] flex-shrink-0" />
-                      )}
-                      {l}
-                    </a>
-                  ))}
+                  {leftLinks.map((l) => {
+                    const toPath = l === "Careers" ? "/careers" : "/";
+                    return (
+                      <Link
+                        key={l}
+                        to={toPath}
+                        className={`flex items-center gap-2 text-sm font-medium transition-colors ${
+                          l === "Services" ? "text-white" : "text-white/50 hover:text-white"
+                        }`}
+                      >
+                        {l === "Services" && (
+                          <span className="w-2 h-2 rounded-full bg-[#60516f] flex-shrink-0" />
+                        )}
+                        {l}
+                      </Link>
+                    )
+                  })}
                 </div>
                 <div className="space-y-3">
                   {rightLinks.map((l) => (

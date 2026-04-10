@@ -7,6 +7,7 @@ import { Home } from "@/pages/Home";
 import { BookCall } from "@/pages/BookCall";
 import { WorkPage } from "@/pages/WorkPage";
 import { Contact } from "@/pages/Contact";
+import { Careers } from "@/pages/Careers";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/book" element={<BookCall />} />
             <Route path="/work" element={<WorkPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/careers" element={<Careers />} />
           </Routes>
           <Footer />
         </div>
