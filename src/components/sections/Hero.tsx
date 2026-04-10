@@ -636,7 +636,6 @@ const WhatsAppScreen = () => (
 
 const SCREENS = [InstagramScreen, LinkedInScreen, RedditScreen, TwitterScreen, WhatsAppScreen];
 const PLATFORM_COLORS = ['#E1306C','#0A66C2','#FF4500','#000000','#25D366'];
-const PLATFORM_LABELS = ['Instagram','LinkedIn','Reddit','Twitter / X','WhatsApp'];
 
 /* ── Hero ── */
 export function Hero() {
@@ -682,7 +681,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2 }}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4"
+              className="flex flex-row items-center gap-3"
             >
               <Link to="/book">
                 <button className="flex items-center gap-2 h-12 px-7 rounded-full bg-[#0d0d0d] text-white font-bold text-sm hover:bg-[#222] transition-colors">
@@ -716,7 +715,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative w-full h-[420px] sm:h-[500px] lg:h-[600px]"
+            className="relative w-full h-[380px] sm:h-[480px] lg:h-[600px]"
           >
             {/* Glow */}
             <div className="absolute rounded-full pointer-events-none" style={{ top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:320, height:320, background:'radial-gradient(circle, rgba(200,240,60,0.15) 0%, transparent 70%)' }} />
@@ -741,13 +740,16 @@ export function Hero() {
             ))}
 
             {/* Phone */}
-            <motion.div
-              className="absolute"
-              style={{ top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'min(248px, 70vw)', zIndex:20 }}
-              initial={{ opacity:0, y:24 }}
-              animate={{ opacity:1, y:0 }}
-              transition={{ duration:0.7, delay:0.5 }}
-            >
+            {/* Centering wrapper — handles only the 50%/50% translate */}
+            <div className="absolute" style={{ top:'50%', left:'50%', transform:'translate(-50%,-50%)', zIndex:20, width:248 }}>
+              {/* Scale shell — shrinks the phone on smaller viewports without breaking pixel-perfect internals */}
+              <div className="scale-[0.68] sm:scale-[0.85] lg:scale-100 origin-center">
+                <motion.div
+                  style={{ width:248 }}
+                  initial={{ opacity:0, y:24 }}
+                  animate={{ opacity:1, y:0 }}
+                  transition={{ duration:0.7, delay:0.5 }}
+                >
               {/* Buttons */}
               <div style={{ position:'absolute', left:-4, top:68,  width:3, height:14, background:'#2a2a2a', borderRadius:'2px 0 0 2px' }} />
               <div style={{ position:'absolute', left:-4, top:90,  width:3, height:26, background:'#2a2a2a', borderRadius:'2px 0 0 2px' }} />
@@ -760,20 +762,6 @@ export function Hero() {
 
                   {/* Dynamic Island */}
                   <div style={{ position:'absolute', top:10, left:'50%', transform:'translateX(-50%)', width:76, height:11, background:'#000', borderRadius:20, zIndex:30, boxShadow:'0 0 0 1px rgba(255,255,255,0.06)' }} />
-
-                  {/* Platform label pill */}
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity:0, y:-6 }}
-                      animate={{ opacity:1, y:0 }}
-                      exit={{ opacity:0, y:6 }}
-                      transition={{ duration:0.25 }}
-                      style={{ position:'absolute', top:56, left:'50%', transform:'translateX(-50%)', zIndex:35, background:PLATFORM_COLORS[idx], borderRadius:20, padding:'2px 10px', whiteSpace:'nowrap' }}
-                    >
-                      <span style={{ color:'white', fontSize:7.5, fontWeight:800 }}>{PLATFORM_LABELS[idx]}</span>
-                    </motion.div>
-                  </AnimatePresence>
 
                   {/* Screen content — fills phone */}
                   <div style={{ height: 468, overflow: 'hidden' }}>
@@ -800,7 +788,9 @@ export function Hero() {
                   <button key={i} onClick={()=>setIdx(i)} style={{ width:i===idx?16:5, height:5, borderRadius:5, background:i===idx?PLATFORM_COLORS[idx]:'rgba(13,13,13,0.2)', border:'none', cursor:'pointer', transition:'all 0.3s ease', padding:0 }} />
                 ))}
               </div>
-            </motion.div>
+                </motion.div>
+              </div>{/* /scale shell */}
+            </div>{/* /centering wrapper */}
 
             {/* Floating stat cards */}
             {statCards.map(({ label, value, delta, color, top, right, left, bottom }, i) => (
