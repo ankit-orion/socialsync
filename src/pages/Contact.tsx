@@ -29,7 +29,7 @@ export function Contact() {
             className="space-y-8"
           >
             <div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight mb-4 text-balance">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tight mb-4 text-balance">
                 Shoot us an <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">email.</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-md">

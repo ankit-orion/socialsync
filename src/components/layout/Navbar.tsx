@@ -1,97 +1,198 @@
-import { Button } from "../ui/button";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
-import { ModeToggle } from "../mode-toggle";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "/work" },
+  { label: "About", href: "#about" },
+];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { scrollY } = useScroll();
 
-  // Smooth scroll handler
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    const href = e.currentTarget.getAttribute('href');
-    if (!href || !href.startsWith('#')) return;
-    
-    const targetId = href.replace('#', '');
-    
-    // If we're not on the homepage, first navigate home
-    if (location.pathname !== '/') {
+  // Track scroll direction to auto-hide/show
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setScrolled(latest > 20);
+    if (latest > prev && latest > 200) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
+
+  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
       e.preventDefault();
-      navigate('/' + href);
+      if (location.pathname !== "/") {
+        navigate("/" + href);
+        setIsOpen(false);
+        return;
+      }
+      document.getElementById(href.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
       setIsOpen(false);
-      return;
     }
-
-    // If we're on the homepage, scroll smoothly
-    e.preventDefault();
-    const elem = document.getElementById(targetId);
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsOpen(false);
   };
 
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    return () => { document.body.style.overflow = "auto"; };
+  }, [isOpen]);
+
   return (
-    <motion.nav 
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="fixed top-0 w-full z-50 border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
-    >
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center shadow-lg">
-            <span className="text-primary-foreground font-bold text-xl leading-none">S</span>
-          </div>
-          <span className="font-bold text-lg tracking-tight">SocialSync</span>
-        </div>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          <a href="#services" onClick={handleScroll} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Services</a>
-          <a href="#work" onClick={handleScroll} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Work</a>
-          <a href="#about" onClick={handleScroll} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">About</a>
-          <div className="flex items-center gap-4">
-            <ModeToggle />
-            <Link to="/book">
-              <Button className="rounded-full px-6 transition-transform hover:scale-105 active:scale-95">Book a Call</Button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Mobile Nav Toggle */}
-        <div className="flex md:hidden items-center gap-4">
-          <ModeToggle />
-          <button className="p-2 -mr-2 text-foreground" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Nav Menu */}
-      <AnimatePresence>
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md absolute w-full left-0 overflow-hidden"
+    <>
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4"
+      >
+        <div
+          className={`
+            flex items-center justify-between w-full max-w-4xl
+            h-14 px-2.5 rounded-full
+            border transition-all duration-500
+            ${scrolled
+              ? "bg-white/80 backdrop-blur-xl border-[#0d0d0d]/[0.06] shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]"
+              : "bg-white/60 backdrop-blur-lg border-[#0d0d0d]/[0.04] shadow-sm"
+            }
+          `}
         >
-          <div className="container mx-auto px-4 py-6 flex flex-col gap-6">
-            <a href="#services" className="text-lg font-medium text-muted-foreground hover:text-foreground" onClick={handleScroll}>Services</a>
-            <a href="#work" className="text-lg font-medium text-muted-foreground hover:text-foreground" onClick={handleScroll}>Work</a>
-            <a href="#about" className="text-lg font-medium text-muted-foreground hover:text-foreground" onClick={handleScroll}>About</a>
-            <Link to="/book" onClick={() => setIsOpen(false)}>
-              <Button size="lg" className="w-full rounded-full mt-2">Book a Call</Button>
-            </Link>
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 pl-3 flex-shrink-0">
+            <div className="flex gap-[3px]">
+              <div className="w-3.5 h-3.5 bg-[#0d0d0d] rounded-[4px]" />
+              <div className="w-3.5 h-3.5 bg-[#2c5270] rounded-[4px]" />
+            </div>
+            <span className="font-black text-[15px] text-[#0d0d0d] tracking-tight">
+              SocialSync
+            </span>
+          </Link>
+
+          {/* Center nav links — desktop */}
+          <div className="hidden md:flex items-center gap-1 bg-[#0d0d0d]/[0.03] rounded-full px-1.5 py-1">
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? location.pathname === "/"
+                  : link.href.startsWith("#")
+                    ? false
+                    : location.pathname === link.href;
+
+              return link.href.startsWith("#") ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleNav(e, link.href)}
+                  className="px-4 py-1.5 rounded-full text-[13px] font-bold text-[#0d0d0d]/45 hover:text-[#0d0d0d] hover:bg-white/70 transition-all duration-200"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={`px-4 py-1.5 rounded-full text-[13px] font-bold transition-all duration-200 ${
+                    isActive
+                      ? "bg-white text-[#0d0d0d] shadow-sm"
+                      : "text-[#0d0d0d]/45 hover:text-[#0d0d0d] hover:bg-white/70"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
-        </motion.div>
-      )}
+
+          {/* Right side — CTA + mobile toggle */}
+          <div className="flex items-center gap-2 pr-1">
+            <Link to="/book" className="hidden md:block">
+              <button className="h-9 px-5 rounded-full bg-[#0d0d0d] text-white text-[12px] font-bold flex items-center gap-1.5 hover:bg-[#222] transition-colors">
+                Get Started
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+            </Link>
+
+            <button
+              className="md:hidden w-9 h-9 rounded-full bg-[#0d0d0d]/[0.05] flex items-center justify-center text-[#0d0d0d] hover:bg-[#0d0d0d]/[0.1] transition-colors"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+          </div>
+        </div>
+      </motion.nav>
+
+      {/* ── Mobile menu overlay ── */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-[#e8e8e8]/95 backdrop-blur-2xl flex flex-col items-center justify-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-col items-center gap-2 w-full max-w-xs"
+            >
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.label}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08 + i * 0.06 }}
+                  className="w-full"
+                >
+                  {link.href.startsWith("#") ? (
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNav(e, link.href)}
+                      className="flex items-center justify-center w-full py-4 rounded-2xl text-lg font-black text-[#0d0d0d] hover:bg-white/50 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center justify-center w-full py-4 rounded-2xl text-lg font-black text-[#0d0d0d] hover:bg-white/50 transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+                </motion.div>
+              ))}
+
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.08 + navLinks.length * 0.06 }}
+                className="w-full pt-4"
+              >
+                <Link to="/book" onClick={() => setIsOpen(false)}>
+                  <button className="w-full h-14 rounded-2xl bg-[#0d0d0d] text-white text-base font-bold flex items-center justify-center gap-2 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.3)]">
+                    Get Started <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 }

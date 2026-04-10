@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "@/pages/Home";
 import { BookCall } from "@/pages/BookCall";
+import { WorkPage } from "@/pages/WorkPage";
 import { Contact } from "@/pages/Contact";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
@@ -21,7 +22,7 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <motion.div 
-          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 origin-left z-[100]" 
+          className="fixed top-0 left-0 right-0 h-1 bg-[#2c5270] origin-left z-[100]" 
           style={{ scaleX }} 
         />
         <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/30">
@@ -29,6 +30,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/book" element={<BookCall />} />
+            <Route path="/work" element={<WorkPage />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
           <Footer />
