@@ -17,7 +17,7 @@ const carousels: CarouselPost[] = [
     illustration: (
       <div className="flex items-end justify-center gap-2 h-24">
         {[60,85,50,100,70,90].map((h, i) => (
-          <div key={i} className="w-5 rounded-t-md flex-shrink-0" style={{ height: `${h}%`, background: i === 3 ? '#c8f03c' : i % 2 === 0 ? '#7c3aed' : '#0d0d0d', opacity: i === 3 ? 1 : 0.15 + i * 0.1 }} />
+          <div key={i} className="w-5 rounded-t-md flex-shrink-0" style={{ height: `${h}%`, background: i === 3 ? '#2c5270' : i % 2 === 0 ? '#60516f' : '#0d0d0d', opacity: i === 3 ? 1 : 0.15 + i * 0.1 }} />
         ))}
       </div>
     ),
@@ -38,8 +38,8 @@ const carousels: CarouselPost[] = [
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <svg viewBox="0 0 80 80" className="w-20 h-20" fill="none">
             <circle cx="40" cy="40" r="28" stroke="#0d0d0d" strokeWidth="1" strokeOpacity="0.1"/>
-            <circle cx="40" cy="16" r="6" fill="#c8f03c"/>
-            <circle cx="62" cy="52" r="5" fill="#7c3aed"/>
+            <circle cx="40" cy="16" r="6" fill="#2c5270"/>
+            <circle cx="62" cy="52" r="5" fill="#60516f"/>
             <circle cx="18" cy="52" r="4" fill="#0d0d0d" opacity="0.2"/>
             <line x1="40" y1="22" x2="58" y2="47" stroke="#0d0d0d" strokeOpacity="0.15" strokeDasharray="3 3"/>
             <line x1="40" y1="22" x2="22" y2="47" stroke="#0d0d0d" strokeOpacity="0.15" strokeDasharray="3 3"/>
@@ -62,9 +62,9 @@ const carousels: CarouselPost[] = [
       <div className="flex items-center justify-center h-24 gap-3">
         {[
           { w: 'w-full', h: 'h-2', bg: '#0d0d0d', op: '0.08' },
-          { w: 'w-3/4', h: 'h-2', bg: '#c8f03c', op: '1' },
+          { w: 'w-3/4', h: 'h-2', bg: '#2c5270', op: '1' },
           { w: 'w-full', h: 'h-2', bg: '#0d0d0d', op: '0.08' },
-          { w: 'w-1/2', h: 'h-2', bg: '#7c3aed', op: '0.6' },
+          { w: 'w-1/2', h: 'h-2', bg: '#60516f', op: '0.6' },
           { w: 'w-full', h: 'h-2', bg: '#0d0d0d', op: '0.08' },
         ].map((bar, i) => (
           <div key={i} className="w-full">
@@ -87,7 +87,7 @@ const carousels: CarouselPost[] = [
     illustration: (
       <div className="h-24 flex items-end justify-center gap-1.5">
         {[30,50,40,70,55,80,65,90].map((h, i) => (
-          <div key={i} className="w-4 rounded-t-sm" style={{ height: `${h}%`, background: i === 7 ? '#c8f03c' : '#0d0d0d', opacity: 0.1 + i * 0.1 }} />
+          <div key={i} className="w-4 rounded-t-sm" style={{ height: `${h}%`, background: i === 7 ? '#2c5270' : '#0d0d0d', opacity: 0.1 + i * 0.1 }} />
         ))}
       </div>
     ),
@@ -108,7 +108,7 @@ const carousels: CarouselPost[] = [
           <circle cx="40" cy="40" r="30" stroke="#0d0d0d" strokeWidth="1" strokeOpacity="0.08"/>
           <circle cx="40" cy="40" r="20" stroke="#0d0d0d" strokeWidth="1" strokeOpacity="0.15"/>
           <circle cx="40" cy="40" r="10" stroke="#0d0d0d" strokeWidth="1" strokeOpacity="0.25"/>
-          <circle cx="40" cy="40" r="4" fill="#c8f03c"/>
+          <circle cx="40" cy="40" r="4" fill="#2c5270"/>
           <line x1="44" y1="36" x2="58" y2="22" stroke="#0d0d0d" strokeWidth="1.5" strokeOpacity="0.4"/>
           <circle cx="60" cy="20" r="3" fill="#0d0d0d" opacity="0.4"/>
         </svg>
@@ -129,13 +129,29 @@ function LightboxSlide({ slide }: { slide: Slide }) {
       <img src={slide.image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
       <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${slide.bg}ee 0%, ${slide.bg}88 60%, ${slide.accent}22 100%)` }} />
       <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: slide.accent }} />
-      <div className="relative z-10 h-full flex flex-col justify-between p-6">
+      <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6">
         <span className="text-[10px] font-black tracking-[0.2em] uppercase" style={{ color: slide.accent }}>{slide.label}</span>
         <div className="space-y-3">
-          <h3 className="text-2xl font-black leading-tight text-white whitespace-pre-line">{slide.headline}</h3>
+          <h3 className="text-xl sm:text-2xl font-black leading-tight text-white whitespace-pre-line">{slide.headline}</h3>
           <p className="text-[13px] text-white/70 font-medium leading-relaxed">{slide.body}</p>
         </div>
         <span className="text-[10px] font-bold" style={{ color: slide.accent + 'cc' }}>{slide.tag}</span>
+      </div>
+    </div>
+  );
+}
+
+/* Shared card inner content — used in both mobile list and desktop carousel */
+function WorkCard({ c, onClick }: { c: CarouselPost; onClick: () => void }) {
+  return (
+    <div
+      onClick={onClick}
+      className="bg-white rounded-[24px] p-5 sm:p-7 cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
+    >
+      <h3 className="text-center font-black text-[#0d0d0d] text-sm sm:text-base leading-snug mb-2 sm:mb-3">{c.topic}</h3>
+      <p className="text-center text-[#0d0d0d]/45 text-[11px] sm:text-[12px] leading-relaxed font-medium mb-5 sm:mb-6">{c.category}</p>
+      <div className="mt-auto pt-4 border-t border-[#0d0d0d]/[0.06]">
+        {c.illustration}
       </div>
     </div>
   );
@@ -161,32 +177,76 @@ export function Work() {
     <section id="work" className="bg-[#e8e8e8] py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-5 md:px-8">
 
-        {/* Header + arrows */}
-        <div className="flex items-start justify-between mb-10 gap-4">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#0d0d0d] leading-tight tracking-tight max-w-lg">
-            Up-To-Date And Fast Social
-            <br />Media Services In One Place
-          </h2>
-          <div className="flex items-center gap-2 flex-shrink-0 mt-2">
+        {/* ── Header ── */}
+        <div className="mb-8 sm:mb-10">
+          {/* Title row — arrows only on desktop */}
+          <div className="flex items-start justify-between gap-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#0d0d0d] leading-tight tracking-tight">
+              Up-To-Date And Fast Social
+              <br />Media Services In One Place
+            </h2>
+            {/* Desktop-only arrows */}
+            <div className="hidden lg:flex items-center gap-2 flex-shrink-0 mt-2">
+              <button
+                onClick={prev}
+                disabled={!canPrev}
+                className="w-10 h-10 rounded-full border-2 border-[#0d0d0d]/20 flex items-center justify-center hover:border-[#0d0d0d]/60 transition-colors disabled:opacity-30"
+              >
+                <ArrowLeft className="w-4 h-4 text-[#0d0d0d]" />
+              </button>
+              <button
+                onClick={next}
+                disabled={!canNext}
+                className="w-10 h-10 rounded-full bg-[#2c5270] flex items-center justify-center hover:bg-[#1e3d54] transition-colors disabled:opacity-30"
+              >
+                <ArrowRight className="w-4 h-4 text-[#0d0d0d]" />
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile-only arrows — full width row below heading */}
+          <div className="flex items-center gap-2 mt-5 lg:hidden">
             <button
               onClick={prev}
               disabled={!canPrev}
-              className="w-10 h-10 rounded-full border-2 border-[#0d0d0d]/20 flex items-center justify-center hover:border-[#0d0d0d]/60 transition-colors disabled:opacity-30"
+              className="w-9 h-9 rounded-full border-2 border-[#0d0d0d]/20 flex items-center justify-center hover:border-[#0d0d0d]/60 transition-colors disabled:opacity-30"
             >
               <ArrowLeft className="w-4 h-4 text-[#0d0d0d]" />
             </button>
             <button
               onClick={next}
               disabled={!canNext}
-              className="w-10 h-10 rounded-full bg-[#c8f03c] flex items-center justify-center hover:bg-[#b8e02c] transition-colors disabled:opacity-30"
+              className="w-9 h-9 rounded-full bg-[#2c5270] flex items-center justify-center hover:bg-[#1e3d54] transition-colors disabled:opacity-30"
             >
               <ArrowRight className="w-4 h-4 text-[#0d0d0d]" />
             </button>
+            <span className="text-xs font-semibold text-[#0d0d0d]/35 ml-1">
+              {start + 1}–{Math.min(start + visible, carousels.length)} of {carousels.length}
+            </span>
           </div>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 overflow-hidden">
+        {/* ── Mobile / tablet cards: 1 col on xs, 2 cols on sm, hidden on lg ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
+          <AnimatePresence mode="popLayout">
+            {carousels.slice(start, start + visible).map((c) => (
+              <motion.div
+                key={c.id}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="h-full"
+              >
+                <WorkCard c={c} onClick={() => openLightbox(c)} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* ── Desktop cards: 3-column paginated carousel, hidden below lg ── */}
+        <div className="hidden lg:grid grid-cols-3 gap-5 overflow-hidden">
           <AnimatePresence mode="popLayout">
             {carousels.slice(start, start + visible).map((c) => (
               <motion.div
@@ -196,60 +256,88 @@ export function Work() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -40 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                onClick={() => openLightbox(c)}
-                className="bg-white rounded-[24px] p-7 cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col"
+                className="h-full"
               >
-                <h3 className="text-center font-black text-[#0d0d0d] text-base leading-snug mb-3">{c.topic}</h3>
-                <p className="text-center text-[#0d0d0d]/45 text-[12px] leading-relaxed font-medium mb-6">{c.category}</p>
-                <div className="mt-auto pt-4 border-t border-[#0d0d0d]/[0.06]">
-                  {c.illustration}
-                </div>
+                <WorkCard c={c} onClick={() => openLightbox(c)} />
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
+
       </div>
 
-      {/* Lightbox */}
+      {/* ── Lightbox ── */}
       <AnimatePresence>
         {active && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4"
-            onClick={closeLightbox}>
-            <motion.div initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-xl p-3 sm:p-4"
+            onClick={closeLightbox}
+          >
+            <motion.div
+              initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}
               transition={{ type: "spring", damping: 28, stiffness: 380 }}
-              className="relative w-full max-w-sm pointer-events-auto" onClick={e => e.stopPropagation()}>
-              <div className="rounded-[2.5rem] overflow-hidden border-[10px] border-zinc-800 shadow-2xl bg-zinc-800">
-                <div className="bg-zinc-800 flex justify-center py-2"><div className="w-20 h-1.5 bg-zinc-600 rounded-full" /></div>
+              className="relative w-full max-w-[300px] sm:max-w-sm pointer-events-auto"
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Phone frame */}
+              <div className="rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border-[6px] sm:border-[10px] border-zinc-800 shadow-2xl bg-zinc-800">
+                <div className="bg-zinc-800 flex justify-center py-1.5 sm:py-2">
+                  <div className="w-16 sm:w-20 h-1.5 bg-zinc-600 rounded-full" />
+                </div>
                 <div className="relative bg-black" style={{ aspectRatio: '4/5' }}>
                   <AnimatePresence mode="wait">
-                    <motion.div key={slideIndex} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.22 }} className="absolute inset-0">
+                    <motion.div
+                      key={slideIndex}
+                      initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }}
+                      transition={{ duration: 0.22 }}
+                      className="absolute inset-0"
+                    >
                       <LightboxSlide slide={active.slides[slideIndex]} />
                     </motion.div>
                   </AnimatePresence>
+                  {/* Tap zones */}
                   <button className="absolute left-0 inset-y-0 w-1/3 z-20" onClick={lbPrev} />
                   <button className="absolute right-0 inset-y-0 w-1/3 z-20" onClick={lbNext} />
                 </div>
-                <div className="bg-zinc-900 px-5 py-3 flex items-center justify-between">
+                {/* Dots + arrows */}
+                <div className="bg-zinc-900 px-4 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between">
                   <div className="flex gap-1.5">
                     {active.slides.map((_, i) => (
-                      <button key={i} onClick={() => setSlideIndex(i)} className="rounded-full transition-all duration-200"
-                        style={{ width: i === slideIndex ? 16 : 6, height: 6, background: i === slideIndex ? active.slides[slideIndex].accent : '#ffffff30' }} />
+                      <button
+                        key={i}
+                        onClick={() => setSlideIndex(i)}
+                        className="rounded-full transition-all duration-200"
+                        style={{ width: i === slideIndex ? 16 : 6, height: 6, background: i === slideIndex ? active.slides[slideIndex].accent : '#ffffff30' }}
+                      />
                     ))}
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={lbPrev} className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"><ChevronLeft className="w-4 h-4 text-white" /></button>
-                    <button onClick={lbNext} className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"><ChevronRight className="w-4 h-4 text-white" /></button>
+                    <button onClick={lbPrev} className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                      <ChevronLeft className="w-4 h-4 text-white" />
+                    </button>
+                    <button onClick={lbNext} className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                      <ChevronRight className="w-4 h-4 text-white" />
+                    </button>
                   </div>
                 </div>
-                <div className="bg-zinc-800 flex justify-center py-2"><div className="w-24 h-1 bg-zinc-600 rounded-full" /></div>
+                <div className="bg-zinc-800 flex justify-center py-1.5 sm:py-2">
+                  <div className="w-20 sm:w-24 h-1 bg-zinc-600 rounded-full" />
+                </div>
               </div>
-              <div className="mt-4 flex items-center justify-between px-1">
-                <div>
-                  <p className="text-white font-black text-base">{active.topic}</p>
+
+              {/* Info row below phone */}
+              <div className="mt-3 sm:mt-4 flex items-center justify-between px-1 gap-3">
+                <div className="min-w-0">
+                  <p className="text-white font-black text-sm sm:text-base truncate">{active.topic}</p>
                   <p className="text-white/40 text-xs font-medium">{slideIndex + 1} / {active.slides.length}</p>
                 </div>
-                <button onClick={closeLightbox} className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"><X className="w-4 h-4 text-white" /></button>
+                <button
+                  onClick={closeLightbox}
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors flex-shrink-0"
+                >
+                  <X className="w-4 h-4 text-white" />
+                </button>
               </div>
             </motion.div>
           </motion.div>

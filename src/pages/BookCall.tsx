@@ -167,7 +167,7 @@ export function BookCall() {
                   "Pricing and service fit assessment",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-5 h-5 rounded-full bg-[#2c5270] flex items-center justify-center flex-shrink-0 mt-0.5">
                       <CheckCircle2 className="w-3 h-3 text-[#0d0d0d]" />
                     </div>
                     <span className="text-[#0d0d0d]/60 text-sm font-medium">{item}</span>
@@ -198,8 +198,8 @@ export function BookCall() {
           >
             {success ? (
               <div className="text-center py-12">
-                <div className="w-20 h-20 bg-[#c8f03c]/15 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle2 className="w-10 h-10 text-[#c8f03c]" />
+                <div className="w-20 h-20 bg-[#2c5270]/15 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 className="w-10 h-10 text-[#2c5270]" />
                 </div>
                 <h3 className="text-3xl font-black text-[#0d0d0d] tracking-tight mb-2">
                   You're Booked!
@@ -274,7 +274,7 @@ export function BookCall() {
                           </span>
                           <span
                             className={`text-xl font-black mt-0.5 ${
-                              isSelected ? "text-[#c8f03c]" : "text-[#0d0d0d]"
+                              isSelected ? "text-[#2c5270]" : "text-[#0d0d0d]"
                             }`}
                           >
                             {dateNum}
@@ -307,7 +307,7 @@ export function BookCall() {
                           {time}
                         </span>
                         {isSelected && (
-                          <div className="w-5 h-5 rounded-full bg-[#c8f03c] flex items-center justify-center">
+                          <div className="w-5 h-5 rounded-full bg-[#2c5270] flex items-center justify-center">
                             <ArrowRight className="w-3 h-3 text-[#0d0d0d]" />
                           </div>
                         )}
@@ -323,14 +323,14 @@ export function BookCall() {
                     placeholder="Your Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-[#f7f7f8] border border-[#0d0d0d]/[0.06] text-[#0d0d0d] placeholder:text-[#0d0d0d]/25 px-5 py-3.5 rounded-2xl outline-none focus:ring-2 focus:ring-[#c8f03c]/30 focus:border-[#0d0d0d]/[0.15] transition-all font-medium text-sm"
+                    className="w-full bg-[#f7f7f8] border border-[#0d0d0d]/[0.06] text-[#0d0d0d] placeholder:text-[#0d0d0d]/25 px-5 py-3.5 rounded-2xl outline-none focus:ring-2 focus:ring-[#2c5270]/30 focus:border-[#0d0d0d]/[0.15] transition-all font-medium text-sm"
                   />
                   <input
                     type="email"
                     placeholder="Your Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-[#f7f7f8] border border-[#0d0d0d]/[0.06] text-[#0d0d0d] placeholder:text-[#0d0d0d]/25 px-5 py-3.5 rounded-2xl outline-none focus:ring-2 focus:ring-[#c8f03c]/30 focus:border-[#0d0d0d]/[0.15] transition-all font-medium text-sm"
+                    className="w-full bg-[#f7f7f8] border border-[#0d0d0d]/[0.06] text-[#0d0d0d] placeholder:text-[#0d0d0d]/25 px-5 py-3.5 rounded-2xl outline-none focus:ring-2 focus:ring-[#2c5270]/30 focus:border-[#0d0d0d]/[0.15] transition-all font-medium text-sm"
                   />
                 </div>
 
@@ -432,7 +432,7 @@ export function BookCall() {
                 transition={{ delay: i * 0.12 }}
                 className="bg-white rounded-[24px] border border-[#0d0d0d]/[0.05] p-7 text-center shadow-[0_8px_30px_-10px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500"
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#c8f03c]/15 flex items-center justify-center mx-auto mb-5 relative z-10">
+                <div className="w-14 h-14 rounded-2xl bg-[#2c5270]/15 flex items-center justify-center mx-auto mb-5 relative z-10">
                   {step.icon}
                 </div>
                 <span className="text-[#0d0d0d]/10 text-3xl font-black">{step.num}</span>

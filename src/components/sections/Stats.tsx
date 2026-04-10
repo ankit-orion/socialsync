@@ -20,19 +20,19 @@ export function Stats() {
               <div className="flex items-center gap-2 border border-[#0d0d0d]/15 rounded-full px-3 py-1">
                 <span className="text-xs font-bold text-[#0d0d0d]/50">From 2020</span>
                 <div className="w-8 h-4 bg-[#0d0d0d] rounded-full flex items-center px-0.5">
-                  <div className="w-3 h-3 rounded-full bg-[#c8f03c] ml-auto" />
+                  <div className="w-3 h-3 rounded-full bg-[#2c5270] ml-auto" />
                 </div>
               </div>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0d0d0d] leading-[1.1] tracking-tight">
-              What Features Make Our
-              <br />Social Strategy{" "}
-              <span style={{ color: '#7c3aed' }}>Distinctive</span>
-              <br />And{" "}
-              <span style={{ color: '#7c3aed' }}>Popular</span>?
+              Everything your brand
+              <br />needs to{" "}
+              <span style={{ color: '#2c5270' }}>grow faster</span>
+              <br />on{" "}
+              <span style={{ color: '#2c5270' }}>social.</span>
             </h2>
             <p className="text-[#0d0d0d]/50 text-[15px] leading-relaxed font-medium max-w-md">
-              According To The Needs Of Users And Different Brands, We Have Provided A New Social Media Strategy That Can Be The Answer To All Your Needs.
+              We've refined our process across 50+ brands since 2020. Here's what's inside every engagement we run.
             </p>
           </div>
 
@@ -40,8 +40,8 @@ export function Stats() {
             <div className="space-y-3">
               {features.slice(0, 3).map((f, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0">
-                    <span className="text-[10px] font-black text-[#0d0d0d]">{i + 1}</span>
+                  <div className="w-6 h-6 rounded-full bg-[#2c5270] flex items-center justify-center flex-shrink-0">
+                    <span className="text-[10px] font-black text-white">{i + 1}</span>
                   </div>
                   <span className="text-[#0d0d0d] font-semibold text-sm leading-snug">{f}</span>
                 </motion.div>
@@ -50,8 +50,8 @@ export function Stats() {
             <div className="space-y-3">
               {features.slice(3).map((f, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: (i + 3) * 0.07 }} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0">
-                    <span className="text-[10px] font-black text-[#0d0d0d]">{i + 4}</span>
+                  <div className="w-6 h-6 rounded-full bg-[#2c5270] flex items-center justify-center flex-shrink-0">
+                    <span className="text-[10px] font-black text-white">{i + 4}</span>
                   </div>
                   <span className="text-[#0d0d0d] font-semibold text-sm leading-snug">{f}</span>
                 </motion.div>
@@ -80,11 +80,11 @@ export function Stats() {
             <circle cx="260" cy="230" r="95" fill="#0d0d0d"/>
 
             {/* Orbiting circles */}
-            <circle cx="110" cy="130" r="22" fill="#7c3aed"/>
-            <circle cx="380" cy="120" r="14" fill="#c8f03c"/>
+            <circle cx="110" cy="130" r="22" fill="#60516f"/>
+            <circle cx="380" cy="120" r="14" fill="#2c5270"/>
             <circle cx="130" cy="340" r="10" fill="white" fillOpacity="0.7"/>
-            <circle cx="390" cy="320" r="18" fill="#7c3aed" fillOpacity="0.5"/>
-            <circle cx="300" cy="390" r="8" fill="#c8f03c" fillOpacity="0.7"/>
+            <circle cx="390" cy="320" r="18" fill="#60516f" fillOpacity="0.5"/>
+            <circle cx="300" cy="390" r="8" fill="#2c5270" fillOpacity="0.7"/>
 
             {/* Connector lines */}
             <line x1="132" y1="148" x2="180" y2="185" stroke="#0d0d0d" strokeOpacity="0.2" strokeDasharray="3 4"/>
@@ -92,10 +92,10 @@ export function Stats() {
             <line x1="140" y1="330" x2="175" y2="295" stroke="#0d0d0d" strokeOpacity="0.15" strokeDasharray="3 4"/>
 
             {/* Small accent dots near main circle */}
-            <circle cx="175" cy="195" r="5" fill="#c8f03c" opacity="0.6"/>
-            <circle cx="340" cy="175" r="4" fill="#7c3aed" opacity="0.5"/>
+            <circle cx="175" cy="195" r="5" fill="#2c5270" opacity="0.6"/>
+            <circle cx="340" cy="175" r="4" fill="#60516f" opacity="0.5"/>
             <circle cx="175" cy="290" r="4" fill="white" opacity="0.5"/>
-            <circle cx="350" cy="320" r="5" fill="#c8f03c" opacity="0.4"/>
+            <circle cx="350" cy="320" r="5" fill="#2c5270" opacity="0.4"/>
           </svg>
         </motion.div>
 

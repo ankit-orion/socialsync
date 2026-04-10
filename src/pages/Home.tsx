@@ -1,8 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 import { Stats } from "@/components/sections/Stats";
-import { Work } from "@/components/sections/Work";
-
 import { Clients } from "@/components/sections/Clients";
 import { CTA } from "@/components/sections/CTA";
 import { GlobalReach } from "@/components/sections/GlobalReach";
@@ -28,7 +26,6 @@ export function Home() {
     <main className="flex-1 w-full flex flex-col bg-[#e8e8e8]">
       <Hero />
       <Services />
-      <Work />
       <Clients />
       <GlobalReach />
       <Stats />

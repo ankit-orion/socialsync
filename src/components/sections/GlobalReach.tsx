@@ -7,14 +7,14 @@ const HX = 450;
 const HY = 205;
 
 const leftAvatars = [
-  { x: 85,  y: 95,  name: 'Alex Kim',    loc: 'New York',  color: '#7c3aed', initials: 'AK' },
-  { x: 60,  y: 205, name: 'Mia Russo',   loc: 'London',    color: '#c8f03c', initials: 'MR' },
-  { x: 85,  y: 318, name: 'Sara Mehra',  loc: 'Dubai',     color: '#7c3aed', initials: 'SM' },
+  { x: 85,  y: 95,  name: 'Alex Kim',    loc: 'New York',  color: '#60516f', initials: 'AK' },
+  { x: 60,  y: 205, name: 'Mia Russo',   loc: 'London',    color: '#2c5270', initials: 'MR' },
+  { x: 85,  y: 318, name: 'Sara Mehra',  loc: 'Dubai',     color: '#60516f', initials: 'SM' },
 ];
 const rightAvatars = [
-  { x: 815, y: 95,  name: 'Tom Wang',    loc: 'Tokyo',     color: '#c8f03c', initials: 'TW' },
-  { x: 840, y: 205, name: 'Elena N.',    loc: 'Sydney',    color: '#7c3aed', initials: 'EN' },
-  { x: 815, y: 318, name: 'Priya L.',    loc: 'Mumbai',    color: '#c8f03c', initials: 'PL' },
+  { x: 815, y: 95,  name: 'Tom Wang',    loc: 'Tokyo',     color: '#2c5270', initials: 'TW' },
+  { x: 840, y: 205, name: 'Elena N.',    loc: 'Sydney',    color: '#60516f', initials: 'EN' },
+  { x: 815, y: 318, name: 'Priya L.',    loc: 'Mumbai',    color: '#2c5270', initials: 'PL' },
 ];
 
 /* L-shaped path string from avatar to hub */
@@ -29,11 +29,11 @@ const rightPath = (ax: number, ay: number) => {
   return `M${ax},${ay} H${midX} V${HY} H${HX + 68}`;
 };
 
-const lineColors = ['#7c3aed', '#c8f03c', '#7c3aed'];
-const lineColorsR = ['#c8f03c', '#7c3aed', '#c8f03c'];
+const lineColors = ['#60516f', '#2c5270', '#60516f'];
+const lineColorsR = ['#2c5270', '#60516f', '#2c5270'];
 
 /* Sparkle star */
-const Sparkle = ({ x, y, size = 14, color = '#7c3aed' }: { x: number; y: number; size?: number; color?: string }) => (
+const Sparkle = ({ x, y, size = 14, color = '#60516f' }: { x: number; y: number; size?: number; color?: string }) => (
   <g transform={`translate(${x},${y})`}>
     <path d={`M0,${-size} L${size*0.2},${-size*0.2} L${size},0 L${size*0.2},${size*0.2} L0,${size} L${-size*0.2},${size*0.2} L${-size},0 L${-size*0.2},${-size*0.2} Z`} fill={color} />
   </g>
@@ -229,7 +229,7 @@ export function GlobalReach() {
                 {/* White card */}
                 <rect x={HX-52} y={HY-62} width="104" height="124" rx="22" fill="white" filter="url(#hubshadow)" />
                 {/* Lime accent bar */}
-                <rect x={HX-52} y={HY-62} width="104" height="6" rx="3" fill="#c8f03c" />
+                <rect x={HX-52} y={HY-62} width="104" height="6" rx="3" fill="#2c5270" />
                 {/* Social platform mini-icons */}
                 {/* Instagram */}
                 <rect x={HX-32} y={HY-48} width="22" height="22" rx="6" fill="url(#ig2)" />
@@ -249,19 +249,19 @@ export function GlobalReach() {
                 <circle cx={HX+21} cy={HY-9} r="5.5" fill="white" opacity="0.9"/>
                 <text x={HX+21} y={HY-9} textAnchor="middle" dominantBaseline="middle" fill="#25D366" fontSize="8" fontWeight="900">W</text>
                 {/* Reddit */}
-                <rect x={HX-11} y={HY+8} width="22" height="22" rx="6" fill="#FF4500"/>
+                <rect x={HX-11} y={HY+8} width="22" height="22" rx="6" fill="#2c5270"/>
                 <circle cx={HX} cy={HY+20} r="4.5" fill="white"/>
-                <circle cx={HX-2.5} cy={HY+20} r="0.8" fill="#FF4500"/>
-                <circle cx={HX+2.5} cy={HY+20} r="0.8" fill="#FF4500"/>
-                <path d={`M${HX-2},${HY+22} q2,1.5 4,0`} stroke="#FF4500" strokeWidth="0.7" fill="none" strokeLinecap="round"/>
+                <circle cx={HX-2.5} cy={HY+20} r="0.8" fill="#2c5270"/>
+                <circle cx={HX+2.5} cy={HY+20} r="0.8" fill="#2c5270"/>
+                <path d={`M${HX-2},${HY+22} q2,1.5 4,0`} stroke="#2c5270" strokeWidth="0.7" fill="none" strokeLinecap="round"/>
                 {/* Label */}
                 <text x={HX} y={HY+44} textAnchor="middle" dominantBaseline="middle" fill="#0d0d0d" fontSize="9" fontWeight="900" fontFamily="system-ui,-apple-system,sans-serif" letterSpacing="-0.3">Your Hub</text>
                 {/* Pulse rings */}
-                <motion.circle cx={HX} cy={HY} r="52" fill="none" stroke="#c8f03c" strokeWidth="1.5"
+                <motion.circle cx={HX} cy={HY} r="52" fill="none" stroke="#2c5270" strokeWidth="1.5"
                   animate={{ r:[52,75,52], opacity:[0.4,0,0.4] }}
                   transition={{ duration:3, repeat:Infinity }}
                 />
-                <motion.circle cx={HX} cy={HY} r="52" fill="none" stroke="#7c3aed" strokeWidth="1"
+                <motion.circle cx={HX} cy={HY} r="52" fill="none" stroke="#60516f" strokeWidth="1"
                   animate={{ r:[52,68,52], opacity:[0.3,0,0.3] }}
                   transition={{ duration:3, repeat:Infinity, delay:1 }}
                 />
@@ -269,13 +269,13 @@ export function GlobalReach() {
 
               {/* ── Decorative sparkles ── */}
               <motion.g initial={{ opacity:0, scale:0 }} whileInView={{ opacity:1, scale:1 }} viewport={{ once:true }} transition={{ delay:1.4 }}>
-                <Sparkle x={30} y={380} size={14} color="#7c3aed" />
+                <Sparkle x={30} y={380} size={14} color="#60516f" />
               </motion.g>
               <motion.g initial={{ opacity:0, scale:0 }} whileInView={{ opacity:1, scale:1 }} viewport={{ once:true }} transition={{ delay:1.6 }}>
-                <Sparkle x={870} y={30} size={12} color="#c8f03c" />
+                <Sparkle x={870} y={30} size={12} color="#2c5270" />
               </motion.g>
               <motion.g initial={{ opacity:0, scale:0 }} whileInView={{ opacity:1, scale:1 }} viewport={{ once:true }} transition={{ delay:1.5 }}>
-                <Sparkle x={870} y={380} size={10} color="#7c3aed" />
+                <Sparkle x={870} y={380} size={10} color="#60516f" />
               </motion.g>
 
               {/* ── Decorative loop/swirl ── */}

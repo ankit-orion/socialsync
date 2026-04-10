@@ -1,20 +1,33 @@
-import { useState } from "react";
-import { Menu, X, Search } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "#services" },
-  { label: "Work", href: "#work" },
-  { label: "Blog", href: "#" },
+  { label: "Work", href: "/work" },
   { label: "About", href: "#about" },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { scrollY } = useScroll();
+
+  // Track scroll direction to auto-hide/show
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setScrolled(latest > 20);
+    if (latest > prev && latest > 200) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
 
   const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
@@ -29,75 +42,157 @@ export function Navbar() {
     }
   };
 
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    return () => { document.body.style.overflow = "auto"; };
+  }, [isOpen]);
+
   return (
-    <motion.nav
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 260, damping: 28 }}
-      className="fixed top-0 w-full z-50 bg-white border-b border-black/[0.06]"
-    >
-      <div className="max-w-7xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
-          <div className="flex gap-0.5">
-            <div className="w-4 h-4 bg-[#0d0d0d] rounded-sm" />
-            <div className="w-4 h-4 border-2 border-[#0d0d0d] rounded-sm" />
-          </div>
-          <span className="font-black text-[17px] text-[#0d0d0d] tracking-tight">SocialSync</span>
-        </Link>
-
-        <div className="hidden md:flex items-center gap-7">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleNav(e, link.href)}
-              className="flex items-center gap-1.5 text-sm font-medium text-[#0d0d0d]/60 hover:text-[#0d0d0d] transition-colors"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#c8f03c] flex-shrink-0" />
-              {link.label}
-            </a>
-          ))}
-        </div>
-
-        <div className="hidden md:flex items-center gap-4">
-          <button className="w-8 h-8 flex items-center justify-center text-[#0d0d0d]/50 hover:text-[#0d0d0d] transition-colors">
-            <Search className="w-4 h-4" />
-          </button>
-          <Link to="/book">
-            <button className="h-9 px-5 rounded-full border-2 border-[#0d0d0d] text-[#0d0d0d] text-sm font-bold hover:bg-[#0d0d0d] hover:text-white transition-all duration-200">
-              Get Started
-            </button>
+    <>
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4"
+      >
+        <div
+          className={`
+            flex items-center justify-between w-full max-w-4xl
+            h-14 px-2.5 rounded-full
+            border transition-all duration-500
+            ${scrolled
+              ? "bg-white/80 backdrop-blur-xl border-[#0d0d0d]/[0.06] shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]"
+              : "bg-white/60 backdrop-blur-lg border-[#0d0d0d]/[0.04] shadow-sm"
+            }
+          `}
+        >
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 pl-3 flex-shrink-0">
+            <div className="flex gap-[3px]">
+              <div className="w-3.5 h-3.5 bg-[#0d0d0d] rounded-[4px]" />
+              <div className="w-3.5 h-3.5 bg-[#2c5270] rounded-[4px]" />
+            </div>
+            <span className="font-black text-[15px] text-[#0d0d0d] tracking-tight">
+              SocialSync
+            </span>
           </Link>
+
+          {/* Center nav links — desktop */}
+          <div className="hidden md:flex items-center gap-1 bg-[#0d0d0d]/[0.03] rounded-full px-1.5 py-1">
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? location.pathname === "/"
+                  : link.href.startsWith("#")
+                    ? false
+                    : location.pathname === link.href;
+
+              return link.href.startsWith("#") ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleNav(e, link.href)}
+                  className="px-4 py-1.5 rounded-full text-[13px] font-bold text-[#0d0d0d]/45 hover:text-[#0d0d0d] hover:bg-white/70 transition-all duration-200"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={`px-4 py-1.5 rounded-full text-[13px] font-bold transition-all duration-200 ${
+                    isActive
+                      ? "bg-white text-[#0d0d0d] shadow-sm"
+                      : "text-[#0d0d0d]/45 hover:text-[#0d0d0d] hover:bg-white/70"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Right side — CTA + mobile toggle */}
+          <div className="flex items-center gap-2 pr-1">
+            <Link to="/book" className="hidden md:block">
+              <button className="h-9 px-5 rounded-full bg-[#0d0d0d] text-white text-[12px] font-bold flex items-center gap-1.5 hover:bg-[#222] transition-colors">
+                Get Started
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+            </Link>
+
+            <button
+              className="md:hidden w-9 h-9 rounded-full bg-[#0d0d0d]/[0.05] flex items-center justify-center text-[#0d0d0d] hover:bg-[#0d0d0d]/[0.1] transition-colors"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+          </div>
         </div>
+      </motion.nav>
 
-        <button className="md:hidden p-2 text-[#0d0d0d]" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-      </div>
-
+      {/* ── Mobile menu overlay ── */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-black/[0.06] overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-[#e8e8e8]/95 backdrop-blur-2xl flex flex-col items-center justify-center"
           >
-            <div className="px-5 py-6 flex flex-col gap-5">
-              {navLinks.map((link) => (
-                <a key={link.label} href={link.href} onClick={(e) => handleNav(e, link.href)}
-                  className="flex items-center gap-2 text-base font-semibold text-[#0d0d0d]/70">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#c8f03c]" />
-                  {link.label}
-                </a>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-col items-center gap-2 w-full max-w-xs"
+            >
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.label}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08 + i * 0.06 }}
+                  className="w-full"
+                >
+                  {link.href.startsWith("#") ? (
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNav(e, link.href)}
+                      className="flex items-center justify-center w-full py-4 rounded-2xl text-lg font-black text-[#0d0d0d] hover:bg-white/50 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center justify-center w-full py-4 rounded-2xl text-lg font-black text-[#0d0d0d] hover:bg-white/50 transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+                </motion.div>
               ))}
-              <Link to="/book" onClick={() => setIsOpen(false)}>
-                <button className="w-full h-11 rounded-full bg-[#0d0d0d] text-white text-sm font-bold mt-2">Get Started</button>
-              </Link>
-            </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.08 + navLinks.length * 0.06 }}
+                className="w-full pt-4"
+              >
+                <Link to="/book" onClick={() => setIsOpen(false)}>
+                  <button className="w-full h-14 rounded-2xl bg-[#0d0d0d] text-white text-base font-bold flex items-center justify-center gap-2 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.3)]">
+                    Get Started <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                </Link>
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 }

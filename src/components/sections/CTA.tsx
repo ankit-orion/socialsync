@@ -17,12 +17,12 @@ export function CTA() {
             Ready to scale your brand?
           </h2>
           <p className="text-white/45 text-base font-medium max-w-md">
-            Join 50+ modern brands who trust us to handle their social presence and drive measurable revenue.
+            Over 50 brands trust us with their social presence. Most see measurable results within the first 30 days.
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
           <Link to="/book">
-            <button className="flex items-center gap-2 h-12 px-7 rounded-full bg-[#c8f03c] text-[#0d0d0d] font-bold text-sm hover:bg-[#b8e02c] transition-colors whitespace-nowrap">
+            <button className="flex items-center gap-2 h-12 px-7 rounded-full bg-[#2c5270] text-white font-bold text-sm hover:bg-[#1e3d54] transition-colors whitespace-nowrap">
               Book a Free Call <ArrowUpRight className="w-4 h-4" />
             </button>
           </Link>

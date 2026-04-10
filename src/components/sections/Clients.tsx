@@ -5,7 +5,7 @@ import { Quote, Linkedin } from "lucide-react";
 const testimonials = [
   {
     company: "SQUIRE",
-    quote: "SocialSync consistently delivers clean, intuitive strategies that strike the perfect balance between brand aesthetic and viral growth. Whether it's for a complex campaign or daily content, the results always feel effortless and refined.",
+    quote: "Working with SocialSync was the first time an agency actually got our brand without us having to explain it twice. Our follower count doubled in 8 weeks, and the quality of engagement went up with it.",
     author: "Dave Salvant",
     role: "Co-founder of Squire",
     avatar: "DS",
@@ -57,7 +57,7 @@ export function Clients() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[10px] font-black uppercase tracking-[0.4em] text-[#c8f03c] mb-4 bg-[#0d0d0d] inline-block px-3 py-1 rounded-full"
+            className="text-[10px] font-black uppercase tracking-[0.4em] text-[#2c5270] mb-4 bg-[#0d0d0d] inline-block px-3 py-1 rounded-full"
           >
             T E S T I M O N I A L S
           </motion.p>
@@ -109,7 +109,7 @@ export function Clients() {
               </div>
 
               <div className="relative mb-10">
-                <Quote className="absolute -top-4 -left-4 w-8 h-8 text-[#c8f03c] opacity-40 rotate-180" strokeWidth={3} />
+                <Quote className="absolute -top-4 -left-4 w-8 h-8 text-[#2c5270] opacity-40 rotate-180" strokeWidth={3} />
                 <p className="text-[#0d0d0d]/70 text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-relaxed tracking-tight relative z-10">
                   {current.quote}
                 </p>
@@ -117,7 +117,7 @@ export function Clients() {
 
               <div className="flex items-center justify-between pt-8 border-t border-[#0d0d0d]/5">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#0d0d0d] flex items-center justify-center text-[#c8f03c] font-black text-sm border-2 border-[#c8f03c]/20">
+                  <div className="w-12 h-12 rounded-full bg-[#0d0d0d] flex items-center justify-center text-[#2c5270] font-black text-sm border-2 border-[#2c5270]/20">
                     {current.avatar}
                   </div>
                   <div>

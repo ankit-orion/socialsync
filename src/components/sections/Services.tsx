@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Rocket, ShoppingBag, Star, Building2, Users } from "lucide-react";
 
 /* ── Category tabs ── */
 const CATEGORIES = [
@@ -9,6 +10,14 @@ const CATEGORIES = [
   "For Enterprise",
   "For Agencies",
 ] as const;
+
+const CATEGORY_ICONS: Record<string, React.ReactNode> = {
+  "For Startups":       <Rocket className="w-4 h-4" />,
+  "For E-Commerce":     <ShoppingBag className="w-4 h-4" />,
+  "For Personal Brands":<Star className="w-4 h-4" />,
+  "For Enterprise":     <Building2 className="w-4 h-4" />,
+  "For Agencies":       <Users className="w-4 h-4" />,
+};
 
 type Category = (typeof CATEGORIES)[number];
 
@@ -148,7 +157,7 @@ const ManagementMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Platforms We Manage</span>
-      <span className="text-[7px] font-semibold text-[#c8f03c] bg-[#c8f03c]/10 px-2 py-0.5 rounded-full">All Active</span>
+      <span className="text-[7px] font-semibold text-[#2c5270] bg-[#2c5270]/10 px-2 py-0.5 rounded-full">All Active</span>
     </div>
     {/* Platform results we achieved for clients */}
     {[
@@ -173,7 +182,7 @@ const ManagementMock = () => (
         </div>
         <div className="text-right flex-shrink-0">
           <p className="text-[9px] font-black text-[#0d0d0d]">{p.followers}</p>
-          <p className="text-[7px] font-bold text-[#c8f03c]">{p.growth}</p>
+          <p className="text-[7px] font-bold text-[#2c5270]">{p.growth}</p>
         </div>
       </motion.div>
     ))}
@@ -184,12 +193,12 @@ const ManagementMock = () => (
       transition={{ delay: 0.65 }}
       className="mt-auto bg-[#0d0d0d] rounded-xl p-2.5 flex items-center gap-2"
     >
-      <div className="w-6 h-6 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0">
+      <div className="w-6 h-6 rounded-full bg-[#2c5270] flex items-center justify-center flex-shrink-0">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#0d0d0d" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </div>
       <div>
         <p className="text-[7px] text-white/45 font-semibold">Posts Published This Month</p>
-        <p className="text-[11px] font-black text-white">186 posts <span className="text-[7px] font-bold text-[#c8f03c]">across 3 platforms</span></p>
+        <p className="text-[11px] font-black text-white">186 posts <span className="text-[7px] font-bold text-[#2c5270]">across 3 platforms</span></p>
       </div>
     </motion.div>
   </div>
@@ -215,7 +224,7 @@ const CreationMock = () => (
         transition={{ delay: 0.3 + i * 0.12 }}
         className="bg-white rounded-xl overflow-hidden shadow-sm border border-[#0d0d0d]/[0.04]"
       >
-        <div className="h-14 bg-gradient-to-br from-[#7c3aed] to-[#c8f03c] relative flex items-center justify-center">
+        <div className="h-14 bg-gradient-to-br from-[#60516f] to-[#2c5270] relative flex items-center justify-center">
           <div className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
             {c.type === "Short Video" ? (
               <svg width="9" height="9" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -244,12 +253,12 @@ const CreationMock = () => (
       transition={{ delay: 0.6 }}
       className="bg-white rounded-xl p-2.5 shadow-sm border border-[#0d0d0d]/[0.04] flex items-center gap-2"
     >
-      <div className="w-6 h-6 rounded-full bg-[#7c3aed]/10 flex items-center justify-center flex-shrink-0">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="#7c3aed" strokeWidth="2"/></svg>
+      <div className="w-6 h-6 rounded-full bg-[#60516f]/10 flex items-center justify-center flex-shrink-0">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="#60516f" strokeWidth="2"/></svg>
       </div>
       <div>
         <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Assets Delivered</p>
-        <p className="text-[10px] font-black text-[#0d0d0d]">48 pieces <span className="text-[7px] font-bold text-[#7c3aed]">this week</span></p>
+        <p className="text-[10px] font-black text-[#0d0d0d]">48 pieces <span className="text-[7px] font-bold text-[#60516f]">this week</span></p>
       </div>
     </motion.div>
     <motion.div
@@ -259,12 +268,12 @@ const CreationMock = () => (
       transition={{ delay: 0.72 }}
       className="mt-auto bg-white rounded-xl p-2.5 shadow-sm border border-[#0d0d0d]/[0.04] flex items-center gap-2"
     >
-      <div className="w-6 h-6 rounded-full bg-[#c8f03c]/15 flex items-center justify-center flex-shrink-0">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#c8f03c" strokeWidth="2" strokeLinecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#c8f03c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      <div className="w-6 h-6 rounded-full bg-[#2c5270]/15 flex items-center justify-center flex-shrink-0">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#2c5270" strokeWidth="2" strokeLinecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#2c5270" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </div>
       <div>
         <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Client Approval Rate</p>
-        <p className="text-[10px] font-black text-[#0d0d0d]">96% <span className="text-[7px] font-bold text-[#c8f03c]">first-round</span></p>
+        <p className="text-[10px] font-black text-[#0d0d0d]">96% <span className="text-[7px] font-bold text-[#2c5270]">first-round</span></p>
       </div>
     </motion.div>
   </div>
@@ -309,18 +318,18 @@ const GrowthMock = () => (
     >
       <div className="flex items-center justify-between mb-2">
         <span className="text-[8px] font-bold text-[#0d0d0d]/60">Audience Growth</span>
-        <span className="text-[7px] font-bold text-[#c8f03c] bg-[#c8f03c]/10 px-1.5 py-0.5 rounded-full">+312%</span>
+        <span className="text-[7px] font-bold text-[#2c5270] bg-[#2c5270]/10 px-1.5 py-0.5 rounded-full">+312%</span>
       </div>
       <svg viewBox="0 0 200 55" className="w-full">
         <defs>
           <linearGradient id="growthGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#c8f03c" stopOpacity="0.2"/>
-            <stop offset="100%" stopColor="#c8f03c" stopOpacity="0"/>
+            <stop offset="0%" stopColor="#2c5270" stopOpacity="0.2"/>
+            <stop offset="100%" stopColor="#2c5270" stopOpacity="0"/>
           </linearGradient>
         </defs>
         <motion.path
           d="M0,48 Q20,45 40,40 T80,32 T120,22 T160,14 T200,5"
-          fill="none" stroke="#c8f03c" strokeWidth="2.5" strokeLinecap="round"
+          fill="none" stroke="#2c5270" strokeWidth="2.5" strokeLinecap="round"
           initial={{ pathLength: 0 }}
           whileInView={{ pathLength: 1 }}
           viewport={{ once: true }}
@@ -337,12 +346,12 @@ const GrowthMock = () => (
       transition={{ delay: 0.7 }}
       className="bg-white rounded-xl p-2.5 shadow-sm border border-[#0d0d0d]/[0.04] flex items-center gap-2"
     >
-      <div className="w-6 h-6 rounded-full bg-[#c8f03c]/15 flex items-center justify-center flex-shrink-0">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="#c8f03c" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      <div className="w-6 h-6 rounded-full bg-[#2c5270]/15 flex items-center justify-center flex-shrink-0">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="#2c5270" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </div>
       <div>
         <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Organic Reach Increase</p>
-        <p className="text-[10px] font-black text-[#0d0d0d]">4.2M <span className="text-[7px] font-bold text-[#c8f03c]">impressions/mo</span></p>
+        <p className="text-[10px] font-black text-[#0d0d0d]">4.2M <span className="text-[7px] font-bold text-[#2c5270]">impressions/mo</span></p>
       </div>
     </motion.div>
   </div>
@@ -353,12 +362,12 @@ const CampaignsMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Recent Campaigns</span>
-      <span className="text-[7px] font-semibold text-[#c8f03c] bg-[#c8f03c]/10 px-2 py-0.5 rounded-full">3 Live</span>
+      <span className="text-[7px] font-semibold text-[#2c5270] bg-[#2c5270]/10 px-2 py-0.5 rounded-full">3 Live</span>
     </div>
     {[
       { name: "Summer Drop '26", client: "StyleHaus", reach: "2.1M", status: "Live", color: "#E1306C" },
       { name: "Back to School", client: "EduBrand", reach: "890K", status: "Live", color: "#0A66C2" },
-      { name: "Holiday Pre-Launch", client: "LuxHome", reach: "Draft", status: "Planning", color: "#7c3aed" },
+      { name: "Holiday Pre-Launch", client: "LuxHome", reach: "Draft", status: "Planning", color: "#60516f" },
     ].map((c, i) => (
       <motion.div
         key={i}
@@ -373,7 +382,7 @@ const CampaignsMock = () => (
             <div className="w-5 h-5 rounded-md flex items-center justify-center text-white text-[5.5px] font-black" style={{ background: c.color }}>{c.client[0]}</div>
             <span className="text-[8.5px] font-bold text-[#0d0d0d]">{c.name}</span>
           </div>
-          <span className={`text-[6.5px] font-bold px-1.5 py-0.5 rounded-full ${c.status === 'Live' ? 'bg-[#c8f03c]/15 text-[#5a6d11]' : 'bg-[#0d0d0d]/5 text-[#0d0d0d]/30'}`}>{c.status}</span>
+          <span className={`text-[6.5px] font-bold px-1.5 py-0.5 rounded-full ${c.status === 'Live' ? 'bg-[#2c5270]/15 text-[#2c5270]' : 'bg-[#0d0d0d]/5 text-[#0d0d0d]/30'}`}>{c.status}</span>
         </div>
         <div className="flex items-center gap-3 ml-7">
           <p className="text-[7px] text-[#0d0d0d]/35 font-medium">{c.client}</p>
@@ -388,12 +397,12 @@ const CampaignsMock = () => (
       transition={{ delay: 0.65 }}
       className="mt-auto bg-[#0d0d0d] rounded-xl p-2.5 flex items-center gap-2"
     >
-      <div className="w-6 h-6 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0">
+      <div className="w-6 h-6 rounded-full bg-[#2c5270] flex items-center justify-center flex-shrink-0">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#0d0d0d" strokeWidth="2.5" strokeLinecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#0d0d0d" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </div>
       <div>
         <p className="text-[7px] text-white/45 font-semibold">Campaigns Delivered</p>
-        <p className="text-[11px] font-black text-white">42 launches <span className="text-[7px] font-bold text-[#c8f03c]">this year</span></p>
+        <p className="text-[11px] font-black text-white">42 launches <span className="text-[7px] font-bold text-[#2c5270]">this year</span></p>
       </div>
     </motion.div>
   </div>
@@ -419,14 +428,14 @@ const InfluencerMock = () => (
         transition={{ delay: 0.25 + i * 0.12 }}
         className="bg-white rounded-xl p-2.5 shadow-sm border border-[#0d0d0d]/[0.04] flex items-center gap-2"
       >
-        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#E1306C] to-[#7c3aed] flex items-center justify-center text-white text-[7px] font-bold flex-shrink-0">
+        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#E1306C] to-[#60516f] flex items-center justify-center text-white text-[7px] font-bold flex-shrink-0">
           {c.name[0]}
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-[8.5px] font-bold text-[#0d0d0d] truncate">{c.name}</p>
           <p className="text-[7px] text-[#0d0d0d]/35 font-medium">{c.niche} · {c.followers}</p>
         </div>
-        <span className="text-[8px] font-black text-[#c8f03c] flex-shrink-0">{c.result}</span>
+        <span className="text-[8px] font-black text-[#2c5270] flex-shrink-0">{c.result}</span>
       </motion.div>
     ))}
     <motion.div
@@ -469,7 +478,7 @@ const AdsMock = () => (
       >
         <div className="flex items-center justify-between mb-1.5">
           <span className="text-[8.5px] font-bold text-[#0d0d0d]">{ad.client}</span>
-          <span className={`text-[6.5px] font-bold px-1.5 py-0.5 rounded-full ${ad.status === 'Running' ? 'bg-[#c8f03c]/15 text-[#5a6d11]' : 'bg-[#7c3aed]/10 text-[#7c3aed]'}`}>{ad.status}</span>
+          <span className={`text-[6.5px] font-bold px-1.5 py-0.5 rounded-full ${ad.status === 'Running' ? 'bg-[#2c5270]/15 text-[#2c5270]' : 'bg-[#60516f]/10 text-[#60516f]'}`}>{ad.status}</span>
         </div>
         <div className="flex items-center gap-4">
           <div>
@@ -478,7 +487,7 @@ const AdsMock = () => (
           </div>
           <div>
             <p className="text-[6.5px] text-[#0d0d0d]/30 font-medium">ROAS</p>
-            <p className="text-[8.5px] font-black text-[#c8f03c]">{ad.roas}</p>
+            <p className="text-[8.5px] font-black text-[#2c5270]">{ad.roas}</p>
           </div>
           <div>
             <p className="text-[6.5px] text-[#0d0d0d]/30 font-medium">Conversions</p>
@@ -494,12 +503,12 @@ const AdsMock = () => (
       transition={{ delay: 0.65 }}
       className="mt-auto bg-[#0d0d0d] rounded-xl p-2.5 flex items-center gap-2"
     >
-      <div className="w-6 h-6 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0">
+      <div className="w-6 h-6 rounded-full bg-[#2c5270] flex items-center justify-center flex-shrink-0">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="#0d0d0d" strokeWidth="2.5" strokeLinecap="round"/></svg>
       </div>
       <div>
         <p className="text-[7px] text-white/45 font-semibold">Total Revenue Generated</p>
-        <p className="text-[11px] font-black text-white">$128K <span className="text-[7px] font-bold text-[#c8f03c]">for clients this month</span></p>
+        <p className="text-[11px] font-black text-white">$128K <span className="text-[7px] font-bold text-[#2c5270]">for clients this month</span></p>
       </div>
     </motion.div>
   </div>
@@ -510,7 +519,7 @@ const CommunityMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Engagement We Handle</span>
-      <span className="text-[7px] font-semibold text-[#7c3aed] bg-[#7c3aed]/8 px-2 py-0.5 rounded-full">Today</span>
+      <span className="text-[7px] font-semibold text-[#60516f] bg-[#60516f]/8 px-2 py-0.5 rounded-full">Today</span>
     </div>
     {[
       { action: "Replied to 24 comments", client: "StyleHaus", platform: "IG", color: "#E1306C", time: "2h ago" },
@@ -542,12 +551,12 @@ const CommunityMock = () => (
       transition={{ delay: 0.65 }}
       className="mt-auto bg-white rounded-xl p-2.5 shadow-sm border border-[#0d0d0d]/[0.04] flex items-center gap-2"
     >
-      <div className="w-6 h-6 rounded-full bg-[#7c3aed]/10 flex items-center justify-center flex-shrink-0">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#7c3aed" strokeWidth="2"/><polyline points="12 6 12 12 16 14" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round"/></svg>
+      <div className="w-6 h-6 rounded-full bg-[#60516f]/10 flex items-center justify-center flex-shrink-0">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#60516f" strokeWidth="2"/><polyline points="12 6 12 12 16 14" stroke="#60516f" strokeWidth="2" strokeLinecap="round"/></svg>
       </div>
       <div>
         <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Avg. Response Time</p>
-        <p className="text-[10px] font-black text-[#0d0d0d]">&lt;15 min <span className="text-[7px] font-bold text-[#7c3aed]">across all clients</span></p>
+        <p className="text-[10px] font-black text-[#0d0d0d]">&lt;15 min <span className="text-[7px] font-bold text-[#60516f]">across all clients</span></p>
       </div>
     </motion.div>
   </div>
@@ -570,7 +579,7 @@ const BrandingMock = () => (
     >
       <p className="text-[7px] text-[#0d0d0d]/35 font-semibold mb-2">Color Palette</p>
       <div className="flex gap-1.5">
-        {["#0d0d0d", "#7c3aed", "#c8f03c", "#E1306C", "#f5f5f5"].map((c, i) => (
+        {["#0d0d0d", "#60516f", "#2c5270", "#E1306C", "#f5f5f5"].map((c, i) => (
           <div key={i} className="flex-1 h-6 rounded-md shadow-inner" style={{ background: c, border: c === '#f5f5f5' ? '1px solid #e0e0e0' : 'none' }} />
         ))}
       </div>
@@ -609,12 +618,12 @@ const BrandingMock = () => (
       transition={{ delay: 0.6 }}
       className="bg-[#0d0d0d] rounded-xl p-2.5 flex items-center gap-2"
     >
-      <div className="w-6 h-6 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0">
+      <div className="w-6 h-6 rounded-full bg-[#2c5270] flex items-center justify-center flex-shrink-0">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#0d0d0d" strokeWidth="2.5" strokeLinecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#0d0d0d" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </div>
       <div>
         <p className="text-[7px] text-white/45 font-semibold">Brand Kits Delivered</p>
-        <p className="text-[11px] font-black text-white">86 brands <span className="text-[7px] font-bold text-[#c8f03c]">& counting</span></p>
+        <p className="text-[11px] font-black text-white">86 brands <span className="text-[7px] font-bold text-[#2c5270]">& counting</span></p>
       </div>
     </motion.div>
   </div>
@@ -625,7 +634,7 @@ const ReputationMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Brand Sentiment</span>
-      <span className="text-[7px] font-semibold text-[#c8f03c] bg-[#c8f03c]/10 px-2 py-0.5 rounded-full">Healthy</span>
+      <span className="text-[7px] font-semibold text-[#2c5270] bg-[#2c5270]/10 px-2 py-0.5 rounded-full">Healthy</span>
     </div>
     <motion.div
       initial={{ scale: 0.9, opacity: 0 }}
@@ -634,7 +643,7 @@ const ReputationMock = () => (
       transition={{ delay: 0.25 }}
       className="bg-white rounded-xl p-3 shadow-sm border border-[#0d0d0d]/[0.04] text-center"
     >
-      <p className="text-[28px] font-black text-[#c8f03c] leading-none">94%</p>
+      <p className="text-[28px] font-black text-[#2c5270] leading-none">94%</p>
       <p className="text-[7.5px] text-[#0d0d0d]/40 font-semibold mt-1">Positive Sentiment Score</p>
     </motion.div>
     {[
@@ -688,7 +697,7 @@ const ThoughtMock = () => (
           </div>
           <div>
             <p className="text-[6.5px] text-[#0d0d0d]/30">Engagement</p>
-            <p className="text-[9px] font-black text-[#c8f03c]">{p.engagement}</p>
+            <p className="text-[9px] font-black text-[#2c5270]">{p.engagement}</p>
           </div>
         </div>
       </motion.div>
@@ -719,7 +728,7 @@ const WhitelabelMock = () => (
       <span className="text-[7px] font-semibold text-[#0d0d0d]/30">White-label</span>
     </div>
     {[
-      { agency: "Agency Alpha", clients: "12 brands", deliverables: "Content + Ads", color: "#7c3aed" },
+      { agency: "Agency Alpha", clients: "12 brands", deliverables: "Content + Ads", color: "#60516f" },
       { agency: "MediaHive", clients: "8 brands", deliverables: "Full Management", color: "#E1306C" },
       { agency: "GrowthCo", clients: "5 brands", deliverables: "Creative Only", color: "#0A66C2" },
     ].map((a, i) => (
@@ -747,12 +756,12 @@ const WhitelabelMock = () => (
       transition={{ delay: 0.65 }}
       className="mt-auto bg-[#0d0d0d] rounded-xl p-2.5 flex items-center gap-2"
     >
-      <div className="w-6 h-6 rounded-full bg-[#c8f03c] flex items-center justify-center flex-shrink-0">
+      <div className="w-6 h-6 rounded-full bg-[#2c5270] flex items-center justify-center flex-shrink-0">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#0d0d0d" strokeWidth="2.5"/><circle cx="9" cy="7" r="4" stroke="#0d0d0d" strokeWidth="2.5"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#0d0d0d" strokeWidth="2.5"/></svg>
       </div>
       <div>
         <p className="text-[7px] text-white/45 font-semibold">Agency Partners</p>
-        <p className="text-[11px] font-black text-white">25 agencies <span className="text-[7px] font-bold text-[#c8f03c]">trust our team</span></p>
+        <p className="text-[11px] font-black text-white">25 agencies <span className="text-[7px] font-bold text-[#2c5270]">trust our team</span></p>
       </div>
     </motion.div>
   </div>
@@ -811,7 +820,7 @@ export function Services() {
           className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-black text-[#0d0d0d] leading-[1.15] tracking-tight max-w-2xl mx-auto mb-10"
         >
           We handle your{" "}
-          <span className="inline-flex items-center align-middle mx-1 bg-[#c8f03c] rounded-lg px-2 py-0.5">
+          <span className="inline-flex items-center align-middle mx-1 bg-[#2c5270] rounded-lg px-2 py-0.5">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" stroke="#0d0d0d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </span>{" "}
           social media so you don't have to
@@ -825,20 +834,22 @@ export function Services() {
           transition={{ delay: 0.2 }}
           className="mb-12"
         >
-          {/* Scrollable on mobile, centered on desktop */}
-          <div className="w-full overflow-x-auto scrollbar-none flex justify-start sm:justify-center px-5 sm:px-0">
-            <div className="inline-flex items-center gap-1 bg-white rounded-full p-1.5 border border-[#0d0d0d]/[0.06] shadow-sm flex-shrink-0">
+          {/* Scrollable ribbon — single row, swipe right on mobile */}
+          <div className="overflow-x-auto scrollbar-none text-center">
+            <div className="inline-flex items-center gap-0.5 bg-white rounded-full p-1.5 border border-[#0d0d0d]/[0.06] shadow-sm">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`relative px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-300 whitespace-nowrap ${
+                  title={cat}
+                  className={`flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300 ${
                     activeCategory === cat
                       ? "bg-[#0d0d0d] text-white shadow-md"
                       : "text-[#0d0d0d]/50 hover:text-[#0d0d0d]/80 hover:bg-[#0d0d0d]/[0.03]"
                   }`}
                 >
-                  {cat}
+                  <span className="md:hidden">{CATEGORY_ICONS[cat]}</span>
+                  <span className="hidden md:inline">{cat}</span>
                 </button>
               ))}
             </div>

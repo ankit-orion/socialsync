@@ -22,7 +22,7 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <motion.div 
-          className="fixed top-0 left-0 right-0 h-1 bg-[#c8f03c] origin-left z-[100]" 
+          className="fixed top-0 left-0 right-0 h-1 bg-[#2c5270] origin-left z-[100]" 
           style={{ scaleX }} 
         />
         <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/30">

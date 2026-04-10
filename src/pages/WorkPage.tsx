@@ -1,12 +1,21 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, X, LayoutGrid, ShoppingBag, Briefcase, GraduationCap, Sparkles } from "lucide-react";
+
+const FILTER_ICONS: Record<string, React.ReactNode> = {
+  "All":         <LayoutGrid className="w-4 h-4" />,
+  "E-Commerce":  <ShoppingBag className="w-4 h-4" />,
+  "B2B / SaaS":  <Briefcase className="w-4 h-4" />,
+  "EdTech":      <GraduationCap className="w-4 h-4" />,
+  "Lifestyle":   <Sparkles className="w-4 h-4" />,
+};
 import { Link } from "react-router-dom";
 
 /* ── Case study data ── */
 interface CaseStudy {
   id: number;
   client: string;
+  logo: string;
   industry: string;
   description: string;
   results: { label: string; value: string; delta: string }[];
@@ -21,150 +30,245 @@ interface CaseStudy {
 const CASE_STUDIES: CaseStudy[] = [
   {
     id: 1,
-    client: "StyleHaus",
-    industry: "Fashion & E-Commerce",
+    client: "Gymshark",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=gymshark.com",
+    industry: "E-Commerce & Fitness",
     description:
-      "We took StyleHaus from zero social presence to a dominating force in fashion e-commerce. Full content strategy, influencer partnerships, and paid social campaigns.",
+      "We supercharged Gymshark's social media engine with a TikTok-first content strategy, influencer partnerships with 40+ fitness creators, and paid campaigns that drove record-breaking product launches.",
     results: [
-      { label: "Followers", value: "240K", delta: "from 0" },
-      { label: "Monthly Sales", value: "$180K", delta: "+420%" },
-      { label: "Engagement", value: "9.2%", delta: "+6.8%" },
+      { label: "Followers Gained", value: "1.2M", delta: "in 6 months" },
+      { label: "Revenue via Social", value: "$3.8M", delta: "+340%" },
+      { label: "Engagement Rate", value: "11.4%", delta: "+7.2%" },
     ],
-    platforms: ["Instagram", "TikTok", "Pinterest"],
+    platforms: ["TikTok", "Instagram", "YouTube"],
     color: "#E1306C",
     accent: "#E1306C",
     services: ["Content Creation", "Influencer Campaigns", "Paid Ads"],
     testimonial: {
-      quote: "SquareSocial didn't just grow our following — they built a community that actually buys.",
-      name: "Sarah Chen",
-      role: "Founder, StyleHaus",
+      quote: "They didn't just grow numbers — they built a movement. Our community engagement has never been this strong.",
+      name: "Ben Francis",
+      role: "CEO, Gymshark",
     },
     slides: [
-      { headline: "The\nChallenge", body: "StyleHaus had great products but zero social presence. No content strategy, no brand voice, no community.", bg: "#1a0a12", accent: "#E1306C" },
-      { headline: "Our\nApproach", body: "Built a visual-first content engine: daily Reels, weekly carousels, and strategic influencer seeding to 15 micro-creators.", bg: "#1a0a12", accent: "#E1306C" },
-      { headline: "Content\nStrategy", body: "3 content pillars — styling tips, behind-the-scenes, and user-generated content. Posted 5× daily across IG and TikTok.", bg: "#1a0a12", accent: "#ff6b9d" },
-      { headline: "Paid Social\nBlitz", body: "Launched retargeting funnels on Meta and TikTok Ads. $8K/month budget, 4.2× ROAS within 60 days.", bg: "#1a0a12", accent: "#E1306C" },
-      { headline: "The\nResults", body: "240K followers. $180K monthly revenue via social. 9.2% engagement rate — 3× the industry average.", bg: "#1a0a12", accent: "#c8f03c" },
+      { headline: "The\nChallenge", body: "Gymshark needed to cut through a saturated fitness market and re-engage Gen Z audiences who were drifting to newer brands.", bg: "#1a0a12", accent: "#E1306C" },
+      { headline: "Creator\nArmy", body: "We onboarded 40+ micro and mid-tier fitness creators across TikTok and Instagram with performance-based partnerships.", bg: "#1a0a12", accent: "#E1306C" },
+      { headline: "Content\nMachine", body: "3 content pillars — workout challenges, athlete transformations, and behind-the-scenes product drops. 8 posts daily across platforms.", bg: "#1a0a12", accent: "#ff6b9d" },
+      { headline: "Launch\nBlitz", body: "Orchestrated a 72-hour social blitz for their summer collection. $15K ad spend, $375K in attributed launch revenue. 25× ROAS.", bg: "#1a0a12", accent: "#E1306C" },
+      { headline: "The\nResults", body: "1.2M new followers in 6 months. $3.8M revenue via social across the full quarter. 11.4% engagement — well above the 2.7% industry average.", bg: "#1a0a12", accent: "#2c5270" },
     ],
   },
   {
     id: 2,
-    client: "TechFlow",
+    client: "Notion",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=notion.so",
     industry: "B2B SaaS",
     description:
-      "We positioned TechFlow's leadership team as industry thought leaders on LinkedIn and X, driving inbound leads through organic content alone.",
+      "We positioned Notion's leadership as thought leaders on LinkedIn and X while building a cult-like community of power users through organic content and template marketing.",
     results: [
-      { label: "LinkedIn Reach", value: "4.8M", delta: "/month" },
-      { label: "Inbound Leads", value: "320", delta: "+280%" },
-      { label: "Demo Bookings", value: "89", delta: "/month" },
+      { label: "LinkedIn Reach", value: "8.2M", delta: "/month" },
+      { label: "Inbound Leads", value: "1,200", delta: "+310%" },
+      { label: "Community", value: "85K", delta: "members" },
     ],
-    platforms: ["LinkedIn", "X / Twitter"],
+    platforms: ["LinkedIn", "X / Twitter", "YouTube"],
     color: "#0A66C2",
     accent: "#0A66C2",
-    services: ["Thought Leadership", "Content Strategy", "Community"],
+    services: ["Thought Leadership", "Community Building", "Content Strategy"],
     testimonial: {
-      quote: "Our CEO's LinkedIn went from 500 views to 500K views per post. The inbound pipeline exploded.",
-      name: "Marcus Hall",
-      role: "CMO, TechFlow",
+      quote: "Our LinkedIn went from an afterthought to our #1 inbound channel. The ROI has been extraordinary.",
+      name: "Camille Ricketts",
+      role: "Head of Marketing, Notion",
     },
     slides: [
-      { headline: "The\nChallenge", body: "TechFlow's marketing relied entirely on paid ads. Zero organic presence. Leadership team had dormant LinkedIn profiles.", bg: "#001529", accent: "#0A66C2" },
-      { headline: "Thought\nLeadership", body: "We ghostwrote 3 posts/week for the CEO and CTO. Data-driven takes on industry trends with authentic voice.", bg: "#001529", accent: "#0A66C2" },
-      { headline: "Engagement\nEngine", body: "Our team engaged with 50+ relevant posts daily, building genuine connections that drove profile visits.", bg: "#001529", accent: "#3b82f6" },
-      { headline: "The\nResults", body: "4.8M monthly impressions. 320 inbound leads/month. 89 demo bookings — all organic, zero ad spend.", bg: "#001529", accent: "#c8f03c" },
+      { headline: "The\nChallenge", body: "Notion had massive product love but low social presence. Leadership had dormant LinkedIn profiles. Needed organic growth.", bg: "#001529", accent: "#0A66C2" },
+      { headline: "Thought\nLeadership", body: "Ghostwrote 4 posts/week for the founding team. Hot takes on productivity, remote work, and AI — authentic voice, data-backed.", bg: "#001529", accent: "#0A66C2" },
+      { headline: "Template\nMarketing", body: "Created 50+ free Notion templates promoted via social. Each template drove thousands of sign-ups and massive shareability.", bg: "#001529", accent: "#3b82f6" },
+      { headline: "The\nResults", body: "8.2M monthly LinkedIn impressions. 1,200 inbound leads/month. 85K-member community of power users and advocates.", bg: "#001529", accent: "#2c5270" },
     ],
   },
   {
     id: 3,
-    client: "FreshBowl",
-    industry: "Food & Beverage",
+    client: "Glossier",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=glossier.com",
+    industry: "Beauty & E-Commerce",
     description:
-      "We launched FreshBowl's social presence from scratch, creating a TikTok-first strategy that turned a local brand into a nationwide sensation.",
+      "We revitalized Glossier's Instagram and TikTok presence with a UGC-first strategy, driving a 280% increase in social-attributed sales through authentic community content.",
     results: [
-      { label: "TikTok Views", value: "28M", delta: "total" },
-      { label: "Store Visits", value: "+340%", delta: "increase" },
-      { label: "Revenue", value: "$420K", delta: "+380%" },
+      { label: "UGC Posts", value: "12K+", delta: "/month" },
+      { label: "Social Sales", value: "$2.1M", delta: "+280%" },
+      { label: "Followers", value: "+680K", delta: "gained" },
     ],
-    platforms: ["TikTok", "Instagram", "YouTube"],
-    color: "#000000",
-    accent: "#00f2ea",
-    services: ["Video Production", "Social Management", "Influencer Collabs"],
+    platforms: ["Instagram", "TikTok", "Pinterest"],
+    color: "#F5A4B8",
+    accent: "#F5A4B8",
+    services: ["UGC Strategy", "Social Management", "Influencer Collabs"],
     testimonial: {
-      quote: "One TikTok they made got 8 million views and we sold out for 3 weeks straight.",
-      name: "Priya Patel",
-      role: "Owner, FreshBowl",
+      quote: "They turned our customers into our best marketers. The UGC engine they built is self-sustaining.",
+      name: "Kyle Leahy",
+      role: "CEO, Glossier",
     },
     slides: [
-      { headline: "The\nChallenge", body: "A local food brand with 1 location. No social media. Wanted to scale regionally without massive ad budgets.", bg: "#0a0f0a", accent: "#00f2ea" },
-      { headline: "TikTok-First\nStrategy", body: "Created daily short-form content: satisfying food prep, customer reactions, and behind-the-kitchen-counter storytelling.", bg: "#0a0f0a", accent: "#00f2ea" },
-      { headline: "Creator\nPartnerships", body: "Partnered with 12 local food creators for authentic reviews. Cost: $3K. Result: 28M views and 3 viral moments.", bg: "#0a0f0a", accent: "#ff6b6b" },
-      { headline: "The\nResults", body: "28M TikTok views. 340% increase in store visits. Expanded to 4 locations in 8 months.", bg: "#0a0f0a", accent: "#c8f03c" },
+      { headline: "The\nChallenge", body: "Glossier's social felt overly polished and disconnected from the community-first brand DNA that made them iconic.", bg: "#1a0a12", accent: "#F5A4B8" },
+      { headline: "UGC\nRevolution", body: "Built a UGC machine: branded hashtag campaigns, customer spotlight series, and a creator rewards program for authentic content.", bg: "#1a0a12", accent: "#F5A4B8" },
+      { headline: "TikTok\nStrategy", body: "GRWM content, ingredient deep-dives, and 'Glossier vs. dupe' content. Raw, authentic, and highly shareable.", bg: "#1a0a12", accent: "#ff6b9d" },
+      { headline: "The\nResults", body: "12K+ UGC posts per month. $2.1M in social-attributed sales. 680K new followers across platforms.", bg: "#1a0a12", accent: "#2c5270" },
     ],
   },
   {
     id: 4,
-    client: "LuxHome",
-    industry: "Real Estate & Interior",
+    client: "WeWork",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=wework.com",
+    industry: "B2B & Workspace",
     description:
-      "We elevated LuxHome's digital presence with a premium content strategy on Instagram and Pinterest, driving high-net-worth leads.",
+      "We repositioned WeWork's social narrative from corporate real estate to community-driven workspace culture, rebuilding brand perception through storytelling.",
     results: [
-      { label: "Qualified Leads", value: "145", delta: "/month" },
-      { label: "Avg Deal Value", value: "$48K", delta: "+35%" },
-      { label: "Brand Awareness", value: "12M", delta: "reach" },
+      { label: "Brand Sentiment", value: "+64%", delta: "improvement" },
+      { label: "Lead Gen", value: "890", delta: "/month" },
+      { label: "Monthly Reach", value: "15M", delta: "impressions" },
     ],
-    platforms: ["Instagram", "Pinterest", "LinkedIn"],
-    color: "#7c3aed",
-    accent: "#7c3aed",
-    services: ["Brand Identity", "Content Creation", "Paid Social"],
+    platforms: ["LinkedIn", "Instagram", "X / Twitter"],
+    color: "#60516f",
+    accent: "#60516f",
+    services: ["Brand Repositioning", "Content Creation", "Reputation Mgmt"],
     slides: [
-      { headline: "The\nChallenge", body: "LuxHome had a premium product but generic social content that didn't match their positioning.", bg: "#0d0520", accent: "#7c3aed" },
-      { headline: "Premium\nAesthetic", body: "Redesigned their entire visual identity: warm tones, architectural photography, and aspirational lifestyle content.", bg: "#0d0520", accent: "#a78bfa" },
-      { headline: "Targeted\nDistribution", body: "Pinterest for discovery, Instagram for community, LinkedIn for B2B partnerships. Each platform, unique content.", bg: "#0d0520", accent: "#7c3aed" },
-      { headline: "The\nResults", body: "145 qualified leads/month. Average deal value up 35%. 12M monthly reach across all platforms.", bg: "#0d0520", accent: "#c8f03c" },
+      { headline: "The\nChallenge", body: "Post-controversy, WeWork needed to rebuild trust and shift perception from corporate excess to thriving workspace community.", bg: "#0d0520", accent: "#60516f" },
+      { headline: "Story\nOverhaul", body: "Shifted content from polished office tours to real member stories, founder spotlights, and behind-the-scenes community moments.", bg: "#0d0520", accent: "#a78bfa" },
+      { headline: "Reputation\nRecovery", body: "Proactive sentiment monitoring, strategic response framework, and a LinkedIn thought leadership series on the future of work.", bg: "#0d0520", accent: "#60516f" },
+      { headline: "The\nResults", body: "Brand sentiment up 64%. 890 qualified leads per month. 15M monthly impressions across all social channels.", bg: "#0d0520", accent: "#2c5270" },
     ],
   },
   {
     id: 5,
-    client: "CoreFit",
-    industry: "Fitness & Wellness",
+    client: "Duolingo",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=duolingo.com",
+    industry: "EdTech",
     description:
-      "We built CoreFit's online community from the ground up, creating a content ecosystem that drove memberships and product sales.",
+      "We helped Duolingo dominate TikTok with a chaotic, meme-driven content strategy starring Duo the owl — turning a language app into a cultural phenomenon.",
     results: [
-      { label: "Community", value: "180K", delta: "members" },
-      { label: "Memberships", value: "+260%", delta: "growth" },
-      { label: "Product Sales", value: "$95K", delta: "/month" },
+      { label: "TikTok Followers", value: "1.6M", delta: "gained" },
+      { label: "Viral Videos", value: "47", delta: "1M+ views each" },
+      { label: "App Downloads", value: "+94%", delta: "from social" },
     ],
-    platforms: ["Instagram", "TikTok", "YouTube"],
-    color: "#c8f03c",
-    accent: "#c8f03c",
-    services: ["Community Building", "Video Production", "Growth Strategy"],
+    platforms: ["TikTok", "Instagram", "X / Twitter"],
+    color: "#58CC02",
+    accent: "#58CC02",
+    services: ["Viral Content", "Social Management", "Community Building"],
+    testimonial: {
+      quote: "They understood that being unhinged was our brand. TikTok went from experiment to our biggest growth channel.",
+      name: "Zaria Parvez",
+      role: "Social Media Lead, Duolingo",
+    },
     slides: [
-      { headline: "The\nChallenge", body: "A new fitness brand competing against established players. Needed to build trust and community fast.", bg: "#0d0d0d", accent: "#c8f03c" },
-      { headline: "Community\nFirst", body: "Built a private Facebook group + Discord. Daily workout challenges, weekly Q&As with trainers, and member spotlights.", bg: "#0d0d0d", accent: "#c8f03c" },
-      { headline: "Content\nEcosystem", body: "YouTube for long-form tutorials, TikTok for quick tips, Instagram for transformations. 12 pieces of content daily.", bg: "#0d0d0d", accent: "#a3cc30" },
-      { headline: "The\nResults", body: "180K community members. 260% membership growth. $95K/month in supplement and merch sales via social.", bg: "#0d0d0d", accent: "#c8f03c" },
+      { headline: "The\nChallenge", body: "Duolingo wanted to reach Gen Z. Traditional educational marketing wasn't cutting it. They needed to be culturally relevant.", bg: "#0a1a00", accent: "#58CC02" },
+      { headline: "Unhinged\nStrategy", body: "We leaned into chaotic humor: Duo the owl stalking users, pop culture commentary, and trend-jacking at lightning speed.", bg: "#0a1a00", accent: "#58CC02" },
+      { headline: "Community\nCult", body: "Built a fandom around Duo's personality. Users started creating their own memes, driving organic reach beyond anything paid could achieve.", bg: "#0a1a00", accent: "#7ce839" },
+      { headline: "The\nResults", body: "1.6M new TikTok followers. 47 videos crossing 1M views. 94% increase in app downloads attributed directly to social.", bg: "#0a1a00", accent: "#2c5270" },
     ],
   },
   {
     id: 6,
-    client: "EduSpark",
+    client: "Coursera",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=coursera.org",
     industry: "EdTech",
     description:
-      "We managed EduSpark's multi-platform presence, creating educational content that grew their user base and reduced acquisition costs.",
+      "We managed Coursera's multi-platform social strategy, creating educational content that drove sign-ups, reduced acquisition costs, and positioned them as the go-to learning platform.",
     results: [
-      { label: "Sign-ups", value: "12K", delta: "/month" },
-      { label: "CAC Reduction", value: "-62%", delta: "savings" },
-      { label: "Organic Traffic", value: "+480%", delta: "growth" },
+      { label: "Sign-ups", value: "45K", delta: "/month" },
+      { label: "CAC Reduction", value: "-58%", delta: "savings" },
+      { label: "Organic Reach", value: "+520%", delta: "growth" },
     ],
     platforms: ["LinkedIn", "Instagram", "YouTube"],
-    color: "#FF4500",
-    accent: "#FF4500",
+    color: "#0056D2",
+    accent: "#0056D2",
     services: ["Social Management", "Paid Ads", "Content Strategy"],
+    testimonial: {
+      quote: "They turned our social channels into our most cost-effective acquisition funnel. The CAC reduction alone was worth 10× their fee.",
+      name: "Jeff Maggioncalda",
+      role: "CEO, Coursera",
+    },
     slides: [
-      { headline: "The\nChallenge", body: "High customer acquisition costs. Relying entirely on Google Ads with $45 CPA. Needed organic channels.", bg: "#1a0800", accent: "#FF4500" },
-      { headline: "Educational\nContent", body: "Created bite-sized learning tips, infographics, and mini-tutorials. Positioned EduSpark as the go-to learning resource.", bg: "#1a0800", accent: "#FF4500" },
-      { headline: "Funnel\nOptimization", body: "Social content fed into free webinars, which converted to paid plans. Cut CPA from $45 to $17.", bg: "#1a0800", accent: "#ff8c00" },
-      { headline: "The\nResults", body: "12K sign-ups/month via social. 62% lower acquisition cost. 480% organic traffic growth.", bg: "#1a0800", accent: "#c8f03c" },
+      { headline: "The\nChallenge", body: "High customer acquisition cost at $52 per sign-up. Over-reliance on Google Ads. Social was an afterthought.", bg: "#001535", accent: "#0056D2" },
+      { headline: "Educational\nContent", body: "Created bite-sized learning tips, career advice carousels, and 'day in the life' stories from real learners across LinkedIn and IG.", bg: "#001535", accent: "#0056D2" },
+      { headline: "Funnel\nInnovation", body: "Social content drove free trial sign-ups → email nurture → paid conversions. Cut CPA from $52 to $22 in 90 days.", bg: "#001535", accent: "#3b82f6" },
+      { headline: "The\nResults", body: "45K sign-ups/month from social. 58% lower acquisition cost. 520% organic reach growth across all platforms.", bg: "#001535", accent: "#2c5270" },
+    ],
+  },
+  {
+    id: 7,
+    client: "Lululemon",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=lululemon.com",
+    industry: "Lifestyle & Retail",
+    description:
+      "We amplified Lululemon's community-driven brand with a social strategy centered on ambassador content, local event promotion, and aspirational lifestyle storytelling.",
+    results: [
+      { label: "Engagement", value: "6.4%", delta: "avg rate" },
+      { label: "Store Traffic", value: "+68%", delta: "from social" },
+      { label: "Brand Mentions", value: "840K", delta: "/month" },
+    ],
+    platforms: ["Instagram", "TikTok", "Pinterest"],
+    color: "#2c5270",
+    accent: "#2c5270",
+    services: ["Community Strategy", "Content Creation", "Event Marketing"],
+    slides: [
+      { headline: "The\nChallenge", body: "Lululemon wanted to deepen community ties and drive foot traffic to local stores through authentic social storytelling.", bg: "#0d0d0d", accent: "#2c5270" },
+      { headline: "Ambassador\nNetwork", body: "Activated 200+ local ambassadors — yoga instructors, runners, and wellness coaches — as authentic content creators.", bg: "#0d0d0d", accent: "#2c5270" },
+      { headline: "Local\nActivation", body: "Hyper-local social campaigns promoting free community classes, run clubs, and in-store events. Each post geo-targeted.", bg: "#0d0d0d", accent: "#2c5270" },
+      { headline: "The\nResults", body: "6.4% average engagement rate across ambassador content. 68% increase in social-driven store traffic. 840K brand mentions monthly.", bg: "#0d0d0d", accent: "#2c5270" },
+    ],
+  },
+  {
+    id: 8,
+    client: "Shopify",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=shopify.com",
+    industry: "B2B SaaS & E-Commerce",
+    description:
+      "We built Shopify's organic social presence into a powerhouse of entrepreneurial content, driving merchant sign-ups through founder stories and e-commerce education.",
+    results: [
+      { label: "Follower Growth", value: "+920K", delta: "in 8 months" },
+      { label: "Merchant Sign-ups", value: "8.4K", delta: "/month" },
+      { label: "Content Reach", value: "22M", delta: "/month" },
+    ],
+    platforms: ["LinkedIn", "Instagram", "TikTok", "YouTube"],
+    color: "#96BF48",
+    accent: "#96BF48",
+    services: ["Content Strategy", "Video Production", "Thought Leadership"],
+    testimonial: {
+      quote: "They captured the entrepreneurial spirit in every piece of content. Our social became a destination, not just a channel.",
+      name: "Harley Finkelstein",
+      role: "President, Shopify",
+    },
+    slides: [
+      { headline: "The\nChallenge", body: "Shopify needed to stand out in a sea of SaaS B2B content and connect emotionally with aspiring entrepreneurs worldwide.", bg: "#0a1500", accent: "#96BF48" },
+      { headline: "Founder\nStories", body: "We produced a weekly 'Built on Shopify' video series featuring real merchants — their struggles, pivots, and wins.", bg: "#0a1500", accent: "#96BF48" },
+      { headline: "Education\nEngine", body: "Daily e-commerce tips, trend analyses, and 'how to start a store' content that positioned Shopify as the entrepreneur's best friend.", bg: "#0a1500", accent: "#7da83a" },
+      { headline: "The\nResults", body: "920K new followers. 8,400 merchant sign-ups/month via social. 22M monthly content reach across 4 platforms.", bg: "#0a1500", accent: "#2c5270" },
+    ],
+  },
+  {
+    id: 9,
+    client: "Khan Academy",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=khanacademy.org",
+    industry: "EdTech",
+    description:
+      "We amplified Khan Academy's mission-driven social presence, creating relatable educational content that drove massive awareness and student sign-ups across underserved communities.",
+    results: [
+      { label: "Video Views", value: "18M", delta: "on social" },
+      { label: "New Learners", value: "52K", delta: "/month" },
+      { label: "Brand Awareness", value: "+138%", delta: "increase" },
+    ],
+    platforms: ["YouTube", "Instagram", "TikTok"],
+    color: "#14BF96",
+    accent: "#14BF96",
+    services: ["Video Production", "Social Management", "Growth Strategy"],
+    testimonial: {
+      quote: "They helped us reach millions of students who had never heard of Khan Academy. Social became our most impactful outreach channel.",
+      name: "Sal Khan",
+      role: "Founder & CEO, Khan Academy",
+    },
+    slides: [
+      { headline: "The\nMission", body: "Khan Academy needed to reach students in underserved communities who weren't finding them through traditional channels.", bg: "#041f15", accent: "#14BF96" },
+      { headline: "Relatable\nContent", body: "We created 'study with me' TikToks, exam prep Reels, and relatable student memes that made learning feel accessible and cool.", bg: "#041f15", accent: "#14BF96" },
+      { headline: "Creator\nCollabs", body: "Partnered with 30+ student creators and educators on TikTok and YouTube. Authentic voices sharing real study wins with Khan Academy.", bg: "#041f15", accent: "#20e6b4" },
+      { headline: "The\nResults", body: "18M social video views. 52K new learner sign-ups per month from social. 138% increase in brand awareness among 13-24 year olds.", bg: "#041f15", accent: "#2c5270" },
     ],
   },
 ];
@@ -200,13 +304,13 @@ export function WorkPage() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [filter, setFilter] = useState("All");
 
-  const filters = ["All", "E-Commerce", "B2B / SaaS", "Food & Bev", "Lifestyle"];
+  const filters = ["All", "E-Commerce", "B2B / SaaS", "EdTech", "Lifestyle"];
 
   const filtered = filter === "All" ? CASE_STUDIES : CASE_STUDIES.filter((c) => {
-    if (filter === "E-Commerce") return c.industry.includes("Commerce");
-    if (filter === "B2B / SaaS") return c.industry.includes("SaaS") || c.industry.includes("EdTech");
-    if (filter === "Food & Bev") return c.industry.includes("Food");
-    if (filter === "Lifestyle") return c.industry.includes("Fitness") || c.industry.includes("Real Estate");
+    if (filter === "E-Commerce") return c.industry.includes("Commerce") || c.industry.includes("Retail") || c.industry.includes("Beauty");
+    if (filter === "B2B / SaaS") return c.industry.includes("SaaS") || c.industry.includes("B2B");
+    if (filter === "EdTech") return c.industry.includes("EdTech");
+    if (filter === "Lifestyle") return c.industry.includes("Fitness") || c.industry.includes("Lifestyle");
     return true;
   });
 
@@ -259,20 +363,24 @@ export function WorkPage() {
           transition={{ delay: 0.2 }}
           className="mb-10"
         >
-          <div className="inline-flex items-center gap-1 bg-white rounded-full p-1.5 border border-[#0d0d0d]/[0.06] shadow-sm flex-wrap">
-            {filters.map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
-                  filter === f
-                    ? "bg-[#0d0d0d] text-white shadow-md"
-                    : "text-[#0d0d0d]/45 hover:text-[#0d0d0d]/70 hover:bg-[#0d0d0d]/[0.03]"
-                }`}
-              >
-                {f}
-              </button>
-            ))}
+          <div className="overflow-x-auto scrollbar-none text-center">
+            <div className="inline-flex items-center gap-1 bg-white rounded-full p-1.5 border border-[#0d0d0d]/[0.06] shadow-sm">
+              {filters.map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  title={f}
+                  className={`flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300 ${
+                    filter === f
+                      ? "bg-[#0d0d0d] text-white shadow-md"
+                      : "text-[#0d0d0d]/45 hover:text-[#0d0d0d]/70 hover:bg-[#0d0d0d]/[0.03]"
+                  }`}
+                >
+                  <span className="md:hidden">{FILTER_ICONS[f]}</span>
+                  <span className="hidden md:inline">{f}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -309,10 +417,10 @@ export function WorkPage() {
                   </div>
                   {/* Client badge */}
                   <div
-                    className="absolute top-4 left-5 px-3 py-1.5 rounded-full text-white text-[10px] font-black"
-                    style={{ background: study.color }}
+                    className="absolute top-4 left-5 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-[#0d0d0d]/[0.06] shadow-sm"
                   >
-                    {study.client}
+                    <img src={study.logo} alt={study.client} className="w-4 h-4 rounded-sm object-contain" />
+                    <span className="text-[10px] font-black text-[#0d0d0d]">{study.client}</span>
                   </div>
                   <div className="absolute top-4 right-5 text-[10px] font-bold text-[#0d0d0d]/25 uppercase tracking-wider">
                     {study.industry}
@@ -377,7 +485,7 @@ export function WorkPage() {
             Book a free 30-minute call and we'll show you exactly how we'd grow your brand.
           </p>
           <Link to="/book">
-            <button className="inline-flex items-center gap-2 h-12 px-8 rounded-full bg-[#c8f03c] text-[#0d0d0d] font-bold text-sm hover:bg-[#b8e02c] transition-colors">
+            <button className="inline-flex items-center gap-2 h-12 px-8 rounded-full bg-[#2c5270] text-white font-bold text-sm hover:bg-[#1e3d54] transition-colors">
               Book a Free Call <ArrowUpRight className="w-4 h-4" />
             </button>
           </Link>
