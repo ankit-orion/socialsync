@@ -82,7 +82,7 @@ export function Footer() {
                 <input
                   type="email"
                   placeholder="Enter Email"
-                  className="flex-1 bg-transparent text-[#0d0d0d] text-sm placeholder:text-[#0d0d0d]/30 outline-none min-w-0 w-0"
+                  className="flex-1 bg-transparent text-[#0d0d0d] text-sm placeholder:text-[#0d0d0d]/60 outline-none min-w-0 w-0"
                 />
                 <button className="h-9 px-3 sm:px-5 rounded-full bg-[#2c5270] text-white font-bold text-xs sm:text-sm flex items-center gap-1 hover:bg-[#1e3d54] transition-colors flex-shrink-0 whitespace-nowrap">
                   Subscribe <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />

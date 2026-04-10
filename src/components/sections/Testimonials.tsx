@@ -13,7 +13,7 @@ export function Testimonials() {
   return (
     <section className="bg-[#e8e8e8] py-16 md:py-24 overflow-hidden">
       <div className="text-center mb-14">
-        <p className="text-xs font-black uppercase tracking-[0.25em] text-[#0d0d0d]/35 mb-3">Unmatched Results</p>
+        <p className="text-xs font-black uppercase tracking-[0.25em] text-[#0d0d0d]/60 mb-3">Unmatched Results</p>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#0d0d0d] tracking-tight">
           Don't take our word for it.
         </h2>
@@ -36,7 +36,7 @@ export function Testimonials() {
                 </div>
                 <div>
                   <p className="font-black text-[#0d0d0d] text-sm">{review.name}</p>
-                  <p className="text-[#0d0d0d]/40 text-xs font-medium">{review.role}</p>
+                  <p className="text-[#0d0d0d]/70 text-xs font-medium">{review.role}</p>
                 </div>
               </div>
             </div>

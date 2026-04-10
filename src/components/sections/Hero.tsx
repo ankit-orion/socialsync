@@ -2631,14 +2631,14 @@ export function Hero() {
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 bg-[#0d0d0d] text-white text-[11px] font-bold tracking-[0.14em] uppercase px-4 py-2 rounded-full"
+              className="inline-flex items-center gap-2 bg-[#0d0d0d] dark:bg-white text-white dark:text-[#0d0d0d] text-[11px] font-bold tracking-[0.14em] uppercase px-4 py-2 rounded-full"
             >
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#2c5270" }} />
               Social Media Agency
             </motion.div>
 
             {/* Heading — line-by-line blur + slide reveal */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-[#0d0d0d] leading-[1.05] tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-[#0d0d0d] dark:text-white leading-[1.05] tracking-tight">
               <motion.span
                 className="block"
                 initial={{ opacity: 0, y: 56, filter: "blur(10px)" }}
@@ -2683,7 +2683,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.55, delay: 0.4, ease: "easeOut" }}
-              className="text-[#0d0d0d]/55 text-base leading-relaxed font-medium max-w-sm"
+              className="text-[#0d0d0d]/70 dark:text-white/70 text-base leading-relaxed font-medium max-w-sm"
             >
               We build content that stops the scroll, grows real audiences, and turns followers into revenue — backed by data, not guesswork.
             </motion.p>
@@ -2714,14 +2714,14 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.68 }}
               className="pt-1"
             >
-              <p className="text-xs text-[#0d0d0d]/35 font-semibold uppercase tracking-widest mb-3">
+              <p className="text-xs text-[#0d0d0d]/60 dark:text-white/60 font-semibold uppercase tracking-widest mb-3">
                 Trusted by brands
               </p>
               <div className="flex items-center gap-6 flex-wrap">
                 {brands.map((b) => (
                   <span
                     key={b.name}
-                    className="text-sm font-black text-[#0d0d0d]/25 tracking-tight"
+                    className="text-sm font-black text-[#0d0d0d]/70 dark:text-white/40 tracking-tight"
                   >
                     {b.name}
                   </span>

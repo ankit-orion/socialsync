@@ -94,7 +94,7 @@ export function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNav(e, link.href)}
-                  className="px-4 py-1.5 rounded-full text-[13px] font-bold text-[#0d0d0d]/45 hover:text-[#0d0d0d] hover:bg-white/70 transition-all duration-200"
+                  className="px-4 py-1.5 rounded-full text-[13px] font-bold text-[#0d0d0d]/70 hover:text-[#0d0d0d] hover:bg-white/70 transition-all duration-200"
                 >
                   {link.label}
                 </a>
@@ -105,7 +105,7 @@ export function Navbar() {
                   className={`px-4 py-1.5 rounded-full text-[13px] font-bold transition-all duration-200 ${
                     isActive
                       ? "bg-white text-[#0d0d0d] shadow-sm"
-                      : "text-[#0d0d0d]/45 hover:text-[#0d0d0d] hover:bg-white/70"
+                      : "text-[#0d0d0d]/70 hover:text-[#0d0d0d] hover:bg-white/70"
                   }`}
                 >
                   {link.label}

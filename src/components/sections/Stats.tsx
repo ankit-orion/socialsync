@@ -18,7 +18,7 @@ export function Stats() {
           <div className="space-y-5">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 border border-[#0d0d0d]/15 rounded-full px-3 py-1">
-                <span className="text-xs font-bold text-[#0d0d0d]/50">From 2020</span>
+                <span className="text-xs font-bold text-[#0d0d0d]/70">From 2020</span>
                 <div className="w-8 h-4 bg-[#0d0d0d] rounded-full flex items-center px-0.5">
                   <div className="w-3 h-3 rounded-full bg-[#2c5270] ml-auto" />
                 </div>
@@ -31,7 +31,7 @@ export function Stats() {
               <br />on{" "}
               <span style={{ color: '#2c5270' }}>social.</span>
             </h2>
-            <p className="text-[#0d0d0d]/50 text-[15px] leading-relaxed font-medium max-w-md">
+            <p className="text-[#0d0d0d]/70 text-[15px] leading-relaxed font-medium max-w-md">
               We've refined our process across 50+ brands since 2020. Here's what's inside every engagement we run.
             </p>
           </div>

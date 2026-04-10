@@ -326,7 +326,7 @@ export function WorkPage() {
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="mb-10">
           <Link
             to="/"
-            className="text-[#0d0d0d]/40 hover:text-[#0d0d0d] inline-flex items-center text-sm font-bold transition-colors bg-white px-4 py-2 rounded-full border border-[#0d0d0d]/[0.06] shadow-sm"
+            className="text-[#0d0d0d]/60 hover:text-[#0d0d0d] dark:text-white/60 dark:hover:text-white inline-flex items-center text-sm font-bold transition-colors bg-white dark:bg-white/5 px-4 py-2 rounded-full border border-[#0d0d0d]/[0.06] dark:border-white/10 shadow-sm"
           >
             ← Back to home
           </Link>
@@ -335,23 +335,23 @@ export function WorkPage() {
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-14">
           <div className="flex justify-start mb-5">
-            <div className="inline-flex items-center gap-2 bg-white border border-[#0d0d0d]/[0.08] rounded-full px-4 py-2 shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-white dark:bg-white/5 border border-[#0d0d0d]/[0.08] dark:border-white/10 rounded-full px-4 py-2 shadow-sm text-[#0d0d0d] dark:text-white">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="3" width="7" height="7" rx="1" stroke="#0d0d0d" strokeWidth="2" />
-                <rect x="14" y="3" width="7" height="7" rx="1" stroke="#0d0d0d" strokeWidth="2" />
-                <rect x="3" y="14" width="7" height="7" rx="1" stroke="#0d0d0d" strokeWidth="2" />
-                <rect x="14" y="14" width="7" height="7" rx="1" stroke="#0d0d0d" strokeWidth="2" />
+                <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
+                <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
+                <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
+                <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
               </svg>
-              <span className="text-[11px] font-bold text-[#0d0d0d] tracking-wide uppercase">Our Work</span>
+              <span className="text-[11px] font-bold tracking-wide uppercase">Our Work</span>
             </div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#0d0d0d] tracking-tight leading-[1.05] mb-5 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#0d0d0d] dark:text-white tracking-tight leading-[1.05] mb-5 max-w-2xl">
             Real results for
             <br />
             real brands.
           </h1>
-          <p className="text-[#0d0d0d]/45 text-base md:text-lg font-medium leading-relaxed max-w-lg">
+          <p className="text-[#0d0d0d]/70 dark:text-white/70 text-base md:text-lg font-medium leading-relaxed max-w-lg">
             Every campaign we run is built to deliver measurable growth. Here's what we've done for our clients.
           </p>
         </motion.div>
@@ -364,7 +364,7 @@ export function WorkPage() {
           className="mb-10"
         >
           <div className="overflow-x-auto scrollbar-none text-center">
-            <div className="inline-flex items-center gap-1 bg-white rounded-full p-1.5 border border-[#0d0d0d]/[0.06] shadow-sm">
+            <div className="inline-flex items-center gap-1 bg-white dark:bg-white/5 rounded-full p-1.5 border border-[#0d0d0d]/[0.06] dark:border-white/10 shadow-sm">
               {filters.map((f) => (
                 <button
                   key={f}
@@ -372,8 +372,8 @@ export function WorkPage() {
                   title={f}
                   className={`flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300 ${
                     filter === f
-                      ? "bg-[#0d0d0d] text-white shadow-md"
-                      : "text-[#0d0d0d]/45 hover:text-[#0d0d0d]/70 hover:bg-[#0d0d0d]/[0.03]"
+                      ? "bg-[#0d0d0d] text-white dark:bg-white dark:text-[#0d0d0d] shadow-md"
+                      : "text-[#0d0d0d]/70 dark:text-white/60 hover:text-[#0d0d0d] dark:hover:text-white hover:bg-[#0d0d0d]/[0.03] dark:hover:bg-white/10"
                   }`}
                 >
                   <span className="md:hidden">{FILTER_ICONS[f]}</span>
@@ -409,39 +409,39 @@ export function WorkPage() {
                     <div className="flex gap-6">
                       {study.results.map((r, j) => (
                         <div key={j} className="text-center">
-                          <p className="text-2xl font-black text-[#0d0d0d] leading-none">{r.value}</p>
-                          <p className="text-[9px] font-bold text-[#0d0d0d]/30 mt-1 uppercase tracking-wider">{r.label}</p>
+                          <p className="text-2xl font-black text-[#0d0d0d] dark:text-white leading-none">{r.value}</p>
+                          <p className="text-[9px] font-bold text-[#0d0d0d]/60 dark:text-white/60 mt-1 uppercase tracking-wider">{r.label}</p>
                         </div>
                       ))}
                     </div>
                   </div>
                   {/* Client badge */}
                   <div
-                    className="absolute top-4 left-5 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-[#0d0d0d]/[0.06] shadow-sm"
+                    className="absolute top-4 left-5 flex items-center gap-2 bg-white/90 dark:bg-[#1a1c23]/90 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-[#0d0d0d]/[0.06] dark:border-white/10 shadow-sm"
                   >
                     <img src={study.logo} alt={study.client} className="w-4 h-4 rounded-sm object-contain" />
-                    <span className="text-[10px] font-black text-[#0d0d0d]">{study.client}</span>
+                    <span className="text-[10px] font-black text-[#0d0d0d] dark:text-white">{study.client}</span>
                   </div>
-                  <div className="absolute top-4 right-5 text-[10px] font-bold text-[#0d0d0d]/25 uppercase tracking-wider">
+                  <div className="absolute top-4 right-5 text-[10px] font-bold text-[#0d0d0d]/60 dark:text-white/60 uppercase tracking-wider">
                     {study.industry}
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-7">
-                  <p className="text-[#0d0d0d]/50 text-[13px] font-medium leading-relaxed mb-5">
+                  <p className="text-[#0d0d0d]/70 dark:text-white/70 text-[13px] font-medium leading-relaxed mb-5">
                     {study.description}
                   </p>
 
                   {/* Platform + service tags */}
                   <div className="flex flex-wrap gap-1.5 mb-5">
                     {study.platforms.map((p) => (
-                      <span key={p} className="text-[9px] font-bold bg-[#0d0d0d]/[0.04] text-[#0d0d0d]/45 px-2.5 py-1 rounded-full">
+                      <span key={p} className="text-[9px] font-bold bg-[#0d0d0d]/5 text-[#0d0d0d]/70 dark:bg-white/10 dark:text-white/80 px-2.5 py-1 rounded-full">
                         {p}
                       </span>
                     ))}
                     {study.services.map((s) => (
-                      <span key={s} className="text-[9px] font-bold px-2.5 py-1 rounded-full" style={{ background: `${study.color}10`, color: study.color }}>
+                      <span key={s} className="text-[9px] font-bold px-2.5 py-1 rounded-full" style={{ background: `${study.color}15`, color: study.color, opacity: 0.9 }}>
                         {s}
                       </span>
                     ))}
@@ -449,19 +449,19 @@ export function WorkPage() {
 
                   {/* Testimonial */}
                   {study.testimonial && (
-                    <div className="bg-[#f7f7f8] rounded-2xl p-4 border border-[#0d0d0d]/[0.03]">
-                      <p className="text-[12px] text-[#0d0d0d]/60 font-medium italic leading-relaxed mb-2">
+                    <div className="bg-[#f7f7f8] dark:bg-white/5 rounded-2xl p-4 border border-[#0d0d0d]/[0.03] dark:border-transparent">
+                      <p className="text-[12px] text-[#0d0d0d]/80 dark:text-white/80 font-medium italic leading-relaxed mb-2">
                         "{study.testimonial.quote}"
                       </p>
-                      <p className="text-[10px] font-bold text-[#0d0d0d]">
+                      <p className="text-[10px] font-bold text-[#0d0d0d] dark:text-white">
                         {study.testimonial.name}{" "}
-                        <span className="text-[#0d0d0d]/30 font-medium">— {study.testimonial.role}</span>
+                        <span className="text-[#0d0d0d]/70 dark:text-white/50 font-medium">— {study.testimonial.role}</span>
                       </p>
                     </div>
                   )}
 
                   {/* CTA */}
-                  <div className="flex items-center gap-2 mt-5 text-[#0d0d0d] group-hover:gap-3 transition-all">
+                  <div className="flex items-center gap-2 mt-5 text-[#0d0d0d] dark:text-white group-hover:gap-3 transition-all">
                     <span className="text-xs font-black">View Case Study</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </div>

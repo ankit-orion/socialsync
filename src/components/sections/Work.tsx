@@ -149,7 +149,7 @@ function WorkCard({ c, onClick }: { c: CarouselPost; onClick: () => void }) {
       className="bg-white rounded-[24px] p-5 sm:p-7 cursor-pointer hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
     >
       <h3 className="text-center font-black text-[#0d0d0d] text-sm sm:text-base leading-snug mb-2 sm:mb-3">{c.topic}</h3>
-      <p className="text-center text-[#0d0d0d]/45 text-[11px] sm:text-[12px] leading-relaxed font-medium mb-5 sm:mb-6">{c.category}</p>
+      <p className="text-center text-[#0d0d0d]/70 text-[11px] sm:text-[12px] leading-relaxed font-medium mb-5 sm:mb-6">{c.category}</p>
       <div className="mt-auto pt-4 border-t border-[#0d0d0d]/[0.06]">
         {c.illustration}
       </div>
@@ -220,7 +220,7 @@ export function Work() {
             >
               <ArrowRight className="w-4 h-4 text-[#0d0d0d]" />
             </button>
-            <span className="text-xs font-semibold text-[#0d0d0d]/35 ml-1">
+            <span className="text-xs font-semibold text-[#0d0d0d]/60 ml-1">
               {start + 1}–{Math.min(start + visible, carousels.length)} of {carousels.length}
             </span>
           </div>

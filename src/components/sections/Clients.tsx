@@ -69,14 +69,14 @@ export function Clients() {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#0d0d0d] tracking-tighter leading-none mb-6 uppercase"
           >
             TRUSTED BY FOUNDERS<br />
-            <span className="text-[#0d0d0d]/40">BACKED BY RESULTS</span>
+            <span className="text-[#0d0d0d]/70">BACKED BY RESULTS</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-[#0d0d0d]/40 text-sm font-medium"
+            className="text-[#0d0d0d]/70 text-sm font-medium"
           >
             Results that speak through founder voices.
           </motion.p>
@@ -122,7 +122,7 @@ export function Clients() {
                   </div>
                   <div>
                     <h4 className="font-black text-[#0d0d0d] text-base leading-tight uppercase tracking-tight">{current.author}</h4>
-                    <p className="text-[#0d0d0d]/40 text-xs font-bold uppercase tracking-wider">{current.role}</p>
+                    <p className="text-[#0d0d0d]/70 text-xs font-bold uppercase tracking-wider">{current.role}</p>
                   </div>
                 </div>
                 

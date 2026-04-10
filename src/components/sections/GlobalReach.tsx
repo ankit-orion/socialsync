@@ -49,14 +49,14 @@ export function GlobalReach() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8 md:p-12 pb-6">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-xs font-black uppercase tracking-widest text-[#0d0d0d]/40">// Global Reach</span>
+                <span className="text-xs font-black uppercase tracking-widest text-[#0d0d0d]/70">// Global Reach</span>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0d0d0d] leading-tight tracking-tight">
                 We Connect Your Brand<br />Across The World.
               </h2>
             </div>
             <div className="flex items-center">
-              <p className="text-[#0d0d0d]/50 text-base leading-relaxed max-w-sm">
+              <p className="text-[#0d0d0d]/70 text-base leading-relaxed max-w-sm">
                 From New York to Tokyo, our strategies drive engagement across every timezone and platform — building communities that transcend borders.
               </p>
             </div>
@@ -319,7 +319,7 @@ export function GlobalReach() {
             ].map((s, i) => (
               <div key={i} className="py-4 sm:py-6 text-center px-1">
                 <p className="text-xl sm:text-2xl md:text-3xl font-black text-[#0d0d0d] tracking-tight">{s.value}</p>
-                <p className="text-[9px] sm:text-xs font-semibold text-[#0d0d0d]/40 mt-1 uppercase tracking-widest leading-tight">{s.label}</p>
+                <p className="text-[9px] sm:text-xs font-semibold text-[#0d0d0d]/70 mt-1 uppercase tracking-widest leading-tight">{s.label}</p>
               </div>
             ))}
           </div>

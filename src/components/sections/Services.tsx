@@ -178,7 +178,7 @@ const ManagementMock = () => (
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-[8.5px] font-bold text-[#0d0d0d] truncate">{p.platform}</p>
-          <p className="text-[7px] text-[#0d0d0d]/35 font-medium">{p.handle}</p>
+          <p className="text-[7px] text-[#0d0d0d]/60 font-medium">{p.handle}</p>
         </div>
         <div className="text-right flex-shrink-0">
           <p className="text-[9px] font-black text-[#0d0d0d]">{p.followers}</p>
@@ -209,7 +209,7 @@ const CreationMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Content We Created</span>
-      <span className="text-[7px] font-semibold text-[#0d0d0d]/30">This week</span>
+      <span className="text-[7px] font-semibold text-[#0d0d0d]/60">This week</span>
     </div>
     {/* Sample content pieces */}
     {[
@@ -237,7 +237,7 @@ const CreationMock = () => (
         <div className="p-2.5 flex items-center justify-between">
           <div>
             <p className="text-[8.5px] font-bold text-[#0d0d0d]">{c.title}</p>
-            <p className="text-[7px] text-[#0d0d0d]/35 font-medium">♥ {c.likes} likes</p>
+            <p className="text-[7px] text-[#0d0d0d]/60 font-medium">♥ {c.likes} likes</p>
           </div>
           <div className="w-5 h-5 rounded-md flex items-center justify-center text-white text-[5.5px] font-black" style={{ background: c.color }}>
             {c.platform}
@@ -257,7 +257,7 @@ const CreationMock = () => (
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="#60516f" strokeWidth="2"/></svg>
       </div>
       <div>
-        <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Assets Delivered</p>
+        <p className="text-[7px] text-[#0d0d0d]/70 font-semibold">Assets Delivered</p>
         <p className="text-[10px] font-black text-[#0d0d0d]">48 pieces <span className="text-[7px] font-bold text-[#60516f]">this week</span></p>
       </div>
     </motion.div>
@@ -272,7 +272,7 @@ const CreationMock = () => (
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#2c5270" strokeWidth="2" strokeLinecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#2c5270" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </div>
       <div>
-        <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Client Approval Rate</p>
+        <p className="text-[7px] text-[#0d0d0d]/70 font-semibold">Client Approval Rate</p>
         <p className="text-[10px] font-black text-[#0d0d0d]">96% <span className="text-[7px] font-bold text-[#2c5270]">first-round</span></p>
       </div>
     </motion.div>
@@ -284,7 +284,7 @@ const GrowthMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Client Results</span>
-      <span className="text-[7px] font-semibold text-[#0d0d0d]/30">Last 90 days</span>
+      <span className="text-[7px] font-semibold text-[#0d0d0d]/60">Last 90 days</span>
     </div>
     {/* KPI cards — results we achieved */}
     <div className="grid grid-cols-2 gap-2">
@@ -302,7 +302,7 @@ const GrowthMock = () => (
         >
           <div className="flex items-center gap-1 mb-1">
             <span className="text-[10px]">{kpi.icon}</span>
-            <p className="text-[7px] text-[#0d0d0d]/35 font-semibold">{kpi.label}</p>
+            <p className="text-[7px] text-[#0d0d0d]/60 font-semibold">{kpi.label}</p>
           </div>
           <span className="text-[14px] font-black text-[#0d0d0d] leading-none">{kpi.val}</span>
         </motion.div>
@@ -350,7 +350,7 @@ const GrowthMock = () => (
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="#2c5270" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </div>
       <div>
-        <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Organic Reach Increase</p>
+        <p className="text-[7px] text-[#0d0d0d]/70 font-semibold">Organic Reach Increase</p>
         <p className="text-[10px] font-black text-[#0d0d0d]">4.2M <span className="text-[7px] font-bold text-[#2c5270]">impressions/mo</span></p>
       </div>
     </motion.div>
@@ -382,11 +382,11 @@ const CampaignsMock = () => (
             <div className="w-5 h-5 rounded-md flex items-center justify-center text-white text-[5.5px] font-black" style={{ background: c.color }}>{c.client[0]}</div>
             <span className="text-[8.5px] font-bold text-[#0d0d0d]">{c.name}</span>
           </div>
-          <span className={`text-[6.5px] font-bold px-1.5 py-0.5 rounded-full ${c.status === 'Live' ? 'bg-[#2c5270]/15 text-[#2c5270]' : 'bg-[#0d0d0d]/5 text-[#0d0d0d]/30'}`}>{c.status}</span>
+          <span className={`text-[6.5px] font-bold px-1.5 py-0.5 rounded-full ${c.status === 'Live' ? 'bg-[#2c5270]/15 text-[#2c5270]' : 'bg-[#0d0d0d]/5 text-[#0d0d0d]/60'}`}>{c.status}</span>
         </div>
         <div className="flex items-center gap-3 ml-7">
-          <p className="text-[7px] text-[#0d0d0d]/35 font-medium">{c.client}</p>
-          <p className="text-[7px] font-bold text-[#0d0d0d]/50">{c.reach} reach</p>
+          <p className="text-[7px] text-[#0d0d0d]/60 font-medium">{c.client}</p>
+          <p className="text-[7px] font-bold text-[#0d0d0d]/70">{c.reach} reach</p>
         </div>
       </motion.div>
     ))}
@@ -413,7 +413,7 @@ const InfluencerMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Creators We Partnered</span>
-      <span className="text-[7px] font-semibold text-[#0d0d0d]/30">Active collabs</span>
+      <span className="text-[7px] font-semibold text-[#0d0d0d]/60">Active collabs</span>
     </div>
     {[
       { name: "Emma Wilson", niche: "Fashion & Lifestyle", followers: "245K", result: "3.2× ROI" },
@@ -433,7 +433,7 @@ const InfluencerMock = () => (
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-[8.5px] font-bold text-[#0d0d0d] truncate">{c.name}</p>
-          <p className="text-[7px] text-[#0d0d0d]/35 font-medium">{c.niche} · {c.followers}</p>
+          <p className="text-[7px] text-[#0d0d0d]/60 font-medium">{c.niche} · {c.followers}</p>
         </div>
         <span className="text-[8px] font-black text-[#2c5270] flex-shrink-0">{c.result}</span>
       </motion.div>
@@ -449,7 +449,7 @@ const InfluencerMock = () => (
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#E1306C" strokeWidth="2"/><circle cx="9" cy="7" r="4" stroke="#E1306C" strokeWidth="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#E1306C" strokeWidth="2"/></svg>
       </div>
       <div>
-        <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Creator Partnerships</p>
+        <p className="text-[7px] text-[#0d0d0d]/70 font-semibold">Creator Partnerships</p>
         <p className="text-[10px] font-black text-[#0d0d0d]">24 active <span className="text-[7px] font-bold text-[#E1306C]">+8 this quarter</span></p>
       </div>
     </motion.div>
@@ -461,7 +461,7 @@ const AdsMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Ad Performance</span>
-      <span className="text-[7px] font-semibold text-[#0d0d0d]/30">Client campaigns</span>
+      <span className="text-[7px] font-semibold text-[#0d0d0d]/60">Client campaigns</span>
     </div>
     {[
       { client: "StyleHaus", spend: "$12,400", roas: "4.2×", conv: "1,840", status: "Running" },
@@ -482,15 +482,15 @@ const AdsMock = () => (
         </div>
         <div className="flex items-center gap-4">
           <div>
-            <p className="text-[6.5px] text-[#0d0d0d]/30 font-medium">Spend</p>
+            <p className="text-[6.5px] text-[#0d0d0d]/60 font-medium">Spend</p>
             <p className="text-[8.5px] font-bold text-[#0d0d0d]">{ad.spend}</p>
           </div>
           <div>
-            <p className="text-[6.5px] text-[#0d0d0d]/30 font-medium">ROAS</p>
+            <p className="text-[6.5px] text-[#0d0d0d]/60 font-medium">ROAS</p>
             <p className="text-[8.5px] font-black text-[#2c5270]">{ad.roas}</p>
           </div>
           <div>
-            <p className="text-[6.5px] text-[#0d0d0d]/30 font-medium">Conversions</p>
+            <p className="text-[6.5px] text-[#0d0d0d]/60 font-medium">Conversions</p>
             <p className="text-[8.5px] font-bold text-[#0d0d0d]">{ad.conv}</p>
           </div>
         </div>
@@ -539,7 +539,7 @@ const CommunityMock = () => (
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-[8px] font-bold text-[#0d0d0d] truncate">{a.action}</p>
-          <p className="text-[7px] text-[#0d0d0d]/35 font-medium">{a.client} · {a.time}</p>
+          <p className="text-[7px] text-[#0d0d0d]/60 font-medium">{a.client} · {a.time}</p>
         </div>
       </motion.div>
     ))}
@@ -555,7 +555,7 @@ const CommunityMock = () => (
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#60516f" strokeWidth="2"/><polyline points="12 6 12 12 16 14" stroke="#60516f" strokeWidth="2" strokeLinecap="round"/></svg>
       </div>
       <div>
-        <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Avg. Response Time</p>
+        <p className="text-[7px] text-[#0d0d0d]/70 font-semibold">Avg. Response Time</p>
         <p className="text-[10px] font-black text-[#0d0d0d]">&lt;15 min <span className="text-[7px] font-bold text-[#60516f]">across all clients</span></p>
       </div>
     </motion.div>
@@ -567,7 +567,7 @@ const BrandingMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Brand Kit We Built</span>
-      <span className="text-[7px] font-semibold text-[#0d0d0d]/30">Delivered</span>
+      <span className="text-[7px] font-semibold text-[#0d0d0d]/60">Delivered</span>
     </div>
     {/* Color palette row */}
     <motion.div
@@ -577,7 +577,7 @@ const BrandingMock = () => (
       transition={{ delay: 0.25 }}
       className="bg-white rounded-xl p-2.5 shadow-sm border border-[#0d0d0d]/[0.04]"
     >
-      <p className="text-[7px] text-[#0d0d0d]/35 font-semibold mb-2">Color Palette</p>
+      <p className="text-[7px] text-[#0d0d0d]/60 font-semibold mb-2">Color Palette</p>
       <div className="flex gap-1.5">
         {["#0d0d0d", "#60516f", "#2c5270", "#E1306C", "#f5f5f5"].map((c, i) => (
           <div key={i} className="flex-1 h-6 rounded-md shadow-inner" style={{ background: c, border: c === '#f5f5f5' ? '1px solid #e0e0e0' : 'none' }} />
@@ -592,9 +592,9 @@ const BrandingMock = () => (
       transition={{ delay: 0.37 }}
       className="bg-white rounded-xl p-2.5 shadow-sm border border-[#0d0d0d]/[0.04]"
     >
-      <p className="text-[7px] text-[#0d0d0d]/35 font-semibold mb-1.5">Typography</p>
+      <p className="text-[7px] text-[#0d0d0d]/60 font-semibold mb-1.5">Typography</p>
       <p className="text-[13px] font-black text-[#0d0d0d] leading-none mb-0.5">Inter Black</p>
-      <p className="text-[8px] text-[#0d0d0d]/50" style={{ fontWeight: 400 }}>Inter Regular for body copy</p>
+      <p className="text-[8px] text-[#0d0d0d]/70" style={{ fontWeight: 400 }}>Inter Regular for body copy</p>
     </motion.div>
     {/* Voice */}
     <motion.div
@@ -604,7 +604,7 @@ const BrandingMock = () => (
       transition={{ delay: 0.49 }}
       className="flex-1 bg-white rounded-xl p-2.5 shadow-sm border border-[#0d0d0d]/[0.04]"
     >
-      <p className="text-[7px] text-[#0d0d0d]/35 font-semibold mb-1.5">Brand Voice</p>
+      <p className="text-[7px] text-[#0d0d0d]/60 font-semibold mb-1.5">Brand Voice</p>
       <div className="flex flex-wrap gap-1">
         {["Bold", "Authentic", "Playful", "Expert", "Approachable"].map((v, i) => (
           <span key={i} className="text-[7px] font-bold bg-[#0d0d0d]/[0.04] text-[#0d0d0d]/60 px-2 py-1 rounded-full">{v}</span>
@@ -644,7 +644,7 @@ const ReputationMock = () => (
       className="bg-white rounded-xl p-3 shadow-sm border border-[#0d0d0d]/[0.04] text-center"
     >
       <p className="text-[28px] font-black text-[#2c5270] leading-none">94%</p>
-      <p className="text-[7.5px] text-[#0d0d0d]/40 font-semibold mt-1">Positive Sentiment Score</p>
+      <p className="text-[7.5px] text-[#0d0d0d]/70 font-semibold mt-1">Positive Sentiment Score</p>
     </motion.div>
     {[
       { label: "Mentions Monitored", val: "2,400/week", icon: "🔍" },
@@ -661,7 +661,7 @@ const ReputationMock = () => (
       >
         <span className="text-[11px]">{s.icon}</span>
         <div className="flex-1">
-          <p className="text-[7px] text-[#0d0d0d]/35 font-medium">{s.label}</p>
+          <p className="text-[7px] text-[#0d0d0d]/60 font-medium">{s.label}</p>
           <p className="text-[9px] font-bold text-[#0d0d0d]">{s.val}</p>
         </div>
       </motion.div>
@@ -674,7 +674,7 @@ const ThoughtMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Content We Ghostwrote</span>
-      <span className="text-[7px] font-semibold text-[#0d0d0d]/30">For leadership team</span>
+      <span className="text-[7px] font-semibold text-[#0d0d0d]/60">For leadership team</span>
     </div>
     {[
       { title: "Why AI Won't Replace Marketers", platform: "LinkedIn", impressions: "48K", engagement: "12%" },
@@ -689,14 +689,14 @@ const ThoughtMock = () => (
         className="bg-white rounded-xl p-3 shadow-sm border border-[#0d0d0d]/[0.04]"
       >
         <p className="text-[8.5px] font-bold text-[#0d0d0d] mb-1">{p.title}</p>
-        <p className="text-[7px] text-[#0d0d0d]/35 font-medium mb-2">Published on {p.platform}</p>
+        <p className="text-[7px] text-[#0d0d0d]/60 font-medium mb-2">Published on {p.platform}</p>
         <div className="flex gap-3">
           <div>
-            <p className="text-[6.5px] text-[#0d0d0d]/30">Impressions</p>
+            <p className="text-[6.5px] text-[#0d0d0d]/60">Impressions</p>
             <p className="text-[9px] font-black text-[#0d0d0d]">{p.impressions}</p>
           </div>
           <div>
-            <p className="text-[6.5px] text-[#0d0d0d]/30">Engagement</p>
+            <p className="text-[6.5px] text-[#0d0d0d]/60">Engagement</p>
             <p className="text-[9px] font-black text-[#2c5270]">{p.engagement}</p>
           </div>
         </div>
@@ -713,7 +713,7 @@ const ThoughtMock = () => (
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="#0A66C2" strokeWidth="2"/></svg>
       </div>
       <div>
-        <p className="text-[7px] text-[#0d0d0d]/40 font-semibold">Articles Published</p>
+        <p className="text-[7px] text-[#0d0d0d]/70 font-semibold">Articles Published</p>
         <p className="text-[10px] font-black text-[#0d0d0d]">64 posts <span className="text-[7px] font-bold text-[#0A66C2]">for 12 executives</span></p>
       </div>
     </motion.div>
@@ -725,7 +725,7 @@ const WhitelabelMock = () => (
   <div className="w-full h-full flex flex-col gap-2.5">
     <div className="flex items-center justify-between px-0.5">
       <span className="text-[9px] font-bold text-[#0d0d0d]/60">Your Brand, Our Work</span>
-      <span className="text-[7px] font-semibold text-[#0d0d0d]/30">White-label</span>
+      <span className="text-[7px] font-semibold text-[#0d0d0d]/60">White-label</span>
     </div>
     {[
       { agency: "Agency Alpha", clients: "12 brands", deliverables: "Content + Ads", color: "#60516f" },
@@ -745,7 +745,7 @@ const WhitelabelMock = () => (
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-[8.5px] font-bold text-[#0d0d0d] truncate">{a.agency}</p>
-          <p className="text-[7px] text-[#0d0d0d]/35 font-medium">{a.clients} · {a.deliverables}</p>
+          <p className="text-[7px] text-[#0d0d0d]/60 font-medium">{a.clients} · {a.deliverables}</p>
         </div>
       </motion.div>
     ))}
@@ -845,7 +845,7 @@ export function Services() {
                   className={`flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300 ${
                     activeCategory === cat
                       ? "bg-[#0d0d0d] text-white shadow-md"
-                      : "text-[#0d0d0d]/50 hover:text-[#0d0d0d]/80 hover:bg-[#0d0d0d]/[0.03]"
+                      : "text-[#0d0d0d]/70 hover:text-[#0d0d0d]/80 hover:bg-[#0d0d0d]/[0.03]"
                   }`}
                 >
                   <span className="md:hidden">{CATEGORY_ICONS[cat]}</span>
@@ -876,11 +876,11 @@ export function Services() {
               >
                 {/* Text area */}
                 <div className="p-7 pb-5">
-                  <span className="text-[#0d0d0d]/10 text-5xl font-black leading-none select-none">{card.num}</span>
+                  <span className="text-[#0d0d0d]/70 text-5xl font-black leading-none select-none">{card.num}</span>
                   <h3 className="text-xl font-black text-[#0d0d0d] tracking-tight leading-tight mt-2 whitespace-pre-line">
                     {card.title}
                   </h3>
-                  <p className="text-[#0d0d0d]/45 text-[13px] font-medium leading-relaxed mt-3 max-w-[260px]">
+                  <p className="text-[#0d0d0d]/70 text-[13px] font-medium leading-relaxed mt-3 max-w-[260px]">
                     {card.description}
                   </p>
                 </div>
