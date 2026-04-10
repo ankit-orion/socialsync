@@ -1,119 +1,11 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+const fs = require('fs');
 
-const brands = [
-  { name: "Precision" },
-  { name: "ArsenalBio" },
-  { name: "Stretch" },
-  { name: "Stryder" },
-  { name: "Helix" },
-];
+const file = 'src/components/sections/Hero.tsx';
+let content = fs.readFileSync(file, 'utf8');
 
-/* ── SVG platform icons (floating) ── */
-const InstagramIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    <rect width="24" height="24" rx="6" fill="url(#ig)" />
-    <circle cx="12" cy="12" r="4.2" stroke="white" strokeWidth="1.8" fill="none" />
-    <circle cx="17.2" cy="6.8" r="1.1" fill="white" />
-    <defs>
-      <radialGradient id="ig" cx="30%" cy="107%" r="150%">
-        <stop offset="0%" stopColor="#fdf497" />
-        <stop offset="45%" stopColor="#fd5949" />
-        <stop offset="70%" stopColor="#d6249f" />
-        <stop offset="100%" stopColor="#285AEB" />
-      </radialGradient>
-    </defs>
-  </svg>
-);
-const TwitterIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    <rect width="24" height="24" rx="6" fill="#000" />
-    <path d="M6 6h4l2.5 3.5L15.5 6H18l-4 5.5L18 18h-4l-2.5-3.8L8.5 18H6l4.2-5.8z" fill="white" />
-  </svg>
-);
-const LinkedInIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    <rect width="24" height="24" rx="6" fill="#0A66C2" />
-    <rect x="5" y="9" width="3" height="10" fill="white" />
-    <circle cx="6.5" cy="6.5" r="1.8" fill="white" />
-    <path d="M11 9h3v1.4c.6-1 1.8-1.6 3-1.4 2.2.1 3 1.5 3 3.8V19h-3v-5.5c0-1.2-.4-2-1.5-2s-1.5.9-1.5 2V19h-3z" fill="white" />
-  </svg>
-);
-const TikTokIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    <rect width="24" height="24" rx="6" fill="#010101" />
-    <path d="M14 4h2.5c.3 2 1.8 3.3 3.5 3.5v2.5c-1.2-.1-2.3-.5-3.2-1.2V14a5 5 0 1 1-5-5c.2 0 .4 0 .7.1v2.6c-.2-.1-.4-.1-.7-.1a2.5 2.5 0 1 0 2.2 2.4z" fill="white" />
-  </svg>
-);
-const YouTubeIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    <rect width="24" height="24" rx="6" fill="#FF0000" />
-    <polygon points="10,8.5 10,15.5 16,12" fill="white" />
-  </svg>
-);
-const RedditIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    <rect width="24" height="24" rx="6" fill="#FF4500" />
-    <circle cx="12" cy="13" r="5" fill="white" />
-    <circle cx="9.5" cy="13" r="1" fill="#FF4500" />
-    <circle cx="14.5" cy="13" r="1" fill="#FF4500" />
-    <path d="M9.5 15.5c.7.6 1.5.9 2.5.9s1.8-.3 2.5-.9" stroke="#FF4500" strokeWidth="0.8" fill="none" strokeLinecap="round"/>
-    <circle cx="18" cy="8" r="2" fill="white" />
-    <line x1="13" y1="8" x2="17" y2="8" stroke="white" strokeWidth="1.2"/>
-  </svg>
-);
-const WhatsAppIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    <rect width="24" height="24" rx="6" fill="#25D366" />
-    <path d="M12 4a8 8 0 0 0-6.9 12l-1.1 3.2 3.3-1.1A8 8 0 1 0 12 4z" fill="white"/>
-    <path d="M9 10.5c0-.3.2-.5.5-.5h.5c.3 0 .5.2.6.5l.4 1c.1.2 0 .5-.2.7l-.3.3c.4.8 1 1.4 1.8 1.8l.3-.3c.2-.2.5-.3.7-.2l1 .4c.3.1.5.3.5.6v.5c0 .3-.2.5-.5.5C10.5 15.8 9 13 9 10.5z" fill="#25D366"/>
-  </svg>
-);
+const regex = /\/\*\s*──\s*Instagram screen\s*──\s*\*\/[\s\S]*?(?=const SCREENS = \[InstagramScreen)/;
 
-const floatingIcons: { Icon: () => JSX.Element; size: number; top?: string; left?: string; right?: string; bottom?: string; delay: number; duration: number }[] = [
-  { Icon: InstagramIcon, size: 50, top: '8%',  left: '8%',  delay: 0,    duration: 3.5 },
-  { Icon: TikTokIcon,   size: 42, top: '30%', left: '1%',  delay: 0.6,  duration: 4 },
-  { Icon: YouTubeIcon,  size: 46, top: '60%', left: '5%',  delay: 1.2,  duration: 3.8 },
-  { Icon: TwitterIcon,  size: 42, top: '78%', left: '20%', delay: 0.3,  duration: 3.2 },
-  { Icon: LinkedInIcon, size: 44, top: '5%',  left: '72%', delay: 0.9,  duration: 4.2 },
-  { Icon: RedditIcon,   size: 40, top: '22%', left: '88%', delay: 0.4,  duration: 3.6 },
-  { Icon: WhatsAppIcon, size: 42, top: '72%', left: '82%', delay: 1.5,  duration: 3.9 },
-];
-
-const statCards: { label: string; value: string; delta: string; color: string; top?: string; right?: string; left?: string; bottom?: string }[] = [
-  { label: 'Total Followers',  value: '2.4M',  delta: '+18%',  color: '#c8f03c', top: '12%', right: '2%' },
-  { label: 'Avg. Engagement',  value: '8.7%',  delta: '+3.2%', color: '#7c3aed', top: '50%', left:  '0%' },
-  { label: 'Monthly Reach',    value: '12.1M', delta: '+24%',  color: '#c8f03c', bottom:'6%', right: '4%' },
-];
-
-/* ── Shared status bar ── */
-const StatusBar = () => (
-  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'28px 18px 4px' }}>
-    <span style={{ color:'#fff', fontWeight:700, fontSize:9.5, fontFamily:'system-ui,-apple-system,sans-serif', letterSpacing:'-0.02em' }}>9:41</span>
-    <div style={{ display:'flex', alignItems:'center', gap:4 }}>
-      <svg width="13" height="9" viewBox="0 0 13 9" fill="none">
-        <rect x="0" y="5" width="2.5" height="4" rx="0.5" fill="white"/>
-        <rect x="3.5" y="3" width="2.5" height="6" rx="0.5" fill="white"/>
-        <rect x="7" y="1" width="2.5" height="8" rx="0.5" fill="white"/>
-        <rect x="10.5" y="0" width="2.5" height="9" rx="0.5" fill="white" opacity="0.3"/>
-      </svg>
-      <svg width="12" height="9" viewBox="0 0 12 9" fill="white">
-        <path d="M6 7.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-        <path d="M2.5 4.8a5 5 0 0 1 7 0" stroke="white" strokeWidth="1.1" fill="none" strokeLinecap="round"/>
-        <path d="M0.5 2.8a8 8 0 0 1 11 0" stroke="white" strokeWidth="1.1" fill="none" strokeLinecap="round" opacity="0.5"/>
-      </svg>
-      <svg width="18" height="9" viewBox="0 0 18 9" fill="none">
-        <rect x="0" y="1" width="15" height="7" rx="2" stroke="white" strokeWidth="1" opacity="0.6"/>
-        <rect x="1.5" y="2.5" width="10" height="4" rx="1" fill="white"/>
-        <path d="M16 3.5v2" stroke="white" strokeWidth="1.2" strokeLinecap="round" opacity="0.5"/>
-      </svg>
-    </div>
-  </div>
-);
-
-/* ── Instagram screen ── */
+const newCode = `/* ── Instagram screen ── */
 const InstagramScreen = () => (
   <div style={{ background:'#000000', fontFamily:'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
     <StatusBar />
@@ -129,7 +21,7 @@ const InstagramScreen = () => (
       {[{n:'Your Story',g:'rgba(255,255,255,0.12)',add:true},{n:'alex.kim',g:'linear-gradient(135deg,#f09433,#dc2743,#bc1888)'},{n:'mia.ux',g:'linear-gradient(135deg,#405de6,#833ab4)'},{n:'dev.raj',g:'linear-gradient(135deg,#c8f03c,#00b09b)'},{n:'sara_m',g:'linear-gradient(135deg,#f09433,#dc2743)'}].map((s,i)=>(
         <div key={i} style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:3, flexShrink:0 }}>
           <div style={{ width:38, height:38, borderRadius:'50%', padding:1.5, background:s.g }}>
-            <div style={{ width:'100%', height:'100%', borderRadius:'50%', background:i===0?'#000000':`hsl(${i*55},35%,20%)`, border:s.add?'none':'1.5px solid #000000', display:'flex', alignItems:'center', justifyContent:'center' }}>
+            <div style={{ width:'100%', height:'100%', borderRadius:'50%', background:i===0?'#000000':\`hsl(\${i*55},35%,20%)\`, border:s.add?'none':'1.5px solid #000000', display:'flex', alignItems:'center', justifyContent:'center' }}>
               {s.add ? <span style={{ color:'#0095f6', fontSize:14, fontWeight:400 }}>+</span> : <span style={{ color:'rgba(255,255,255,0.75)', fontSize:9, fontWeight:600 }}>{s.n[0].toUpperCase()}</span>}
             </div>
           </div>
@@ -231,7 +123,7 @@ const LinkedInScreen = () => (
         </div>
       </div>
       <p style={{ color:'white', fontSize:8.5, lineHeight:1.6, marginBottom:8 }}>
-        Excited to share our client <span style={{ color:'#70b5f9' }}>@TechBrand</span> just hit 100K followers in 30 days! 🎉<br/>Here's the 3-step content strategy we used...
+        Excited to share our client <span style={{ color:'#70b5f9' }}>@TechBrand</span> just hit 100K followers in 30 days! 🎉\\nHere's the 3-step content strategy we used...
         <span style={{ color:'rgba(255,255,255,0.6)' }}> …see more</span>
       </p>
       {/* Attachment */}
@@ -395,7 +287,7 @@ const TwitterScreen = () => (
             <span style={{ color:'rgba(255,255,255,0.5)', fontSize:8 }}>@SquareSocialHQ · 2h</span>
           </div>
           <p style={{ color:'white', fontSize:9, lineHeight:1.4, marginBottom:8, fontWeight:400 }}>
-            Just hit <span style={{ color:'#1d9bf0' }}>1M impressions</span> this week for a client 🚀<br/>
+            Just hit <span style={{ color:'#1d9bf0' }}>1M impressions</span> this week for a client 🚀\\n
             Thread on what's working in social media right now 👇
           </p>
           {/* Media card */}
@@ -493,218 +385,9 @@ const WhatsAppScreen = () => (
       ))}
     </div>
   </div>
-);
+)
+`;
 
-const SCREENS = [InstagramScreen, LinkedInScreen, RedditScreen, TwitterScreen, WhatsAppScreen];
-const PLATFORM_COLORS = ['#E1306C','#0A66C2','#FF4500','#000000','#25D366'];
-const PLATFORM_LABELS = ['Instagram','LinkedIn','Reddit','Twitter / X','WhatsApp'];
-
-/* ── Hero ── */
-export function Hero() {
-  const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % SCREENS.length), 4000);
-    return () => clearInterval(t);
-  }, []);
-
-  const Screen = SCREENS[idx];
-
-  return (
-    <section className="min-h-screen bg-[#e8e8e8] pt-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 md:px-8 pt-16 md:pt-24 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-4 items-center">
-
-          {/* ── Left: text ── */}
-          <div className="space-y-8">
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-              className="text-5xl md:text-6xl xl:text-7xl font-black text-[#0d0d0d] leading-[1.02] tracking-tight"
-            >
-              A Modern Social
-              <br />Agency For A
-              <br />Modern Brand.
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              className="text-[#0d0d0d]/55 text-base leading-relaxed font-medium max-w-sm"
-            >
-              We embrace the era of data-driven content, enabling swift and
-              effortless growth. No more guessing or struggling with outdated
-              marketing methods.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.2 }}
-              className="flex items-center gap-4"
-            >
-              <Link to="/book">
-                <button className="flex items-center gap-2 h-12 px-7 rounded-full bg-[#0d0d0d] text-white font-bold text-sm hover:bg-[#222] transition-colors">
-                  Get Started <ArrowUpRight className="w-4 h-4" />
-                </button>
-              </Link>
-              <Link to="/work">
-                <button className="flex items-center gap-2 h-12 px-7 rounded-full border border-[#0d0d0d]/20 text-[#0d0d0d] font-bold text-sm hover:border-[#0d0d0d]/40 transition-colors">
-                  See Our Work
-                </button>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="pt-2"
-            >
-              <p className="text-xs text-[#0d0d0d]/35 font-semibold uppercase tracking-widest mb-3">Trusted by brands</p>
-              <div className="flex items-center gap-6 flex-wrap">
-                {brands.map((b) => (
-                  <span key={b.name} className="text-sm font-black text-[#0d0d0d]/25 tracking-tight">{b.name}</span>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* ── Right: illustration ── */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative w-full"
-            style={{ height: 600 }}
-          >
-            {/* Glow */}
-            <div className="absolute rounded-full pointer-events-none" style={{ top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:320, height:320, background:'radial-gradient(circle, rgba(200,240,60,0.15) 0%, transparent 70%)' }} />
-
-            {/* Floating platform icons */}
-            {floatingIcons.map(({ Icon, size, top, left, right, bottom, delay, duration }, i) => (
-              <motion.div
-                key={i}
-                className="absolute"
-                style={{ top, left, right, bottom, width: size, height: size }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1, y: [0, -10, 0] }}
-                transition={{
-                  opacity: { duration: 0.4, delay: delay + 0.3 },
-                  scale:   { duration: 0.4, delay: delay + 0.3 },
-                  y: { duration, repeat: Infinity, ease: 'easeInOut', delay },
-                }}
-              >
-                <motion.div className="absolute inset-0 rounded-xl" animate={{ scale:[1,1.35,1], opacity:[0.3,0,0.3] }} transition={{ duration: duration+0.5, repeat:Infinity, delay }} style={{ background:'rgba(124,58,237,0.2)' }} />
-                <Icon />
-              </motion.div>
-            ))}
-
-            {/* Phone */}
-            <motion.div
-              className="absolute"
-              style={{ top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:248, zIndex:20 }}
-              initial={{ opacity:0, y:24 }}
-              animate={{ opacity:1, y:0 }}
-              transition={{ duration:0.7, delay:0.5 }}
-            >
-              {/* Buttons */}
-              <div style={{ position:'absolute', left:-4, top:68,  width:3, height:14, background:'#2a2a2a', borderRadius:'2px 0 0 2px' }} />
-              <div style={{ position:'absolute', left:-4, top:90,  width:3, height:26, background:'#2a2a2a', borderRadius:'2px 0 0 2px' }} />
-              <div style={{ position:'absolute', left:-4, top:124, width:3, height:26, background:'#2a2a2a', borderRadius:'2px 0 0 2px' }} />
-              <div style={{ position:'absolute', right:-4,top:100, width:3, height:38, background:'#2a2a2a', borderRadius:'0 2px 2px 0' }} />
-
-              {/* Frame */}
-              <div style={{ borderRadius:42, background:'linear-gradient(160deg,#3a3a3a 0%,#1c1c1e 40%,#111 100%)', padding:3, boxShadow:'0 0 0 0.5px rgba(255,255,255,0.12), 0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1)' }}>
-                <div style={{ borderRadius:40, background:'#000', overflow:'hidden', position:'relative' }}>
-
-                  {/* Dynamic Island */}
-                  <div style={{ position:'absolute', top:10, left:'50%', transform:'translateX(-50%)', width:76, height:11, background:'#000', borderRadius:20, zIndex:10, boxShadow:'0 0 0 1px rgba(255,255,255,0.06)' }} />
-
-                  {/* Platform label pill */}
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity:0, y:-6 }}
-                      animate={{ opacity:1, y:0 }}
-                      exit={{ opacity:0, y:6 }}
-                      transition={{ duration:0.25 }}
-                      style={{ position:'absolute', top:56, left:'50%', transform:'translateX(-50%)', zIndex:15, background:PLATFORM_COLORS[idx], borderRadius:20, padding:'2px 10px', whiteSpace:'nowrap' }}
-                    >
-                      <span style={{ color:'white', fontSize:7.5, fontWeight:800 }}>{PLATFORM_LABELS[idx]}</span>
-                    </motion.div>
-                  </AnimatePresence>
-
-                  {/* Screen content — fixed height so phone never resizes */}
-                  <div style={{ height: 468, overflow: 'hidden' }}>
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity:0, x:30 }}
-                        animate={{ opacity:1, x:0 }}
-                        exit={{ opacity:0, x:-30 }}
-                        transition={{ duration:0.35, ease:'easeInOut' }}
-                      >
-                        <Screen />
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Platform dots */}
-              <div style={{ display:'flex', justifyContent:'center', gap:5, marginTop:10 }}>
-                {SCREENS.map((_,i)=>(
-                  <button key={i} onClick={()=>setIdx(i)} style={{ width:i===idx?16:5, height:5, borderRadius:5, background:i===idx?PLATFORM_COLORS[idx]:'rgba(13,13,13,0.2)', border:'none', cursor:'pointer', transition:'all 0.3s ease', padding:0 }} />
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Floating stat cards */}
-            {statCards.map(({ label, value, delta, color, top, right, left, bottom }, i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-2xl shadow-lg"
-                style={{ top, right, left, bottom, background:'white', padding:'10px 14px', minWidth:120, zIndex:25, border:'1px solid rgba(0,0,0,0.06)' }}
-                initial={{ opacity:0, scale:0.8 }}
-                animate={{ opacity:1, scale:1, y:[0,-6,0] }}
-                transition={{
-                  opacity: { duration:0.4, delay:0.8+i*0.15 },
-                  scale:   { duration:0.4, delay:0.8+i*0.15 },
-                  y: { duration:3.5+i*0.4, repeat:Infinity, ease:'easeInOut', delay:i*0.5 },
-                }}
-              >
-                <p style={{ fontSize:9, color:'rgba(13,13,13,0.4)', fontWeight:700, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:3 }}>{label}</p>
-                <div className="flex items-end gap-2">
-                  <span style={{ fontSize:20, fontWeight:900, color:'#0d0d0d', lineHeight:1 }}>{value}</span>
-                  <span style={{ fontSize:9, fontWeight:800, color, marginBottom:1, background:`${color}22`, borderRadius:6, padding:'1px 5px' }}>{delta}</span>
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Notification pop-up */}
-            <motion.div
-              className="absolute rounded-2xl shadow-lg"
-              style={{ bottom:'20%', left:'10%', background:'white', padding:'8px 12px', zIndex:25, border:'1px solid rgba(0,0,0,0.06)', display:'flex', alignItems:'center', gap:8 }}
-              initial={{ opacity:0, x:-20 }}
-              animate={{ opacity:[0,1,1,0], x:[-20,0,0,-20] }}
-              transition={{ duration:4, repeat:Infinity, repeatDelay:4, delay:2.5, ease:'easeInOut' }}
-            >
-              <div style={{ width:26, height:26, borderRadius:'50%', background:'linear-gradient(135deg,#fd5949,#d6249f)', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }}>
-                <span style={{ fontSize:12 }}>♥</span>
-              </div>
-              <div>
-                <p style={{ fontSize:8.5, fontWeight:800, color:'#0d0d0d' }}>New milestone!</p>
-                <p style={{ fontSize:7.5, color:'rgba(13,13,13,0.45)', fontWeight:600 }}>1K new followers today</p>
-              </div>
-            </motion.div>
-
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
+content = content.replace(regex, newCode);
+fs.writeFileSync(file, content);
+console.log('Replaced successfully!');
