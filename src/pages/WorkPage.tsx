@@ -300,28 +300,7 @@ const CASE_STUDIES: CaseStudy[] = [
   },
 ];
 
-/* ── Lightbox slide ── */
-function LightboxSlide({ slide }: { slide: CaseStudy["slides"][0] }) {
-  return (
-    <div className="relative w-full h-full overflow-hidden" style={{ background: slide.bg }}>
-      <div
-        className="absolute inset-0"
-        style={{ background: `radial-gradient(ellipse at 30% 80%, ${slide.accent}15 0%, transparent 70%)` }}
-      />
-      <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: slide.accent }} />
-      <div className="relative z-10 h-full flex flex-col justify-between p-7">
-        <span className="text-[10px] font-black tracking-[0.2em] uppercase" style={{ color: slide.accent }}>
-          Case Study
-        </span>
-        <div className="space-y-3">
-          <h3 className="text-3xl font-black leading-tight text-white whitespace-pre-line">{slide.headline}</h3>
-          <p className="text-[14px] text-white/60 font-medium leading-relaxed max-w-[280px]">{slide.body}</p>
-        </div>
-        <div />
-      </div>
-    </div>
-  );
-}
+
 
 /* ════════════════════════════════════════
    WORK PAGE
@@ -463,7 +442,7 @@ export function WorkPage() {
                     </div>
 
                     {/* Middle: Big Metric */}
-                    <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                    <div className="mt-auto transition-transform duration-500">
                       <h3 
                         className="text-5xl md:text-7xl font-black tracking-tighter mb-2" 
                         style={{ color: study.accent }}
@@ -474,8 +453,8 @@ export function WorkPage() {
                         {study.results[0].label}
                       </p>
 
-                      {/* Bottom Description & Tags - revealed on hover */}
-                      <div className="mt-8 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                      {/* Bottom Description & Tags - Always visible */}
+                      <div className="mt-6 md:mt-8 transition-all duration-500">
                         <p className="text-white/60 text-sm md:text-base font-medium leading-relaxed max-w-2xl mb-6 line-clamp-2">
                           {study.description}
                         </p>
@@ -523,77 +502,121 @@ export function WorkPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4"
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-8"
             onClick={closeLightbox}
           >
             <motion.div
-              initial={{ scale: 0.88, y: 40 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.88, y: 40 }}
-              transition={{ type: "spring", damping: 28, stiffness: 380 }}
-              className="relative w-full max-w-sm pointer-events-auto"
+              initial={{ scale: 0.95, y: 30, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 30, opacity: 0 }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="relative w-full max-w-6xl mx-auto h-[85vh] pointer-events-auto bg-[#0a0a0a] rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_100px_-20px_rgba(0,0,0,1)] flex flex-col md:flex-row"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="rounded-[2.5rem] overflow-hidden border-[10px] border-zinc-800 shadow-2xl bg-zinc-800">
-                <div className="bg-zinc-800 flex justify-center py-2">
-                  <div className="w-20 h-1.5 bg-zinc-600 rounded-full" />
+              {/* --- Left Sidebar Info Panel --- */}
+              <div className="w-full md:w-[35%] h-[40%] md:h-full bg-[#121212] p-8 md:p-12 flex flex-col border-b md:border-b-0 md:border-r border-white/5 overflow-y-auto scrollbar-none relative z-10">
+                <div className="flex-1">
+                  <div className="flex items-center gap-4 mb-8">
+                     <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex flex-shrink-0 items-center justify-center">
+                        <img src={active.logo} alt={active.client} className="w-7 h-7 object-contain" />
+                     </div>
+                     <div>
+                        <h2 className="text-2xl font-black text-white leading-tight">{active.client}</h2>
+                        <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">{active.industry}</span>
+                     </div>
+                  </div>
+                  
+                  <p className="text-white/60 text-sm font-medium leading-relaxed mb-10">
+                    {active.description}
+                  </p>
+                  
+                  {/* Vertical Results Grid */}
+                  <div className="space-y-6 mb-10">
+                    {active.results.map((r, idx) => (
+                       <div key={idx} className="border-l-[3px] pl-5" style={{ borderColor: active.accent }}>
+                          <div className="text-3xl font-black text-white tracking-tighter mb-1">{r.value}</div>
+                          <div className="text-[10px] font-bold text-white/50 uppercase tracking-widest">{r.label}</div>
+                       </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="relative bg-black" style={{ aspectRatio: "4/5" }}>
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={slideIndex}
-                      initial={{ opacity: 0, x: 24 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -24 }}
-                      transition={{ duration: 0.22 }}
-                      className="absolute inset-0"
-                    >
-                      <LightboxSlide slide={active.slides[slideIndex]} />
-                    </motion.div>
-                  </AnimatePresence>
-                  <button className="absolute left-0 inset-y-0 w-1/3 z-20" onClick={lbPrev} />
-                  <button className="absolute right-0 inset-y-0 w-1/3 z-20" onClick={lbNext} />
-                </div>
-                <div className="bg-zinc-900 px-5 py-3 flex items-center justify-between">
-                  <div className="flex gap-1.5">
+
+                {/* Bottom Testimonial */}
+                {active.testimonial && (
+                  <div className="mt-8 bg-white/5 p-5 rounded-2xl border border-white/5 relative">
+                     <div className="absolute -top-3 -left-2 text-4xl text-white/10 font-serif">"</div>
+                     <p className="text-sm font-medium text-white/80 italic mb-4 relative z-10">
+                       {active.testimonial.quote}
+                     </p>
+                     <div className="text-xs font-bold text-white">{active.testimonial.name}</div>
+                     <div className="text-[10px] uppercase tracking-wider text-white/40">{active.testimonial.role}</div>
+                  </div>
+                )}
+              </div>
+
+              {/* --- Right Cinematic Slide Presentation --- */}
+              <div className="relative w-full md:w-[65%] h-[60%] md:h-full bg-black overflow-hidden flex flex-col object-cover">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={slideIndex}
+                    initial={{ opacity: 0, filter: "blur(10px)" }}
+                    animate={{ opacity: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, filter: "blur(10px)" }}
+                    transition={{ duration: 0.4 }}
+                    className="absolute inset-0"
+                  >
+                    <div className="w-full h-full p-8 md:p-20 flex flex-col justify-center relative" style={{ backgroundColor: active.slides[slideIndex].bg }}>
+                        <div className="absolute inset-0 opacity-30" style={{ background: `radial-gradient(circle at 80% 20%, ${active.slides[slideIndex].accent} 0%, transparent 70%)` }} />
+                        <div className="relative z-10 max-w-2xl">
+                           <span className="inline-block px-3 py-1 mb-6 rounded-full text-[10px] font-black tracking-[0.2em] uppercase border border-white/20 text-white/80" style={{ backgroundColor: active.slides[slideIndex].accent + '40' }}>
+                             {slideIndex === 0 ? "The Challenge" : slideIndex === active.slides.length - 1 ? "The Results" : "The Strategy"}
+                           </span>
+                           <h3 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-[1.05] tracking-tight whitespace-pre-line drop-shadow-lg">
+                             {active.slides[slideIndex].headline}
+                           </h3>
+                           <p className="text-lg md:text-2xl text-white/80 font-medium leading-relaxed max-w-xl">
+                             {active.slides[slideIndex].body}
+                           </p>
+                        </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Left/Right Click Zones */}
+                <button className="absolute left-0 inset-y-0 w-[40%] z-20 cursor-w-resize" onClick={lbPrev} />
+                <button className="absolute right-0 inset-y-0 w-[60%] z-20 cursor-e-resize" onClick={lbNext} />
+
+                {/* Navigation Overlays */}
+                <div className="absolute bottom-6 md:bottom-12 left-8 md:left-12 right-8 md:right-12 z-30 flex items-center justify-between">
+                  {/* Nav Dots */}
+                  <div className="flex gap-2 md:gap-3 bg-black/20 backdrop-blur-md px-5 py-3 rounded-full border border-white/10">
                     {active.slides.map((_, i) => (
                       <button
                         key={i}
-                        onClick={() => setSlideIndex(i)}
-                        className="rounded-full transition-all duration-200"
+                        onClick={(e) => { e.stopPropagation(); setSlideIndex(i); }}
+                        className="rounded-full transition-all duration-500 hover:scale-150"
                         style={{
-                          width: i === slideIndex ? 16 : 6,
-                          height: 6,
-                          background: i === slideIndex ? active.accent : "#ffffff30",
+                          width: i === slideIndex ? 36 : 8,
+                          height: 8,
+                          background: i === slideIndex ? active.accent : "rgba(255,255,255,0.4)",
                         }}
                       />
                     ))}
                   </div>
-                  <div className="flex gap-1">
-                    <button onClick={lbPrev} className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-                      <ChevronLeft className="w-4 h-4 text-white" />
-                    </button>
-                    <button onClick={lbNext} className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-                      <ChevronRight className="w-4 h-4 text-white" />
-                    </button>
+
+                  <div className="flex items-center gap-3 pointer-events-none">
+                    <span className="text-[11px] font-black text-white bg-black/40 backdrop-blur-md px-5 py-3 rounded-full border border-white/10 tracking-widest uppercase">
+                       {slideIndex + 1} / {active.slides.length}
+                    </span>
                   </div>
                 </div>
-                <div className="bg-zinc-800 flex justify-center py-2">
-                  <div className="w-24 h-1 bg-zinc-600 rounded-full" />
-                </div>
-              </div>
-              <div className="mt-4 flex items-center justify-between px-1">
-                <div>
-                  <p className="text-white font-black text-base">{active.client}</p>
-                  <p className="text-white/40 text-xs font-medium">
-                    {slideIndex + 1} / {active.slides.length}
-                  </p>
-                </div>
+
+                {/* Close Button Top Right */}
                 <button
-                  onClick={closeLightbox}
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                   onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+                   className="absolute top-6 md:top-8 right-6 md:right-8 z-50 w-12 h-12 rounded-full bg-black/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"
                 >
-                  <X className="w-4 h-4 text-white" />
+                   <X className="w-5 h-5" />
                 </button>
               </div>
             </motion.div>
