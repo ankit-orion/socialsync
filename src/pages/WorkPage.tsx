@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronLeft, ChevronRight, X, LayoutGrid, ShoppingBag, Briefcase, GraduationCap, Sparkles } from "lucide-react";
+import { ArrowUpRight, X, LayoutGrid, ShoppingBag, Briefcase, GraduationCap, Sparkles } from "lucide-react";
 
 const FILTER_ICONS: Record<string, React.ReactNode> = {
   "All":         <LayoutGrid className="w-4 h-4" />,
