@@ -2696,12 +2696,12 @@ export function Hero() {
               className="flex flex-row items-center gap-3"
             >
               <Link to="/book">
-                <button className="flex items-center gap-2 h-12 px-7 rounded-full bg-[#0d0d0d] text-white font-bold text-sm hover:bg-[#222] transition-colors">
+                <button className="flex items-center gap-2 h-12 px-7 rounded-full bg-[#0d0d0d] text-white font-bold text-sm hover:bg-[#222] dark:bg-white dark:text-[#0d0d0d] dark:hover:bg-white/90 transition-colors">
                   Get Started <ArrowUpRight className="w-4 h-4" />
                 </button>
               </Link>
               <Link to="/work">
-                <button className="flex items-center gap-2 h-12 px-7 rounded-full border border-[#0d0d0d]/20 text-[#0d0d0d] font-bold text-sm hover:border-[#0d0d0d]/40 transition-colors">
+                <button className="flex items-center gap-2 h-12 px-7 rounded-full border border-[#0d0d0d]/20 text-[#0d0d0d] font-bold text-sm hover:border-[#0d0d0d]/40 dark:border-white/20 dark:text-white dark:hover:border-white/40 dark:hover:bg-white/5 transition-colors">
                   See Our Work
                 </button>
               </Link>

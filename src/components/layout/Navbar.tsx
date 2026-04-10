@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -62,8 +63,8 @@ export function Navbar() {
             h-14 px-2.5 rounded-full
             border transition-all duration-500
             ${scrolled
-              ? "bg-white/80 backdrop-blur-xl border-[#0d0d0d]/[0.06] shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]"
-              : "bg-white/60 backdrop-blur-lg border-[#0d0d0d]/[0.04] shadow-sm"
+              ? "bg-white/80 dark:bg-[#1d2030]/80 backdrop-blur-xl border-[#0d0d0d]/[0.06] dark:border-white/[0.06] shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)]"
+              : "bg-white/60 dark:bg-[#1d2030]/60 backdrop-blur-lg border-[#0d0d0d]/[0.04] dark:border-white/[0.04] shadow-sm"
             }
           `}
         >
@@ -113,17 +114,19 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Right side — CTA + mobile toggle */}
+          {/* Right side — CTA + theme toggle + mobile toggle */}
           <div className="flex items-center gap-2 pr-1">
             <Link to="/book" className="hidden md:block">
-              <button className="h-9 px-5 rounded-full bg-[#0d0d0d] text-white text-[12px] font-bold flex items-center gap-1.5 hover:bg-[#222] transition-colors">
+              <button className="h-9 px-5 rounded-full bg-[#0d0d0d] dark:bg-[#2c5270] text-white text-[12px] font-bold flex items-center gap-1.5 hover:bg-[#222] dark:hover:bg-[#1e3d54] transition-colors">
                 Get Started
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </button>
             </Link>
 
+            <ModeToggle />
+
             <button
-              className="md:hidden w-9 h-9 rounded-full bg-[#0d0d0d]/[0.05] flex items-center justify-center text-[#0d0d0d] hover:bg-[#0d0d0d]/[0.1] transition-colors"
+              className="md:hidden w-9 h-9 rounded-full bg-[#0d0d0d]/[0.05] dark:bg-white/[0.06] flex items-center justify-center text-[#0d0d0d] dark:text-[#e2e4eb] hover:bg-[#0d0d0d]/[0.1] dark:hover:bg-white/10 transition-colors"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -140,7 +143,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-[#e8e8e8]/95 backdrop-blur-2xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-40 bg-[#e8e8e8]/95 dark:bg-[#12141a]/95 backdrop-blur-2xl flex flex-col items-center justify-center"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}

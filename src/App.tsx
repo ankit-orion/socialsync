@@ -25,7 +25,7 @@ function App() {
           className="fixed top-0 left-0 right-0 h-1 bg-[#2c5270] origin-left z-[100]" 
           style={{ scaleX }} 
         />
-        <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/30">
+        <div className="min-h-screen flex flex-col font-sans selection:bg-[#2c5270]/30">
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
