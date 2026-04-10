@@ -18,7 +18,7 @@ function App() {
   });
 
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="light" storageKey="agency-theme-v2">
       <BrowserRouter>
         <ScrollToTop />
         <motion.div 
