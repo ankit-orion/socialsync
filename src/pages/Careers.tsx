@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Sparkles, Zap, Target, Users, X, UploadCloud, CheckCircle2 } from "lucide-react";
-import { Link } from "react-router-dom";
+
 
 const perks = [
   {
