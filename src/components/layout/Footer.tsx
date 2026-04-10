@@ -13,13 +13,6 @@ const socialIcons = [
 ];
 
 // Pixel checkerboard pattern data — pairs of [width, height, color]
-const pixels = [
-  [56,56,"#e8e8e8"],[28,28,"#0d0d0d"],[28,28,"#0d0d0d"],[56,56,"#e8e8e8"],[28,28,"#0d0d0d"],
-  [56,28,"#e8e8e8"],[28,56,"#0d0d0d"],[56,56,"#e8e8e8"],[28,28,"#0d0d0d"],[28,28,"#0d0d0d"],
-  [56,56,"#e8e8e8"],[28,56,"#0d0d0d"],[56,28,"#e8e8e8"],[28,28,"#0d0d0d"],[56,56,"#e8e8e8"],
-  [28,28,"#0d0d0d"],[56,28,"#e8e8e8"],[28,56,"#0d0d0d"],[28,28,"#0d0d0d"],[56,56,"#e8e8e8"],
-  [28,28,"#0d0d0d"],[56,28,"#e8e8e8"],[28,56,"#0d0d0d"],[56,56,"#e8e8e8"],[28,28,"#0d0d0d"],
-];
 
 export function Footer() {
   return (
