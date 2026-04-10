@@ -60,10 +60,10 @@ export function BookCall() {
     const days: Date[] = [];
     let d = new Date();
     while (days.length < 15) {
-      d.setDate(d.getDate() + 1);
       if (d.getDay() !== 0 && d.getDay() !== 6) {
         days.push(new Date(d));
       }
+      d.setDate(d.getDate() + 1);
     }
     return days;
   }, []);
