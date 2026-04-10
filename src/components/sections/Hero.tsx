@@ -4,11 +4,11 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const brands = [
-  { name: "Khan Academy" },
-  { name: "W3Schools" },
-  { name: "Shopify" },
-  { name: "Gymshark" },
-  { name: "Duolingo" },
+  { name: "Khan Academy", logo: "https://www.google.com/s2/favicons?sz=64&domain=khanacademy.org" },
+  { name: "W3Schools", logo: "https://www.google.com/s2/favicons?sz=64&domain=w3schools.com" },
+  { name: "Shopify", logo: "https://www.google.com/s2/favicons?sz=64&domain=shopify.com" },
+  { name: "Gymshark", logo: "https://www.google.com/s2/favicons?sz=64&domain=gymshark.com" },
+  { name: "Duolingo", logo: "https://www.google.com/s2/favicons?sz=64&domain=duolingo.com" },
 ];
 
 /* ── SVG platform icons (floating) ── */
@@ -2719,12 +2719,12 @@ export function Hero() {
               </p>
               <div className="flex items-center gap-6 flex-wrap">
                 {brands.map((b) => (
-                  <span
-                    key={b.name}
-                    className="text-sm font-black text-[#0d0d0d]/70 dark:text-white/40 tracking-tight"
-                  >
-                    {b.name}
-                  </span>
+                  <div key={b.name} className="flex items-center gap-2 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300">
+                    <img src={b.logo} alt={b.name} className="w-5 h-5 object-contain rounded-sm" />
+                    <span className="text-sm font-black text-[#0d0d0d]/90 dark:text-white/70 tracking-tight">
+                      {b.name}
+                    </span>
+                  </div>
                 ))}
               </div>
             </motion.div>
