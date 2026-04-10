@@ -4,11 +4,11 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const brands = [
-  { name: "Precision" },
-  { name: "ArsenalBio" },
-  { name: "Stretch" },
-  { name: "Stryder" },
-  { name: "Helix" },
+  { name: "Khan Academy" },
+  { name: "W3Schools" },
+  { name: "Shopify" },
+  { name: "Gymshark" },
+  { name: "Duolingo" },
 ];
 
 /* ── SVG platform icons (floating) ── */
@@ -2604,7 +2604,7 @@ export function Hero() {
   const Screen = SCREENS[idx];
 
   return (
-    <section className="min-h-screen bg-[#e8e8e8] pt-16 overflow-hidden relative">
+    <section className="w-full bg-[#e8e8e8] pt-24 pb-12 overflow-hidden relative">
       {/* ── Background decoration ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Drifting orbs */}

@@ -463,7 +463,7 @@ export function BookCall() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-8 md:gap-14">
-            {["Precision", "ArsenalBio", "Stretch", "Stryder", "Helix"].map((brand) => (
+            {["Khan Academy", "W3Schools", "Shopify", "Gymshark", "Duolingo"].map((brand) => (
               <span key={brand} className="text-lg font-black text-white/15 tracking-tight">
                 {brand}
               </span>
