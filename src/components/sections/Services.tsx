@@ -804,7 +804,7 @@ export function Services() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const handleDragEnd = (e: any, info: any) => {
+  const handleDragEnd = (_: any, info: any) => {
     if (!isMobile) return;
     if (info.offset.x < -80) {
       setCardIndex((prev) => (prev + 1) % cards.length);
