@@ -823,22 +823,25 @@ export function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="flex justify-center mb-12 px-1"
+          className="mb-12"
         >
-          <div className="flex items-center gap-1 bg-white rounded-full p-1.5 border border-[#0d0d0d]/[0.06] shadow-sm flex-wrap justify-center max-w-full overflow-x-auto scrollbar-none">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`relative px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
-                  activeCategory === cat
-                    ? "bg-[#0d0d0d] text-white shadow-md"
-                    : "text-[#0d0d0d]/50 hover:text-[#0d0d0d]/80 hover:bg-[#0d0d0d]/[0.03]"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          {/* Scrollable on mobile, centered on desktop */}
+          <div className="w-full overflow-x-auto scrollbar-none flex justify-start sm:justify-center px-5 sm:px-0">
+            <div className="inline-flex items-center gap-1 bg-white rounded-full p-1.5 border border-[#0d0d0d]/[0.06] shadow-sm flex-shrink-0">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`relative px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-300 whitespace-nowrap ${
+                    activeCategory === cat
+                      ? "bg-[#0d0d0d] text-white shadow-md"
+                      : "text-[#0d0d0d]/50 hover:text-[#0d0d0d]/80 hover:bg-[#0d0d0d]/[0.03]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
         </motion.div>
 
