@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Quote, Linkedin } from "lucide-react";
+import { Linkedin } from "lucide-react";
 
 const testimonials = [
   {
@@ -42,41 +42,34 @@ export function Clients() {
   const current = testimonials[index];
 
   return (
-    <section className="bg-[#e8e8e8] py-16 md:py-24 px-5 md:px-8 relative overflow-hidden">
-      {/* Subtle Grid Background */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
-        style={{ 
-          backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`,
-          backgroundSize: '100px 100px'
-        }} 
-      />
-
+    <section className="bg-white/50 dark:bg-transparent border-t border-zinc-100 dark:border-zinc-800/50 py-16 md:py-24 px-5 md:px-8 relative overflow-hidden transition-colors duration-500 backdrop-blur-sm">
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[10px] font-black uppercase tracking-[0.4em] text-[#2c5270] mb-4 bg-[#0d0d0d] inline-block px-3 py-1 rounded-full"
+            className="text-center text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-3 uppercase tracking-widest transition-colors"
           >
-            T E S T I M O N I A L S
+            Testimonials
           </motion.p>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#0d0d0d] tracking-tighter leading-none mb-6 uppercase"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white leading-tight max-w-2xl mx-auto mb-4 transition-colors"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
-            TRUSTED BY FOUNDERS<br />
-            <span className="text-[#0d0d0d]/70">BACKED BY RESULTS</span>
+            Trusted by founders,{" "}
+            <em className="not-italic font-bold" style={{ fontStyle: "italic" }}>backed by results</em>
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-[#0d0d0d]/70 text-sm font-medium"
+            className="text-slate-500 dark:text-zinc-400 text-sm font-medium transition-colors"
           >
             Results that speak through founder voices.
           </motion.p>
@@ -86,68 +79,63 @@ export function Clients() {
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.9, y: 20, rotate: -2 }}
-              animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: -20, rotate: 2 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="absolute w-full max-w-2xl bg-white rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 md:p-12 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border border-white"
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -16 }}
+              transition={{ type: "spring", stiffness: 260, damping: 24 }}
+              className="absolute w-full max-w-2xl bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-6 sm:p-8 md:p-12 border border-zinc-100 dark:border-zinc-800 shadow-sm transition-colors"
             >
-              {/* Virtual Badge Header Detail */}
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-24 h-12 bg-gradient-to-b from-[#f0f0f0] to-white rounded-t-xl border-x border-t border-[#000]/5 flex items-center justify-center">
-                  <div className="w-12 h-2 bg-[#000]/5 rounded-full" />
-              </div>
-
               <div className="flex justify-between items-start mb-8">
-                <span className="text-2xl font-black tracking-tighter text-[#0d0d0d] italic">
+                <span className="text-xl font-bold tracking-tighter text-slate-900 dark:text-white transition-colors"
+                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}>
                   {current.company}
                 </span>
                 <div className="flex gap-1">
                   {[1,2,3].map(i => (
-                    <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d]/10" />
+                    <div key={i} className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-600" />
                   ))}
                 </div>
               </div>
 
               <div className="relative mb-10">
-                <Quote className="absolute -top-4 -left-4 w-8 h-8 text-[#2c5270] opacity-40 rotate-180" strokeWidth={3} />
-                <p className="text-[#0d0d0d]/70 text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-relaxed tracking-tight relative z-10">
-                  {current.quote}
+                <p className="text-slate-600 dark:text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed transition-colors">
+                  &ldquo;{current.quote}&rdquo;
                 </p>
               </div>
 
-              <div className="flex items-center justify-between pt-8 border-t border-[#0d0d0d]/5">
+              <div className="flex items-center justify-between pt-8 border-t border-zinc-100 dark:border-zinc-800 transition-colors">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#0d0d0d] flex items-center justify-center text-[#2c5270] font-black text-sm border-2 border-[#2c5270]/20">
+                  <div className="w-10 h-10 rounded-full bg-zinc-900 dark:bg-white flex items-center justify-center text-white dark:text-zinc-900 font-bold text-sm">
                     {current.avatar}
                   </div>
                   <div>
-                    <h4 className="font-black text-[#0d0d0d] text-base leading-tight uppercase tracking-tight">{current.author}</h4>
-                    <p className="text-[#0d0d0d]/70 text-xs font-bold uppercase tracking-wider">{current.role}</p>
+                    <h4 className="font-bold text-slate-900 dark:text-white text-sm leading-tight transition-colors">{current.author}</h4>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-xs transition-colors">{current.role}</p>
                   </div>
                 </div>
-                
+
                 {current.linkedIn && (
-                  <div className="w-10 h-10 rounded-xl border border-[#0d0d0d]/5 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2]/5 transition-colors cursor-pointer group">
-                    <Linkedin size={20} className="group-hover:scale-110 transition-transform" />
+                  <div className="w-9 h-9 rounded-xl border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-blue-600 hover:border-blue-200 transition-colors cursor-pointer">
+                    <Linkedin size={16} />
                   </div>
                 )}
               </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Decorative Ghost Cards */}
-          <div className="absolute inset-x-0 top-4 bottom-0 -z-10 bg-white/40 rounded-[32px] scale-[0.98] blur-sm translate-y-4" />
-          <div className="absolute inset-x-0 top-8 bottom-0 -z-20 bg-white/20 rounded-[32px] scale-[0.95] blur-md translate-y-8" />
+          {/* Ghost cards */}
+          <div className="absolute inset-x-0 top-4 bottom-0 -z-10 bg-zinc-100/60 dark:bg-zinc-800/40 rounded-2xl scale-[0.98] translate-y-3" />
+          <div className="absolute inset-x-0 top-8 bottom-0 -z-20 bg-zinc-100/30 dark:bg-zinc-800/20 rounded-2xl scale-[0.95] translate-y-6" />
         </div>
 
-        {/* Progress Indicators */}
+        {/* Progress indicators */}
         <div className="flex justify-center gap-2 mt-12">
           {testimonials.map((_, i) => (
             <button
               key={i}
               onClick={() => setIndex(i)}
               className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === index ? "w-8 bg-[#0d0d0d]" : "w-1.5 bg-[#0d0d0d]/10 hover:bg-[#0d0d0d]/20"
+                i === index ? "w-8 bg-zinc-900 dark:bg-white" : "w-1.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600"
               }`}
             />
           ))}

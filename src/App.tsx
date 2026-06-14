@@ -22,11 +22,11 @@ function App() {
     <ThemeProvider defaultTheme="light" storageKey="agency-theme-v2">
       <BrowserRouter>
         <ScrollToTop />
-        <motion.div 
-          className="fixed top-0 left-0 right-0 h-1 bg-[#2c5270] origin-left z-[100]" 
-          style={{ scaleX }} 
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-[2px] bg-zinc-900 dark:bg-white origin-left z-[100]"
+          style={{ scaleX }}
         />
-        <div className="min-h-screen flex flex-col font-sans selection:bg-[#2c5270]/30">
+        <div className="min-h-screen flex flex-col font-sans selection:bg-zinc-200 dark:selection:bg-zinc-700">
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
